@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>滇行十五日 · 昆明大理丽江慢游（2026.09.10—09.24）</title>
+<meta name="description" content="长春出发，昆明-大理-丽江15天休闲度假旅行方案：以地图为中心的十五日轨迹、日历天气联动、交通酒店对比、景点攻略、穿搭与行前准备。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f3ed; --bg-soft:#eceade; --ink:#26221c; --ink-2:#575046; --ink-3:#8c847a;
+  --lake:#6f93a4; --lake-deep:#476e80; --terra:#a96f45; --line:#dcd5c6; --card:#fbfaf6;
+  --serif:'Noto Serif SC','Songti SC','STSong',serif;
+  --sans:'Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lake);color:#fff}
+h1,h2,h3,h4,.serif{font-family:var(--serif)}
+img{display:block;max-width:100%}
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(18px,3.5vw,48px)}
+section{padding-top:clamp(56px,7vw,88px)}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.eyebrow b{color:var(--terra);font-weight:500}
+h2.sec{font-size:clamp(24px,2.8vw,38px);font-weight:900;line-height:1.3;margin:8px 0 6px}
+.sec-sub{color:var(--ink-2);font-size:13.5px;max-width:620px}
+/* ---------- Hero（精简） ---------- */
+.hero{min-height:54vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:44px;overflow:hidden;position:relative;
+  background:linear-gradient(178deg,#eef0e9 0%,var(--bg) 40%,#eae6d9 100%)}
+.hero svg.ridge{position:absolute;inset:auto 0 0 0;width:100%;height:34vh;opacity:.85;pointer-events:none}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero h1{font-size:clamp(36px,5.6vw,80px);font-weight:900;line-height:1.15}
+.hero h1 em{font-style:normal;color:var(--lake-deep)}
+.hero-meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:20px;color:var(--ink-2);font-size:13px}
+.hero-meta span{border-top:1px solid var(--ink);padding-top:7px}
+/* ---------- 通用小元件 ---------- */
+.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;padding:8px 16px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:99px;transition:all .3s var(--ease)}
+.btn:hover{background:var(--ink);color:var(--bg);transform:translateY(-1px)}
+.btn.blue{border-color:var(--lake-deep);color:var(--lake-deep)}
+.btn.blue:hover{background:var(--lake-deep);color:#fff}
+.btn.terra{border-color:var(--terra);color:var(--terra)}
+.btn.terra:hover{background:var(--terra);color:#fff}
+.btn.sm{padding:5px 13px;font-size:11.5px}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{padding:8px 20px;border:1px solid var(--line);border-radius:99px;background:var(--card);cursor:pointer;font-size:13px;color:var(--ink-2);transition:all .3s var(--ease)}
+.tab:hover{border-color:var(--ink-3)}
+.tab.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tab.lake.on{background:var(--lake-deep);border-color:var(--lake-deep);color:#fff}
+.price-note{font-size:11.5px;color:var(--ink-3)}
+/* ---------- 核心：地图 ---------- */
+#journey{padding-top:clamp(40px,5vw,64px)}
+.journey-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.view-toggle{display:flex;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px}
+.view-toggle .btn{border:none;border-radius:99px}
+.view-toggle .btn.on{background:var(--ink);color:var(--bg)}
+.daystrip{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.chip{flex:0 0 auto;min-width:92px;padding:9px 12px;border:1px solid var(--line);background:var(--card);cursor:pointer;transition:all .3s var(--ease);border-radius:10px}
+.chip:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(38,34,28,.08)}
+.chip.on{background:var(--lake-deep);border-color:var(--lake-deep);color:#f4f3ed}
+.chip .cd{font-family:var(--serif);font-weight:900;font-size:17px;line-height:1.2}
+.chip .cd small{font-family:var(--sans);font-weight:400;font-size:10.5px;opacity:.75;margin-left:4px}
+.chip .cc{font-size:10.5px;opacity:.8;margin-top:2px;white-space:nowrap}
+.mapwrap{position:relative;height:min(74vh,780px);min-height:520px;border:1px solid var(--line);background:var(--bg-soft)}
+#amap{position:absolute;inset:0}
+.map-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:40px;color:var(--ink-3);font-size:13.5px;background:repeating-linear-gradient(45deg,#efece3 0 14px,#e9e5d9 14px 15px)}
+.day-float{position:absolute;left:16px;top:16px;bottom:16px;width:min(350px,86vw);background:rgba(251,250,246,.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:12px;padding:20px 22px;overflow-y:auto;z-index:5;box-shadow:0 14px 40px rgba(38,34,28,.10)}
+.day-float .dm{font-size:11px;letter-spacing:.18em;color:var(--terra)}
+.day-float h3{font-size:21px;font-weight:900;margin:4px 0 10px}
+.df-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.df-chips span{font-size:11px;padding:3px 10px;border:1px solid var(--line);border-radius:99px;color:var(--ink-2);background:rgba(255,255,255,.6)}
+.df-sec{padding:9px 0;border-top:1px dashed var(--line);font-size:12.8px;color:var(--ink-2)}
+.df-sec b{display:block;font-size:11px;color:var(--ink-3);font-weight:500;letter-spacing:.1em;margin-bottom:2px}
+.df-wx{margin-top:10px;padding:12px 14px;background:var(--bg-soft);border-radius:10px;font-size:12.5px;color:var(--ink-2)}
+.df-wx .t{font-size:15px;color:var(--ink);font-weight:500}
+.df-wx .src{font-size:10.5px;color:var(--ink-3);margin-top:4px}
+.rain-alt{display:none;margin-top:10px;padding:10px 12px;background:#e9f0ec;border-left:3px solid var(--lake);font-size:12px;color:var(--ink-2);border-radius:0 8px 8px 0}
+.rain-alt.show{display:block}
+.map-legend{position:absolute;right:16px;bottom:16px;z-index:5;background:rgba(251,250,246,.92);backdrop-filter:blur(8px);border:1px solid var(--line);padding:9px 14px;font-size:11px;color:var(--ink-2);border-radius:8px;max-width:300px}
+/* ---------- 单卡展示（交通/酒店） ---------- */
+.stage{margin-top:22px}
+.plan-card{background:var(--card);border:1px solid var(--line);padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,40px)}
+.plan-card h4{font-size:22px;font-weight:900;margin:4px 0 6px}
+.plan-card .no{font-size:11px;letter-spacing:.22em;color:var(--terra)}
+.plan-card .dur{font-size:13px;color:var(--lake-deep);font-weight:500}
+.plan-card p{font-size:13.5px;color:var(--ink-2);margin-top:10px}
+.plan-card p b,.stay-card p b{color:var(--ink)}
+.plan-card ul{list-style:none}
+.plan-card li{padding:11px 0;border-top:1px dashed var(--line);font-size:13px;color:var(--ink-2)}
+.plan-card li b{color:var(--ink);font-weight:500}
+.stay-card{background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);overflow:hidden}
+.stay-card .ph{min-height:340px;background:var(--bg-soft);position:relative}
+.stay-card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease)}
+.stay-card .ph img.ld{opacity:1}
+.stay-card .bd{padding:clamp(22px,3vw,34px)}
+.stay-card .lv{font-size:11px;letter-spacing:.22em;color:var(--terra)}
+.stay-card h4{font-size:20px;font-weight:900;margin:4px 0 4px}
+.stay-card .pr{color:var(--lake-deep);font-size:13px;font-weight:500}
+.stay-card p{font-size:13px;color:var(--ink-2);margin-top:10px}
+.stay-card ul{list-style:none;margin-top:8px}
+.stay-card li{padding:9px 0;border-top:1px dashed var(--line);font-size:12.8px;color:var(--ink-2)}
+/* ---------- 景点 ---------- */
+.spot{background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:300px minmax(0,1fr);overflow:hidden;margin-bottom:16px}
+.spot .ph{min-height:220px;background:var(--bg-soft);position:relative}
+.spot .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease)}
+.spot .ph img.ld{opacity:1}
+.spot .tile{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:linear-gradient(150deg,#e3e8e4,#dfe4ea)}
+.spot .tile b{font-family:var(--serif);font-size:30px;color:var(--lake-deep)}
+.spot .tile span{font-size:11px;letter-spacing:.24em;color:var(--ink-3)}
+.spot .bd{padding:22px 26px}
+.spot .city{font-size:10.5px;letter-spacing:.24em;color:var(--lake-deep)}
+.spot h4{font-size:20px;font-weight:900;margin:2px 0 8px}
+.spot-meta{display:flex;flex-wrap:wrap;gap:5px 16px;font-size:12px;color:var(--ink-2);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.spot-meta b{color:var(--ink);font-weight:500}
+.spot .bd p{font-size:13px;color:var(--ink-2);margin-top:9px}
+.spot .bd p b{color:var(--ink)}
+/* ---------- 穿搭 / 量化 / 风险 ---------- */
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gcell{background:var(--card);padding:22px}
+.gcell h5{font-family:var(--serif);font-size:15.5px;font-weight:900;color:var(--lake-deep);margin-bottom:8px}
+.gcell ul{list-style:none;font-size:12.8px;color:var(--ink-2)}
+.gcell li{padding:6px 0;border-top:1px dashed var(--line)}
+.swatches{display:flex;gap:8px;margin-top:12px}
+.sw{width:34px;height:34px;border-radius:50%;border:1px solid var(--line)}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.panel{background:var(--card);border:1px solid var(--line);padding:24px 26px}
+.panel h5{font-family:var(--serif);font-size:16px;font-weight:900;margin-bottom:10px;color:var(--terra)}
+.panel.blue h5{color:var(--lake-deep)}
+.panel ul{list-style:none;font-size:13px;color:var(--ink-2)}
+.panel li{padding:8px 0 8px 18px;border-top:1px dashed var(--line);position:relative}
+.panel li:before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;border:1px solid var(--lake-deep);border-radius:50%}
+.panel.warn li:before{border-color:#9a5b3c}
+table.qt{width:100%;border-collapse:collapse;font-size:12.8px;background:var(--card)}
+table.qt th,table.qt td{padding:10px 13px;border:1px solid var(--line);text-align:left;vertical-align:top}
+table.qt th{background:var(--bg-soft);font-weight:500;color:var(--ink-2);font-size:11.5px}
+table.qt td b{color:var(--lake-deep)}
+.emg{background:#f3ece2;border:1px solid #e0d2ba;padding:16px 20px;font-size:12.5px;color:var(--ink-2);margin-top:18px;border-radius:10px}
+/* ---------- 补充：页签副标 / 天气刷新 / 地图弹窗 ---------- */
+.tab b{font-weight:500}
+.tab i{font-style:normal;font-size:10.5px;opacity:.65;margin-left:7px}
+.df-wx .src a{color:var(--lake-deep);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.iw{font-family:var(--sans);max-width:250px;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(38,34,28,.18);padding:14px 16px;position:relative}
+.iw-close{position:absolute;right:8px;top:8px;width:22px;height:22px;border-radius:50%;background:#ece7db;color:#8c847a;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:all .25s}
+.iw-close:hover{background:var(--ink);color:#fff}
+.iw .iw-img{width:100%;height:110px;object-fit:cover;border-radius:6px;margin-bottom:8px;display:block}
+.iw h5{font-size:14.5px;font-weight:700;color:var(--ink)}
+.iw .iw-tag{display:inline-block;font-size:10px;letter-spacing:.12em;padding:2px 8px;border-radius:99px;color:#fff;margin:4px 0 6px}
+.iw p{font-size:12px;color:var(--ink-2);margin:3px 0;line-height:1.6}
+.iw .iw-nav{display:inline-block;margin-top:8px;font-size:12px;color:var(--lake-deep);text-decoration:underline;text-underline-offset:3px}
+.iw .iw-day{font-size:10.5px;color:var(--terra);letter-spacing:.14em}
+.dtag{padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700;color:#fff;border:1.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.dlab{font-size:10.5px;color:var(--ink-2);background:rgba(251,250,246,.88);padding:2px 7px;border-radius:99px;border:1px solid var(--line)}
+/* ---------- 地图弹窗关闭按钮（清晰可见） ---------- */
+.amap-info-content{position:relative;border-radius:10px!important}
+.amap-info-close{position:absolute;right:8px!important;top:6px!important;width:22px;height:22px;border-radius:50%;background:#ece7db!important;cursor:pointer;opacity:1!important;z-index:5;display:flex!important;align-items:center;justify-content:center}
+.amap-info-close::before{content:'×';font-size:15px;font-weight:700;color:#8c847a;line-height:1;font-family:var(--sans)}
+.amap-info-close:hover{background:var(--ink)!important}
+.amap-info-close:hover::before{color:#fff}
+/* ---------- 行程模拟 ---------- */
+.sim-box{display:grid;grid-template-columns:280px 1fr 230px;border:1px solid var(--line);background:#fff;margin-top:22px;border-radius:14px;overflow:hidden}
+.sim-char{border-left:1px solid var(--line);background:#faf8f2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 14px;gap:12px}
+.sim-char .frame{width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#f4f3ed}
+.sim-char img{width:100%;display:block;transition:opacity .3s;animation:simFloat 3.2s ease-in-out infinite}
+@keyframes simFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.sim-char .act-label{font-size:12.5px;color:var(--ink-2);text-align:center;line-height:1.6}
+.sim-char .act-label b{display:block;font-family:var(--serif);font-size:13.5px;color:var(--lake-deep)}
+.sim-side{padding:24px 22px;border-right:1px solid var(--line);background:#faf8f2}
+.sim-clock{font-family:var(--serif);font-size:50px;font-weight:600;color:var(--lake-deep);letter-spacing:1px;line-height:1.05;font-variant-numeric:tabular-nums}
+.sim-date{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.sim-theme{font-family:var(--serif);font-size:16px;color:var(--ink);margin-top:2px}
+.sim-prog{height:3px;background:#e7e2d6;margin:14px 0 8px;border-radius:99px;overflow:hidden}
+.sim-prog i{display:block;height:100%;width:0;background:var(--terra);transition:width .45s var(--ease)}
+.sim-cost{font-size:12px;color:var(--ink-3);line-height:1.6}
+.sim-ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center}
+.sim-ctl select{height:32px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:0 8px;font-size:12px;color:var(--ink-2);cursor:pointer}
+.sim-auto{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-3);margin-top:12px;cursor:pointer}
+.sim-days{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:14px}
+.sim-days button{border:1px solid var(--line);background:#fff;border-radius:8px;font-size:10.5px;padding:5px 0;color:var(--ink-2);cursor:pointer;transition:all .25s}
+.sim-days button.on{background:var(--lake-deep);border-color:var(--lake-deep);color:#fff}
+.sim-tl{position:relative;max-height:580px;overflow-y:auto;padding:20px 26px;scrollbar-width:thin}
+.tl-i{display:grid;grid-template-columns:52px 28px 1fr;column-gap:10px;padding:8px 0;border-bottom:1px dashed #ece6d8;opacity:.42;transition:opacity .4s}
+.tl-i.done{opacity:.72}
+.tl-i.on{opacity:1}
+.tl-i .tt{font-family:var(--serif);font-size:13.5px;font-weight:600;color:var(--lake-deep);font-variant-numeric:tabular-nums;padding-top:4px}
+.tl-i .dot{width:26px;height:26px;border-radius:50%;background:#f0ede3;display:flex;align-items:center;justify-content:center;font-size:10.5px;color:var(--ink-2);transition:all .3s}
+.tl-i.on .dot{background:var(--lake-deep);color:#fff;box-shadow:0 0 0 4px rgba(71,110,128,.15)}
+.tl-i h6{font-size:13.5px;font-weight:600;color:var(--ink);padding-top:4px}
+.tl-i p{font-size:12px;color:var(--ink-3);margin-top:2px;line-height:1.65}
+.tl-i .cost{color:var(--terra)}
+/* ---------- 穿搭卡通示意 ---------- */
+.outfit-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.ofit{border:1px solid var(--line);background:#fff;border-radius:12px;overflow:hidden}
+.ofit img{width:100%;display:block;background:#f4f3ed}
+.ofit figcaption{font-size:12.3px;color:var(--ink-2);padding:12px 16px 14px;line-height:1.75}
+.ofit b{display:block;font-family:var(--serif);font-size:14.5px;color:var(--ink);margin-bottom:2px}
+/* ---------- 住宿：行程入住日历 ---------- */
+.segs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.seg{border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:11.5px;color:var(--ink-2);background:#faf8f2}
+.seg b{color:var(--lake-deep);font-weight:600}
+/* ---------- 播放器 / Toast / 页脚 ---------- */
+.player{position:fixed;right:20px;bottom:20px;z-index:99;display:flex;align-items:center;gap:11px;background:rgba(251,250,246,.85);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:99px;padding:9px 16px 9px 10px;box-shadow:0 10px 30px rgba(38,34,28,.12)}
+.player button{width:36px;height:36px;border-radius:50%;border:1px solid var(--ink);background:transparent;cursor:pointer;font-size:13px;color:var(--ink);transition:all .3s var(--ease)}
+.player button:hover{background:var(--ink);color:var(--bg)}
+.player .tn{font-size:11.5px;color:var(--ink-2);max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player input[type=range]{width:80px;accent-color:var(--lake-deep)}
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(16px);background:var(--ink);color:var(--bg);font-size:12.5px;padding:11px 20px;border-radius:8px;opacity:0;pointer-events:none;transition:all .4s var(--ease);z-index:120;max-width:86vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 80px;text-align:center;color:var(--ink-3);font-size:11.5px}
+@media(max-width:900px){
+  .day-float{position:static;width:auto;margin:0;border-radius:0;border-left:0;border-right:0;box-shadow:none}
+  .mapwrap{height:auto;min-height:0;display:flex;flex-direction:column}
+  #amap{position:relative;height:60vh;min-height:420px}
+  .plan-card,.stay-card{grid-template-columns:1fr}
+  .stay-card .ph{min-height:220px}
+  .spot{grid-template-columns:1fr}
+  .spot .ph{min-height:200px}
+  .sim-box{grid-template-columns:1fr}
+  .sim-side{border-right:0;border-bottom:1px solid var(--line)}
+  .sim-clock{font-size:40px}
+  .sim-tl{max-height:60vh}
+  .sim-char{display:none}
+  .outfit-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="ridge" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,400 L0,260 L180,180 L340,250 L520,120 L700,230 L900,90 L1100,220 L1280,150 L1440,240 L1440,400 Z" fill="#e4ded0"/>
+    <path d="M0,400 L0,320 L220,240 L420,310 L640,200 L860,300 L1080,190 L1300,290 L1440,230 L1440,400 Z" fill="#d8d2c2" opacity=".8"/>
+    <path d="M0,400 L0,370 L300,310 L560,360 L820,290 L1120,350 L1440,300 L1440,400 Z" fill="#cdc5b2" opacity=".7"/>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow">YUNNAN SLOW TRAVEL · <b>2026.09.10 — 09.24</b></p>
+    <h1>滇行十五日<br>从<em>春城</em>走到<em>雪山</em>与湖</h1>
+    <div class="hero-meta">
+      <span>长春出发 · 1 人 · 休闲度假</span>
+      <span>昆明 3 晚 → 大理 5 晚 → 丽江 5 晚（含泸沽湖 1 晚）</span>
+      <span>全程 5—26℃ · 海拔 1890—4680m</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ 行程模拟：把每一天走一遍 ============ -->
+<section class="wrap" id="sim">
+  <p class="eyebrow">SIMULATION · <b>行程模拟</b></p>
+  <h2 class="sec">跟着计划，把十五天走一遍</h2>
+  <p class="sec-sub">高性价比口径：去程 FM9485 早班经停（¥950 起），返程 C124 早班动车 + 下午低价经停航班；市内公交 / 拼车 + 本地小馆，作息与一日三餐均已排入时间轴。点「播放」按时间节奏自动推进，可调倍速。</p>
+  <div class="sim-box">
+    <div class="sim-side">
+      <div class="sim-clock" id="simClock">--:--</div>
+      <p class="sim-date" id="simDate"></p>
+      <p class="sim-theme" id="simTheme"></p>
+      <div class="sim-prog"><i id="simBar"></i></div>
+      <p class="sim-cost" id="simCost"></p>
+      <div class="sim-ctl">
+        <button class="btn sm" id="simPlay">▶ 播放</button>
+        <button class="btn sm" id="simPrev">上一日</button>
+        <button class="btn sm" id="simNext">下一日</button>
+        <select id="simSpeed"><option value="1">×1</option><option value="2">×2</option><option value="4">×4</option></select>
+      </div>
+      <label class="sim-auto"><input type="checkbox" id="simAuto" checked> 播完自动进入下一日</label>
+      <div class="sim-days" id="simDays"></div>
+    </div>
+    <div class="sim-tl" id="simTl"></div>
+    <div class="sim-char">
+      <div class="frame"><img id="simCharImg" src="assets/act-rest.png" alt="行程模拟人物状态示意"></div>
+      <p class="act-label">正在模拟<b id="simCharLabel">—</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 核心：行程地图 ============ -->
+<section class="wrap" id="journey">
+  <div class="journey-head">
+    <div>
+      <p class="eyebrow">JOURNEY MAP · <b>十五日轨迹</b></p>
+      <h2 class="sec">地图上的十五天</h2>
+    </div>
+    <div class="view-toggle">
+      <button class="btn sm" id="viewDay">当日行程</button>
+      <button class="btn sm on" id="viewAll">完整全程</button>
+    </div>
+  </div>
+  <div class="daystrip" id="dayStrip"></div>
+  <div class="mapwrap">
+    <div id="amap"></div>
+    <div class="map-fallback" id="mapFallback"><div>地图未能加载：请检查网络或高德 Key 配置。<br>所有点位坐标已预写死，联网环境下刷新即可呈现 3D 地形轨迹。</div></div>
+    <aside class="day-float" id="dayFloat"></aside>
+    <div class="map-legend">点击地图标记查看详情：蓝=景点 · 棕=住宿 / 当日推荐酒店 · 灰=枢纽 · 橘=高赞餐厅（均为近似定位，以导航为准）。弹窗内可复制预订搜索词或一键导航（手机唤起高德 App，电脑打开高德网页版）。路线距离为直线参考值。</div>
+  </div>
+</section>
+
+<!-- ============ 大交通 ============ -->
+<section class="wrap" id="transport">
+  <p class="eyebrow">TRANSPORT · <b>往返大交通</b></p>
+  <h2 class="sec">去程长春→昆明 ／ 返程丽江→长春</h2>
+  <p class="sec-sub">选择方向与方案，仅展示当前方案详情。班次票价为 2026-08-29 参考样本，以 12306 / 航司平台为准。</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+    <div class="tabs" id="dirTabs"></div>
+    <div class="tabs" id="planTabs"></div>
+  </div>
+  <div class="stage" id="planStage"></div>
+</section>
+
+<!-- ============ 住宿 ============ -->
+<section class="wrap" id="stay">
+  <p class="eyebrow">STAY · <b>住宿选择</b></p>
+  <h2 class="sec">三座城市，各三档</h2>
+  <p class="sec-sub">先选城市、再选档位，仅展示当前档位详情。房价为 2026-08-29 参考区间，以预订平台为准。</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+    <div class="tabs" id="cityTabs"></div>
+    <div class="tabs" id="tierTabs"></div>
+  </div>
+  <div class="stage" id="stayStage"></div>
+</section>
+
+<!-- ============ 景点 ============ -->
+<section class="wrap" id="spots">
+  <p class="eyebrow">DEEP GUIDE · <b>景点深度攻略</b></p>
+  <h2 class="sec">每个地方的故事、动线与机位</h2>
+  <p class="sec-sub">按城市筛选，卡片已按行程行动日期排序（备选排最后）。开放时间与门票以景区官方公告为准；复制搜索词后打开小红书查看真实用户攻略。</p>
+  <div class="tabs" id="spotTabs" style="margin-top:20px"></div>
+  <div class="stage" id="spotStage"></div>
+</section>
+
+<!-- ============ 穿搭与出片 ============ -->
+<section class="wrap" id="dress">
+  <p class="eyebrow">OUTFIT · <b>穿搭与出片</b></p>
+  <h2 class="sec">三层分层法，应对 5—26℃ 与 4680 米</h2>
+  <p class="sec-sub">海拔每升 1000 米约降 6℃；紫外线常年 7—9 级，SPF50+ 防晒、墨镜、帽子全程必备。</p>
+  <div class="outfit-row">
+    <figure class="ofit"><img src="assets/outfit-town.png" alt="古城人文日穿搭卡通示意" loading="lazy">
+      <figcaption><b>古城人文日</b>米色棉麻长裙 + 浅咖针织开衫 + 草帽，配帆布鞋。适用：昆明老街、大理 / 丽江古城、沙溪——棉麻与石板路最搭。</figcaption></figure>
+    <figure class="ofit"><img src="assets/outfit-lake.png" alt="洱海度假日穿搭卡通示意" loading="lazy">
+      <figcaption><b>洱海度假日</b>白色飘逸长裙 + 浅蓝衬衫外套 + 平顶帽，墨镜推上头顶。适用：生态廊道、双廊、理想邦、泸沽湖——浅色在蓝白水岸最出片。</figcaption></figure>
+    <figure class="ofit"><img src="assets/outfit-snow.png" alt="雪山御寒日穿搭卡通示意" loading="lazy">
+      <figcaption><b>雪山御寒日</b>砖红冲锋衣 + 抓绒中层 + 针织帽围巾，脚踩登山鞋、手握保温杯。适用：玉龙雪山 4680、蓝月谷、苍山索道——亮色是雪线上的安全色。</figcaption></figure>
+  </div>
+  <div class="grid4" style="margin-top:24px">
+    <div class="gcell"><h5>上衣 · 分层</h5><ul><li>短袖 T 恤 ×3（白天打底）</li><li>薄长袖 ×2（早晚防晒）</li><li>薄卫衣 / 针织衫 ×1（中层）</li><li>抓绒 ×1（雪山日中层）</li><li>防风冲锋衣 ×1（雪山与湖边）</li></ul></div>
+    <div class="gcell"><h5>下装与鞋履</h5><ul><li>休闲长裤 ×2 · 牛仔裤 ×1</li><li>长裙 ×1（洱海 / 蓝月谷出片）</li><li>舒适运动鞋 ×1（主力）</li><li>平底休闲鞋 ×1（石板路）</li><li>拖鞋 ×1 · 不穿高跟鞋</li></ul></div>
+    <div class="gcell"><h5>配饰与装备</h5><ul><li>遮阳帽 · 墨镜 · 薄围巾</li><li>SPF50+ 防晒 · 润唇膏 · 面膜</li><li>便携雨衣 / 折叠伞</li><li>氧气瓶（丽江购买约 20 元）</li><li>晕车药（泸沽湖盘山路）· 充电宝</li></ul></div>
+    <div class="gcell"><h5>出片配色</h5>
+      <p style="font-size:12.8px;color:var(--ink-2)">白 / 米 / 浅蓝 / 姜黄 / 砖红，避开大面积深色花色。黄金时段：07:00-08:30 与 17:30-19:00。</p>
+      <div class="swatches"><span class="sw" style="background:#f6f2e8"></span><span class="sw" style="background:#b8cdd6"></span><span class="sw" style="background:#c9a35f"></span><span class="sw" style="background:#a9603c"></span><span class="sw" style="background:#8f7a64"></span></div></div>
+  </div>
+  <div class="panel blue" style="margin-top:18px"><h5>分景点出片速查</h5><ul>
+    <li>石林：纯色衣与灰黑石峰强对比，上午顺光 · 洱海 S 湾 / 龙龛：白衬衫 + 长裙，日出逆光剪影</li>
+    <li>喜洲稻田：浅色文艺风 + 草帽 · 双廊 / 理想邦：飘逸长裙配蓝白建筑，16:00 后前往</li>
+    <li>沙溪：棉麻复古风，玉津桥晨雾 · 雪山 / 蓝月谷：亮色外套点缀，蓝月谷白裙最佳</li>
+    <li>丽江 / 束河：民族风披肩 + 夜景暖光 · 泸沽湖：白 / 浅蓝长裙，里格半岛 + 猪槽船</li>
+  </ul></div>
+</section>
+
+<!-- ============ 费用与体力 ============ -->
+<section class="wrap" id="budget">
+  <p class="eyebrow">BUDGET & ENERGY · <b>费用与体力</b></p>
+  <h2 class="sec">一笔明白账，一条舒缓的体力曲线</h2>
+  <div class="two-col" style="margin-top:24px">
+    <div class="panel" style="padding:0;overflow:auto"><table class="qt">
+      <tr><th>费用分项</th><th>参考区间（单人）</th><th>说明</th></tr>
+      <tr><td>大交通 · 省时</td><td><b>2400-4000 元</b></td><td>去程直飞 + 返程丽江中转</td></tr>
+      <tr><td>大交通 · 常规</td><td><b>1800-2300 元</b></td><td>经停航班 + 动车接直飞</td></tr>
+      <tr><td>大交通 · 省钱</td><td><b>1100-2000 元</b></td><td>Z328 硬卧 / 低价经停舱</td></tr>
+      <tr><td>住宿 14 晚</td><td><b>3500-6000 元</b></td><td>均衡舒适档</td></tr>
+      <tr><td>省内交通</td><td><b>500-700 元</b></td><td>动车 / 专线 / 打车 / 骑行</td></tr>
+      <tr><td>门票体验</td><td><b>800-1200 元</b></td><td>石林 / 三塔 / 雪山 / 泸沽湖等</td></tr>
+      <tr><td>餐饮</td><td><b>2000-3000 元</b></td><td>野生菌火锅、腊排骨等</td></tr>
+      <tr><td>杂费</td><td><b>300-600 元</b></td><td>氧气瓶、伴手礼、雨具</td></tr>
+      <tr><td><b>合计（均衡档）</b></td><td><b>约 9000-13000 元</b></td><td>AI 预估，实际以平台为准</td></tr>
+    </table></div>
+    <div class="panel blue"><h5>体力节奏与高海拔适应</h5><ul>
+      <li>高强度日仅 D10 玉龙雪山（2400→4680m），安排在抵丽江次日，符合高原适应原则</li>
+      <li>低强度日 D1 / D4 / D9 / D11 / D14 / D15 作为恢复与转场缓冲，每 3-4 天一个</li>
+      <li>海拔梯度：昆明 1890m（3 晚适应）→ 大理 1970m → 丽江 2400m → 雪山 4680m → 泸沽湖 2690m</li>
+      <li>有高反史者 D10 改云杉坪（3240m）；雪山日备便携氧气瓶</li>
+      <li>苍山顶比古城低约 8-10℃，洱海边风大体感再降 2-3℃</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ 风险与行前准备 ============ -->
+<section class="wrap" id="prep">
+  <p class="eyebrow">PREPARE & RISK · <b>行前准备与风险</b></p>
+  <h2 class="sec">出发之前，把这些收进心里</h2>
+  <div class="two-col" style="margin-top:24px">
+    <div class="panel warn"><h5>专属风险提示</h5><ul>
+      <li>高原反应：抵达丽江首日勿剧烈运动饮酒，头痛胸闷及时休息下撤</li>
+      <li>雪山索道：大风可能停运；大索道票 09-12 晚 20:00「丽江旅游集团」小程序放票，提前录入身份证；未抢到改云杉坪 + 蓝月谷</li>
+      <li>山地防滑：苍山玉带路、蓝月谷栈道雨后湿滑，穿防滑运动鞋</li>
+      <li>雨季尾声：午后局地短时阵雨，随身便携雨衣</li>
+      <li>紫外线 7-9 级：SPF50+ 每 2-3 小时补涂，晒伤风险高于雨天影响</li>
+      <li>中转容错：D15 动车 + 飞机预留 ≥3.5 小时；低价舱不可退改，确认行程再出票</li>
+      <li>泸沽湖盘山路单程 4 小时备晕车药；猪槽船务必穿救生衣；野生菌务必煮熟</li>
+    </ul></div>
+    <div class="panel"><h5>行前准备清单</h5><ul>
+      <li>证件：身份证随身；优惠证件带上，以景区政策为准；建议购买含高海拔的旅行意外险</li>
+      <li>预约：云南省博物馆提前 3-7 天「游云南」；雪山门票 + 环保车提前 7 天「玉龙雪山服务」</li>
+      <li>会员：华住会 / 亚朵 / IHG / 万豪提前注册领券，权益含早餐与延迟退房</li>
+      <li>入住：民宿多 14:00 入住 12:00 退房；古城石板路优先选可搬运行李的店</li>
+      <li>防坑：海景房下单前索要实拍视频；连住 2 晚以上普遍有折扣；银器茶叶比价后再买</li>
+      <li>习俗：进寺庙不踩门槛、不随意拍僧人与当地人</li>
+      <li>复核节点：09-03 复核 D1-D4 天气；09-07 复核全程；出发前一天复核航班动车时刻</li>
+    </ul></div>
+  </div>
+  <div class="emg"><b>紧急信息</b> ｜ 报警 110 · 急救 120 ｜ 云南旅游投诉 0871-12301 ｜ 长水机场问询 0871-96566 ｜ 大理市一院 0872-2125065 ｜ 丽江市人民医院 0888-5122335 ｜ 单人出行建议每日向家人同步定位</div>
+</section>
+</main>
+
+<footer>滇行十五日 · 数据为 2026-08-29 参考值，以官方平台为准 ｜ 背景音乐为免版权素材（Kevin MacLeod · incompetech.com），仅供个人体验</footer>
+
+<!-- ============ 播放器 / Toast ============ -->
+<div class="player" id="player">
+  <button id="playBtn" title="播放 / 暂停">▶</button>
+  <span class="tn" id="trackName">准备就绪</span>
+  <input type="range" id="vol" min="0" max="100" value="22" title="音量">
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- 高德 JS API 2.0：已配置 Web 端 Key（tour）。如需更换，请替换下方 key 与 securityJsCode -->
+<script>
+window._AMapSecurityConfig = { securityJsCode: 'f1229e78fd9ed0bb65a9cf99940b0ace' }; // 高德安全密钥（Web端 tour）
+</script>
+<script src="https://webapi.amap.com/maps?v=2.0&key=3f99ce7e2d085fb39666bdaffd9cddf9&plugin=AMap.Weather"></script>
+<script>
+/* =====================================================
+   全部数据为 2026-08-29 预生成静态参考值（唯一数据源：确认版行程表）
+   ===================================================== */
+var IMG = {
+  dianchi:'https://kimi-web-img.kimi.ai/img/www.kmxishan.com/6d961d357c9fa2a6a4941d67dd2645a109dfde76.jpg',
+  cuihu:'https://kimi-web-img.kimi.ai/img/pic.huitu.com/f425e56351bbc3cab4a4dce706bd3c82efda2caf.jpg',
+  shuanglang:'https://kimi-web-img.kimi.ai/img/assets.699pic.com/2cdeece1a2faa4353dbb3a6fb9e3478a25fbb985.v1',
+  swan:'https://kimi-web-img.kimi.ai/img/image1.ljcdn.com/07b0250dfc154a7d384ac109a07667b6fe4d83e8.jpg',
+  lanyue:'https://kimi-web-img.kimi.ai/img/www.ourchinastory.com/291e719664770aa43803882c077c3fb9e18ff594.jpg',
+  hotelDali:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/6118c5f5e46eca25639c344414327605c1456934.jpg',
+  hotelLugu:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/78656c8c2a9b0102588b88d17c7bf0a21995ff78.jpg'
+};
+
+var DAYS = [
+{d:'D1',date:'09-10',full:'2026-09-10',week:'四',lunar:'七月廿九',city:'昆明',track:'kunming',theme:'抵达春城 · 初识昆明',am:'长春龙嘉机场乘机（建议直飞 09:05-14:00 班次）',pm:'抵达昆明长水机场，地铁 6 号线 / 机场大巴进城，入住后休整',night:'昆明老街 + 南屏街漫步，吃过桥米线，适应约 1900 米海拔',traffic:'飞机 + 地铁',stay:'昆明',weather:'多云为主',wtype:'趋势预报',temp:'15-24℃',alt:'1500-2000m',energy:'低',
+ points:[
+  {n:'昆明长水机场',lng:102.9292,lat:25.1019,alt:2100,stay:'抵达',desc:'地铁 6 号线 / 机场大巴进城约 1 小时',type:'transit'},
+  {n:'昆明站片区酒店',lng:102.7230,lat:25.0170,alt:1890,stay:'3 晚',desc:'建议昆明站 / 环城南路或翠湖周边入住',type:'hotel'},
+  {n:'昆明老街 · 南屏街',lng:102.7093,lat:25.0433,alt:1900,stay:'2 小时',desc:'夜晚漫步，过桥米线，适应海拔',type:'spot'}],
+ route:[[102.9292,25.1019],[102.7800,25.0400],[102.7230,25.0170],[102.7093,25.0433]]},
+{d:'D2',date:'09-11',full:'2026-09-11',week:'五',lunar:'八月初一',city:'昆明',track:'kunming',theme:'石林奇观一日游',am:'08:30 出发前往石林风景区（车程约 1.5h），游大石林、小石林',pm:'继续游览步哨山、李子园箐，15:30 返程',night:'市区休息，可逛翠湖夜景',traffic:'旅游专线 / 动车 + 打车',stay:'昆明',weather:'多云有阵雨',wtype:'趋势预报',temp:'16-24℃',alt:'1500-2000m',energy:'中',
+ points:[
+  {n:'石林风景区',lng:103.3244,lat:24.8123,alt:1750,stay:'4-5 小时',desc:'喀斯特徒步与阿诗玛文化，门票约 130 元',type:'spot'},
+  {n:'翠湖公园',lng:102.7070,lat:25.0520,alt:1900,stay:'夜景散步',desc:'市区休息，翠湖夜景',type:'spot',img:IMG.cuihu}],
+ route:[[102.7230,25.0170],[103.0000,24.9500],[103.3244,24.8123],[103.0000,24.9500],[102.7070,25.0520]]},
+{d:'D3',date:'09-12',full:'2026-09-12',week:'六',lunar:'八月初二',city:'昆明',track:'kunming',theme:'春城人文慢游',am:'翠湖公园 → 陆军讲武堂（外观）→ 云南大学银杏道',pm:'云南省博物馆（提前「游云南」预约，免费）→ 官渡古镇',night:'南强街巷夜市觅食，早点休息',traffic:'地铁 + 步行',stay:'昆明',weather:'多云',wtype:'趋势预报',temp:'15-24℃',alt:'1800-2000m',energy:'中',
+ points:[
+  {n:'翠湖公园',lng:102.7070,lat:25.0520,alt:1900,stay:'1.5-2 小时',desc:'本地人生活观察，Citywalk 起点',type:'spot',img:IMG.cuihu},
+  {n:'陆军讲武堂',lng:102.7047,lat:25.0497,alt:1900,stay:'0.5 小时',desc:'外观参观（周一闭馆，今日正常）',type:'spot'},
+  {n:'云南大学银杏道',lng:102.7090,lat:25.0560,alt:1920,stay:'1 小时',desc:'校园漫步',type:'spot'},
+  {n:'云南省博物馆',lng:102.7610,lat:24.9425,alt:1890,stay:'2-3 小时',desc:'提前预约免费，古滇国青铜器',type:'spot'},
+  {n:'官渡古镇',lng:102.7560,lat:24.9500,alt:1890,stay:'1.5 小时',desc:'古镇与夜市觅食',type:'spot'}],
+ route:[[102.7070,25.0520],[102.7047,25.0497],[102.7090,25.0560],[102.7610,24.9425],[102.7560,24.9500]]},
+{d:'D4',date:'09-13',full:'2026-09-13',week:'日',lunar:'八月初三',city:'昆明→大理',track:'transition',theme:'滇池风光 · 转场大理',am:'捞渔河湿地公园或滇池海埂大坝散步',pm:'乘动车昆明→大理（参考 14:56-17:06 班次），入住大理古城',night:'大理古城夜游：人民路、洋人街，吃白族酸辣鱼',traffic:'动车 + 打车',stay:'大理（古城）',weather:'多云',wtype:'趋势预报',temp:'14-24℃',alt:'1500-2000m',energy:'低',
+ points:[
+  {n:'滇池海埂大坝',lng:102.6480,lat:24.9580,alt:1886,stay:'1.5 小时',desc:'上午散步，远眺西山睡美人',type:'spot',img:IMG.dianchi},
+  {n:'昆明站',lng:102.7230,lat:25.0170,alt:1890,stay:'换乘',desc:'14:56 动车前往大理，预留 1.5 小时取行李缓冲',type:'transit'},
+  {n:'大理站',lng:100.2550,lat:25.5860,alt:1970,stay:'17:06 抵达',desc:'打车约 40 分钟进古城',type:'transit'},
+  {n:'大理古城',lng:100.1619,lat:25.6916,alt:1976,stay:'4 晚',desc:'人民路、洋人街夜游',type:'hotel',img:'https://kimi-web-img.kimi.ai/img/upload.wikimedia.org/bd0949c02b18a167ccd12b254d0819181cbfac87.jpg'}],
+ route:[[102.6480,24.9580],[102.7230,25.0170],[101.6000,25.3500],[100.6000,25.5000],[100.2550,25.5860],[100.1619,25.6916]]},
+{d:'D5',date:'09-14',full:'2026-09-14',week:'一',lunar:'八月初四',city:'大理',track:'dali',theme:'苍山感通 · 古城慢生活',am:'苍山感通索道上山，走玉带云游路精华段，寂照庵吃素斋（约 20 元）',pm:'下山后逛大理古城：五华楼登楼远眺、床单厂艺术区',night:'古城民谣小酒馆，体验慢生活',traffic:'打车 + 索道 + 步行',stay:'大理（古城）',weather:'多云',wtype:'历史气候参考',temp:'13-24℃',alt:'1900-2600m',energy:'中',
+ points:[
+  {n:'苍山感通索道',lng:100.1370,lat:25.6320,alt:2200,stay:'4-5 小时',desc:'索道约 08:30-16:30，玉带云游路精华段',type:'spot'},
+  {n:'寂照庵',lng:100.1410,lat:25.6360,alt:2300,stay:'1 小时',desc:'素斋约 20 元，多肉庭院',type:'spot'},
+  {n:'五华楼',lng:100.1620,lat:25.6920,alt:1976,stay:'1 小时',desc:'登楼远眺古城全景',type:'spot'},
+  {n:'床单厂艺术区',lng:100.1660,lat:25.6940,alt:1976,stay:'1.5 小时',desc:'老厂房改造的艺术聚落',type:'spot'}],
+ route:[[100.1619,25.6916],[100.1370,25.6320],[100.1410,25.6360],[100.1620,25.6920],[100.1660,25.6940]]},
+{d:'D6',date:'09-15',full:'2026-09-15',week:'二',lunar:'八月初五',city:'大理',track:'dali',theme:'洱海西线 · 日出与稻田',am:'07:00 后前往龙龛码头看洱海日出（可选），沿生态廊道骑行至磻溪 S 湾',pm:'喜洲古镇：转角楼、稻田拍照、吃喜洲破酥粑粑，体验白族扎染',night:'返回古城，晚餐野生菌火锅（务必煮熟）',traffic:'骑行 + 电瓶车 / 打车',stay:'大理（古城）',weather:'多云',wtype:'历史气候参考',temp:'13-24℃',alt:'1900-2000m',energy:'中',
+ points:[
+  {n:'龙龛码头',lng:100.2010,lat:25.6650,alt:1966,stay:'日出 1 小时',desc:'洱海日出机位，清晨人少',type:'spot',img:IMG.swan},
+  {n:'磻溪 S 湾',lng:100.2260,lat:25.7390,alt:1966,stay:'骑行 2 小时',desc:'生态廊道经典弯道',type:'spot',img:IMG.swan},
+  {n:'喜洲古镇',lng:100.2120,lat:25.8560,alt:1990,stay:'3 小时',desc:'转角楼、稻田、扎染体验',type:'spot'}],
+ route:[[100.1619,25.6916],[100.2010,25.6650],[100.2260,25.7390],[100.2120,25.8560],[100.1619,25.6916]]},
+{d:'D7',date:'09-16',full:'2026-09-16',week:'三',lunar:'八月初六',city:'大理',track:'dali',theme:'洱海东线 · 双廊日落',am:'前往双廊古镇，逛玉几岛外围免费机位，临海咖啡馆看苍山洱海同框',pm:'沿环海东路打卡挖色小普陀、文笔村彩虹公路',night:'理想邦（大理圣托里尼）16:00 后拍日落，住双廊海景客栈',traffic:'包车 / 打车',stay:'大理（双廊）',weather:'多云',wtype:'历史气候参考',temp:'13-24℃',alt:'1900-2000m',energy:'中',
+ points:[
+  {n:'双廊古镇',lng:100.2090,lat:25.9070,alt:1970,stay:'半天',desc:'玉几岛外围免费机位，临海咖啡馆',type:'spot',img:IMG.shuanglang},
+  {n:'挖色小普陀',lng:100.2570,lat:25.8200,alt:1966,stay:'0.5 小时',desc:'洱海袖珍小岛',type:'spot'},
+  {n:'文笔村彩虹公路',lng:100.2800,lat:25.7700,alt:1980,stay:'0.5 小时',desc:'环海东路打卡点',type:'spot'},
+  {n:'理想邦',lng:100.2970,lat:25.7450,alt:2000,stay:'2 小时',desc:'蓝白悬崖建筑群，16:00 后拍日落',type:'spot'},
+  {n:'双廊海景客栈',lng:100.2110,lat:25.9050,alt:1970,stay:'1 晚',desc:'D7 住双廊，看日落首选',type:'hotel',img:IMG.hotelDali}],
+ route:[[100.1619,25.6916],[100.2090,25.9070],[100.2570,25.8200],[100.2800,25.7700],[100.2970,25.7450],[100.2110,25.9050]]},
+{d:'D8',date:'09-17',full:'2026-09-17',week:'四',lunar:'八月初七',city:'大理',track:'dali',theme:'沙溪古镇 · 茶马遗风',am:'08:30 出发沙溪古镇（车程约 2h）：寺登街、古戏台',pm:'玉津桥拍照、欧阳大院，古镇咖啡馆发呆',night:'返回大理古城住宿',traffic:'拼车 / 班车',stay:'大理（古城）',weather:'多云',wtype:'历史气候参考',temp:'12-24℃',alt:'1900-2200m',energy:'中',
+ points:[
+  {n:'沙溪古镇 · 寺登街',lng:99.8510,lat:26.3200,alt:2100,stay:'1 天',desc:'茶马古道集市、古戏台、玉津桥晨雾',type:'spot'},
+  {n:'玉津桥',lng:99.8540,lat:26.3180,alt:2100,stay:'拍照',desc:'黑潓江上的古石桥',type:'spot'}],
+ route:[[100.1619,25.6916],[100.0500,25.9500],[99.8510,26.3200],[100.0500,25.9500],[100.1619,25.6916]]},
+{d:'D9',date:'09-18',full:'2026-09-18',week:'五',lunar:'八月初八',city:'大理→丽江',track:'transition',theme:'三塔倒影 · 转场丽江',am:'崇圣寺三塔（门票约 75 元），三塔倒影公园拍经典机位',pm:'乘动车大理→丽江（约 1.5-2h，班次密集），入住丽江古城南门片区',night:'大研古城夜景：四方街、大水车，早睡适应 2400 米海拔',traffic:'动车 + 步行',stay:'丽江',weather:'多云',wtype:'历史气候参考',temp:'12-22℃',alt:'1900-2400m',energy:'低',
+ points:[
+  {n:'崇圣寺三塔',lng:100.1550,lat:25.7130,alt:1980,stay:'2-3 小时',desc:'南诏佛教文化，倒影公园经典机位',type:'spot'},
+  {n:'大理站',lng:100.2550,lat:25.5860,alt:1970,stay:'换乘',desc:'动车约 1.5-2 小时至丽江',type:'transit'},
+  {n:'丽江站',lng:100.2620,lat:26.8080,alt:2400,stay:'抵达',desc:'打车 / 公交进古城',type:'transit'},
+  {n:'丽江古城（大研）',lng:100.2296,lat:26.8721,alt:2416,stay:'5 晚',desc:'四方街、大水车夜景，早睡适应海拔',type:'hotel'}],
+ route:[[100.1550,25.7130],[100.2550,25.5860],[100.3000,26.2000],[100.2620,26.8080],[100.2296,26.8721]]},
+{d:'D10',date:'09-19',full:'2026-09-19',week:'六',lunar:'八月初九',city:'丽江',track:'lijiang',theme:'玉龙雪山 · 蓝月谷',am:'08:00 前出发玉龙雪山（101 路专线 / 拼车），按预约时段乘索道（大索道或云杉坪）',pm:'蓝月谷环湖栈道徒步（电瓶车可不坐，步行更出片）',night:'返回古城，腊排骨火锅，注意保暖早休息',traffic:'专线公交 / 拼车',stay:'丽江',weather:'多云间晴',wtype:'历史气候参考',temp:'山上 5-15℃ · 城区 12-22℃',alt:'2400-4700m',energy:'高',
+ points:[
+  {n:'玉龙雪山',lng:100.1780,lat:27.0980,alt:4680,stay:'1 天',desc:'冰川公园 4680 打卡；门票+环保车提前 7 天预约',type:'spot',img:'https://kimi-web-img.kimi.ai/img/picn.huitu.com/c1118ad8fe0f4a9929b796d542b210972d08a399.jpg'},
+  {n:'蓝月谷',lng:100.1920,lat:27.0890,alt:2900,stay:'1.5-2 小时',desc:'环湖栈道徒步，上午湖水最蓝',type:'spot',img:IMG.lanyue}],
+ route:[[100.2296,26.8721],[100.2100,26.9800],[100.1780,27.0980],[100.1920,27.0890],[100.2296,26.8721]]},
+{d:'D11',date:'09-20',full:'2026-09-20',week:'日',lunar:'八月初十',city:'丽江',track:'lijiang',theme:'束河白沙 · 古镇慢游',am:'束河古镇：青龙桥、四方听音广场，比大研安静',pm:'白沙古镇：白沙壁画、雪山远景咖啡馆',night:'忠义市场夜市：烤乳扇、鸡豆凉粉',traffic:'打车 / 公交',stay:'丽江',weather:'多云',wtype:'历史气候参考',temp:'12-22℃',alt:'2400-2600m',energy:'低',
+ points:[
+  {n:'束河古镇',lng:100.2120,lat:26.9150,alt:2440,stay:'半天',desc:'青龙桥流水人家，上午光线柔和',type:'spot'},
+  {n:'白沙古镇',lng:100.2010,lat:26.9560,alt:2500,stay:'半天',desc:'纳西原乡，主街尽头拍雪山压顶构图',type:'spot'},
+  {n:'忠义市场',lng:100.2350,lat:26.8680,alt:2416,stay:'夜市',desc:'烤乳扇、鸡豆凉粉',type:'spot'}],
+ route:[[100.2296,26.8721],[100.2120,26.9150],[100.2010,26.9560],[100.2350,26.8680]]},
+{d:'D12',date:'09-21',full:'2026-09-21',week:'一',lunar:'八月十一',city:'泸沽湖',track:'lugu',theme:'泸沽湖 · 高原明珠',am:'08:00 乘旅游专线车前往泸沽湖（车程约 4h，盘山路）',pm:'抵达后里格半岛观景台，湖边漫步看水性杨花（初秋尾声）',night:'入住湖景客栈，看泸沽湖日落',traffic:'旅游专线车',stay:'泸沽湖',weather:'多云',wtype:'历史气候参考',temp:'10-20℃',alt:'2600-2700m',energy:'中',
+ points:[
+  {n:'里格半岛观景台',lng:100.7870,lat:27.7240,alt:2690,stay:'下午',desc:'拍半岛全景的经典机位',type:'spot'},
+  {n:'里格湖景客栈',lng:100.7880,lat:27.7220,alt:2690,stay:'1 晚',desc:'270 度湖景，看日落与星空',type:'hotel',img:IMG.hotelLugu}],
+ route:[[100.2296,26.8721],[100.4000,27.1000],[100.6000,27.3500],[100.7870,27.7240]]},
+{d:'D13',date:'09-22',full:'2026-09-22',week:'二',lunar:'八月十二',city:'泸沽湖→丽江',track:'lugu',theme:'泸沽湖环湖 · 返丽江',am:'环湖精华：草海走婚桥、女神湾，乘猪槽船游湖（参考价约 50-100 元）',pm:'13:00 左右乘车返回丽江（车程约 4h）',night:'回到丽江古城休整',traffic:'环湖包车 + 专线车',stay:'丽江',weather:'多云',wtype:'历史气候参考',temp:'10-21℃',alt:'2400-2700m',energy:'中',
+ points:[
+  {n:'草海走婚桥',lng:100.8590,lat:27.6720,alt:2685,stay:'1 小时',desc:'摩梭走婚文化地标',type:'spot'},
+  {n:'女神湾',lng:100.7740,lat:27.6900,alt:2690,stay:'1 小时',desc:'日落机位，湖湾静谧',type:'spot'},
+  {n:'丽江古城',lng:100.2296,lat:26.8721,alt:2416,stay:'晚间休整',desc:'返回后不再安排重行程',type:'hotel'}],
+ route:[[100.7870,27.7240],[100.8590,27.6720],[100.7740,27.6900],[100.6000,27.3500],[100.4000,27.1000],[100.2296,26.8721]]},
+{d:'D14',date:'09-23',full:'2026-09-23',week:'三',lunar:'八月十三',city:'丽江',track:'lijiang',theme:'机动休整 · 古城深度',am:'睡到自然醒，木府（门票约 60 元预估）了解纳西土司文化',pm:'黑龙潭公园拍雪山倒影 / 古城旅拍、买鲜花饼伴手礼',night:'大研花巷文艺街区，整理行李',traffic:'步行',stay:'丽江',weather:'多云',wtype:'历史气候参考',temp:'12-22℃',alt:'2400m',energy:'低',
+ points:[
+  {n:'木府',lng:100.2320,lat:26.8690,alt:2416,stay:'2 小时',desc:'纳西土司府邸，门票约 60 元',type:'spot'},
+  {n:'黑龙潭公园',lng:100.2330,lat:26.8860,alt:2430,stay:'1.5 小时',desc:'拍玉龙雪山倒影经典机位',type:'spot'},
+  {n:'大研花巷',lng:100.2310,lat:26.8740,alt:2416,stay:'晚间',desc:'文艺街区，整理行李',type:'spot'}],
+ route:[[100.2296,26.8721],[100.2320,26.8690],[100.2330,26.8860],[100.2310,26.8740]]},
+{d:'D15',date:'09-24',full:'2026-09-24',week:'四',lunar:'八月十四',city:'丽江→长春',track:'transition',theme:'返程 · 满载而归',am:'根据返程方案前往丽江三义机场 / 丽江站',pm:'中转或经昆明返程长春',night:'抵达长春，行程结束',traffic:'飞机 / 动车 + 飞机',stay:'—',weather:'—',wtype:'—',temp:'—',alt:'—',energy:'低',
+ points:[
+  {n:'丽江三义机场',lng:100.2460,lat:26.6800,alt:2240,stay:'返程',desc:'或丽江站动车经昆明返程',type:'transit'}],
+ route:[[100.2296,26.8721],[100.2460,26.6800]]}
+];
+</script>
+
+<script>
+/* ============ 数据：城际大交通（去程3套 / 返程3套） ============ */
+const GO_PLANS=[
+{id:'fast',tag:'① 最省时方案',title:'直飞 · 当日午后抵达',
+ route:'长春龙嘉机场直飞昆明长水机场，空中飞行约5小时，无经停',
+ strategy:'适配时间敏感、单人出行想当天白天抵达的旅客；选型逻辑为牺牲价格换时间，D1下午即可安排市区活动',
+ rows:[['3U1665','09:05 龙嘉T2 → 14:00 长水','约1200-2000元（预估）','四川航空直飞，每日一班；早高峰建议提前1.5小时到机场，含正餐'],
+       ['CZ6459','09:05 龙嘉T2 → 14:00 长水','3540元起','南航共享航班，为全价舱样本，提前预订通常远低于此价'],
+       ['FM9485/MU8573','07:55 龙嘉T2 → 14:35 长水','950元起','上航/东航，经停亳州约1小时不下机，准点率参考较高']],
+ time:'约5小时（直飞）/ 约6.5-7小时（经停，含机场通勤约9小时）',
+ pros:'当日午后抵达、体力消耗最小',cons:'直飞票价波动大，旺季需提前2-4周锁定',
+ copy:'长春到昆明 直飞航班 9月10日'},
+{id:'std',tag:'② 直达常规方案',title:'经停直达 · 票价稳定',
+ route:'长春龙嘉机场乘经停航班一班直达昆明长水机场，无需中转换乘',
+ strategy:'适配追求价格与便利均衡的旅客；选型逻辑为经停航班票价稳定在一千元上下，班期覆盖每日',
+ rows:[['CZ9413','07:55 龙嘉T2 → 14:40 长水','940-1200元','南方航空，经停天津，班期每日，含餐食'],
+       ['QW6043','07:55 龙嘉T2 → 14:40 长水','940元起','青岛航空共享，与CZ9413同机，比价后选低价渠道'],
+       ['GJ8142','15:35 龙嘉T2 → 22:10 长水','887元起','长龙航空，经停临沂；晚到班次适合想睡懒觉的旅客，但当晚直接休息'],
+       ['3U8276','17:05 龙嘉T2 → 23:15 长水T1','800元起','四川航空，经停临汾；当日样本最低价，注意抵达为T1航站楼']],
+ time:'约6.5-7小时（含经停）',
+ pros:'票价稳定、班次选择多',cons:'耗时比直飞多1.5-2小时',
+ copy:'长春到昆明 航班 9月10日'},
+{id:'cheap',tag:'③ 高性价比省钱方案',title:'Z328 卧铺 · 南北纵贯',
+ route:'长春站乘Z328次直达特快卧铺至昆明站，全程一票到底',
+ strategy:'适配时间充裕、想体验南北纵贯线、预算敏感的旅客；注意全程约49小时需两晚车上过夜，15天行程会压缩为13天地面行程，需09-08提前出发',
+ rows:[['Z328','09:49 长春 → 10:49（+2天）昆明','硬座391.5 / 硬卧659.5 / 软卧1045.5元','全程49小时建议硬卧；车上备零食、充电宝、拖鞋'],
+       ['G1276 + D939','长春西09:59 → 石家庄17:22 换 D939 21:43 → 昆明南10:49+1','535.5元 + 二等764.5元 / 动卧820元','备选中转：高铁+动卧组合，全程约25小时，比普速快一天']],
+ time:'约49小时（Z328）/ 约25小时（高铁+动卧中转）',
+ pros:'最低价仅为机票一半、省两晚住宿',cons:'耗时极长、硬卧紧俏需提前候补抢票，且出发日需提前至09-08',
+ copy:'长春到昆明 Z328 卧铺'}
+];
+const BACK_PLANS=[
+{id:'fast',tag:'① 最省时方案',title:'丽江中转直飞 · 当日到家',
+ route:'丽江三义机场乘中转航班（经成都 / 西安枢纽）当日抵达长春龙嘉机场',
+ strategy:'适配想行程最后一天直接从丽江离开、不再折返昆明的旅客；选型逻辑为省去丽江-昆明4小时动车，总耗时最短；务必买中转联程票而非分段自购，行李直挂',
+ rows:[['ZH8434','丽江三义 09:30 → 成都天府T2 11:00','两段联程约1300-2200元（预估）','深圳航空执飞，衔接下段停留约2小时'],
+       ['CA2723','成都天府T2 12:55 → 长春龙嘉T2 16:45','同上','国航直飞约3小时50分，当日傍晚到家'],
+       ['备选：JD5206 + MU2271','丽江 09:50 → 西安 11:40 ｜ 西安 13:20 → 长春 16:30','约1200-2000元（预估）','首都航空+东航西安中转，衔接1小时40分偏紧，建议选同航站楼并提前值机'],
+       ['备选晚班：JD5206 + CZ6400','丽江 09:50 → 西安 11:40 ｜ 西安 20:50 → 长春 23:55','约1100-1900元（预估）','西安半日停留可进城吃泡馍，深夜抵长春']],
+ time:'约7-9小时（含中转）',
+ pros:'当日直达不折返、总耗时最短',cons:'中转票价高于昆明直飞，且需接受1次中转',
+ copy:'丽江到长春 中转航班 9月24日'},
+{id:'std',tag:'② 直达常规方案',title:'动车回昆明 + 直飞长春',
+ route:'丽江站乘 C 字头动车至昆明（约3.5-4.5小时），换乘昆明→长春直飞航班',
+ strategy:'适配追求票价可控、衔接成熟的旅客；选型逻辑为利用滇中动车网+长水机场枢纽，选 07:20 早班 C124 衔接下午航班，预留≥3.5小时换乘缓冲',
+ rows:[['C124','丽江 07:20 → 昆明 11:10','二等座 190元','最早班，衔接下午航班最稳；备选 C452（08:08→12:02）、C644（08:39→12:48）'],
+       ['3U1666','昆明长水 下午时段（约15:00-20:00，以实际班表为准） → 长春龙嘉','约1200-2000元（预估）','去程 3U1665 的反向直飞班；昆明站至长水机场地铁约40-60分钟，需计入缓冲'],
+       ['经停备选：GJ8141 等反向班期','昆明长水 早间约07:55 → 长春 13:55（经停）','800-1100元','早间出发需前一晚（D14）住昆明，与本方案动车节奏不同，二选一']],
+ time:'约10-12小时（含换乘缓冲）',
+ pros:'动车段票价稳定、航班选择多',cons:'需一次换乘，行李需自提转运',
+ copy:'丽江到昆明 动车 C124 / 昆明到长春 航班 9月24日'},
+{id:'cheap',tag:'③ 高性价比省钱方案',title:'早班动车 + 低价经停航班',
+ route:'丽江→昆明 C124 早班动车 + 昆明→长春低价经停航班（提前2-3周锁定低价舱）',
+ strategy:'适配预算优先、能接受晚班机的旅客；注意低价舱退改签限制严格，确认行程后再出票',
+ rows:[['C124','丽江 07:20 → 昆明 11:10','二等座 190元','12306 提前购票；若早班售罄可候补 C452 / C644'],
+       ['昆明 → 长春 低价经停航班','下午至晚间时段（约15:00-18:00 起飞，GJ8141 / 3U8275 等反向班期）','800-1000元','经停航班常态最低价区间，与动车 11:10 抵达衔接宽松'],
+       ['备选：夜班卧铺 Y768 / K9618','丽江 18:02 / 20:00 → 昆明 04:49 / 04:59（+1）','硬卧约123-152元','想再省一晚住宿可选夜班车，清晨抵昆明后接早间航班'],
+       ['全程候补策略','—','—','动车票候补成功率较高，机票在航旅纵横/携程设置低价提醒']],
+ time:'约11-13小时',
+ pros:'全程可控制在1100元以内',cons:'低价舱不可退改，若D14遇恶劣天气需承担改签成本',
+ copy:'昆明到长春 特价机票 9月24日'}
+];
+
+/* ============ 数据：住宿（3城 × 3档） ============ */
+const HOTELS={
+'昆明':{nights:'D1-D3 · 共3晚',segs:[['市区（D1-D3）','09-10 入住','09-13 退房','3 晚']],tiers:{
+ '高性价比':{area:'昆明站/环城南路片区、翠湖周边',price:'130-300元/晚',
+  strategy:'适配预算敏感、D4需乘动车转场大理的旅客；片区逻辑为昆明站步行圈赶车最省心，翠湖圈逛市区最方便；选型标准为评分4.5+、近地铁、含行李寄存',
+  items:[['昆明余光艺术酒店（昆明站店）','距昆明站约504米','约133元/晚','24小时前台、抬脚上车','位置无敌；房间面积偏小'],
+         ['锦大民宿（昆明站片区）','昆明站周边','约129元/晚','4.8分高分低价','性价比高；设施较基础'],
+         ['昆明倾城国际青年旅舍（翠湖店）','五华区南屏街正义路','约100-200元/晚（预估）','距翠湖150米、地铁5号线华山西路站200米','位置与氛围好；青旅房型私密性一般']],
+  tip:'华住会（全季/汉庭）、亚朵会员可在官方App/小程序领取，新客常有立减券；9月属淡旺季过渡，周中价低于周末',
+  copy:'昆明站附近 酒店 高性价比',avoid:'特价无窗房慎选；青旅床位先确认是否混住',img:'https://kimi-web-img.kimi.ai/img/q-xx.bstatic.com/cab493102227fb07b126417212c22046f849e8af.jpg'},
+ '品质星级':{area:'翠湖-东风广场核心圈、滇池度假区',price:'400-900元/晚',
+  strategy:'适配均衡舒适预算、重视睡眠品质的独行者；选型标准为国际/头部连锁品牌、评分4.7+、含早',
+  items:[['昆明JEN酒店（香格里拉集团）','盘龙区','约450-700元/晚（预估）','香格里拉集团品控、健身中心+室内泳池','服务稳定；部分房型面积一般'],
+         ['昆明站关上国贸中心亚朵酒店','金汁路469号','约412元/晚起','4.8分、1876条评价、全房型禁烟','品控稳定；离翠湖核心区有一段距离'],
+         ['昆明洲际酒店','西山区滇池片区','约700-1000元/晚（预估）','近滇池海埂、度假感强','环境好；离老城区较远']],
+  tip:'香格里拉会、亚朵会员、IHG优悦会均建议提前注册，权益含免费早餐/延迟退房/房型升级；连住3晚可询价连住折扣',
+  copy:'昆明翠湖 品质酒店',avoid:'滇池片区离老城远、打车成本高；周五周六明显涨价',img:'https://kimi-web-img.kimi.ai/img/letus-travel.com/fa33c89a3b24f1719bbf68bcd07282566d704e85.jpg'},
+ '网红特色':{area:'昆明老街片区、滇池海埂片区',price:'300-800元/晚',
+  strategy:'适配想在昆明也住出氛围感的旅客；选型标准为设计独特、位置即景点',
+  items:[['昆明若安·对月楼酒店','五华区昆明老街酒杯楼内','约500-700元/晚（预估）','住进昆明地标酒杯楼，下楼即老街','位置与建筑特色；老街夜间略有噪音'],
+         ['滇池海埂湖景民宿（片区样本）','海埂大坝步行圈','约300-600元/晚（预估）','步行5分钟到滇池观景步道、看西山睡美人日落','景观好；餐饮配套少'],
+         ['观小田云境公寓酒店','官渡区','约200-300元/晚（预估）','公寓式、适合连住','性价比高；服务非酒店化']],
+  tip:'9月中旬错开周末可省15%-25%；连住2晚以上多数民宿有折扣，下单前私聊询价',
+  copy:'昆明老街 特色民宿',avoid:'老街内酒吧噪音到深夜，选房要求背街',img:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/0f8ded77d0b733995caf894b57193f081b8c01fe.jpg'}
+}},
+'大理':{nights:'D4-D8 · 共5晚（古城4晚 + 双廊1晚）',segs:[['古城（D4-D6）','09-13 入住','09-16 退房','3 晚'],['双廊（D7）','09-16 入住','09-17 退房','1 晚'],['古城（D8）','09-17 入住','09-18 退房','1 晚']],tiers:{
+ '高性价比':{area:'大理古城周边（南门/西门）、大理站片区（仅转场用）',price:'120-300元/晚',
+  strategy:'适配以古城为活动中心的旅客；片区逻辑为古城100-300元/晚密度最高、吃饭赶车都方便；选型标准为安静巷弄、不临主街',
+  items:[['大理留云酒店（高铁站洱海公园店）','大理站/洱海公园','约200-300元/晚（预估）','4.6分、设施新、停车方便','干净位置好找；离古城较远（仅适合转场夜）'],
+         ['全季大理火车站店','大理站片区','约250-350元/晚（预估）','4.5分、房间宽敞、早餐米线口碑好','中转舒适；同样不近古城'],
+         ['大理无由民宿（古城内）','大理古城','约200-400元/晚（预估）','沉浸式风景体验、安静不折腾','古城氛围浓；石板路拖行李费力'],
+         ['古城巷弄连锁民宿（如家/汉庭古城店等）','古城南门','约150-250元/晚（预估）','品控稳定','省心；设计感弱']],
+  tip:'华住会、首旅如家会员提前注册领券；古城民宿美团/携程比价后选含取消险',
+  copy:'大理古城 民宿 高性价比',avoid:'古城民宿图片美化普遍，下单前务必索要实拍视频',img:'https://kimi-web-img.kimi.ai/img/res.klook.com/e7459621eabe08260aedcc3f07b4ff01de0420b5.jpg'},
+ '品质星级':{area:'下关洱海公园片区、古城周边品质民宿集群',price:'500-1500元/晚',
+  strategy:'适配重视品牌服务与稳定体验的旅客；选型标准为国际连锁或4.7分+精品、含接送机/站服务',
+  items:[['大理洱海天域英迪格酒店','下关洱海公园','约1463元/晚起','4.7分6484条点评、洲际集团、白族风情设计、含接送机','品牌与景观；距古城约12公里'],
+         ['大理福朋喜来登酒店','洱海片区','约1199元/晚起','4.7分4227条点评、万豪集团服务稳定','标准化服务；设计风格偏商务'],
+         ['大理云之国·忆闲居度假酒店','大理古城附近','约400-700元/晚（预估）','性价比极高、去各景点交通便利','位置与价格平衡；旺季需早订']],
+  tip:'IHG优悦会、万豪旅享家会员可积分+权益（早餐/延迟退房/升级）；官方App常有提前预订价',
+  copy:'大理 五星级酒店 洱海',avoid:'「海景房」认准一线海景标签，二线只能看到一角',img:'https://kimi-web-img.kimi.ai/img/tournews.tw/39f7a3088d33731e4b10225a400dddd7755ec6c4.jpg'},
+ '网红特色':{area:'双廊古镇（看日落首选）、龙龛码头（看日出首选）、挖色小普陀片区',price:'300-1200元/晚',
+  strategy:'适配出片与度假感优先的旅客；片区逻辑为海西看日出、海东双廊看日落，亲水民宿集中；选型标准为一线海景房、提供实拍视频验证。D7双廊住宿首选本档',
+  items:[['云栖·设海景酒店（云七毗舍）','双廊镇','约600-1200元/晚（预估）','11年民宿标杆、白族建筑+现代美学、浮于海面的亲水平台','设计与底蕴；热门房型需提前2周订'],
+         ['汐之屿·日落海景半山花园Villa','双廊半山腰','约500-900元/晚（预估）','侘寂风+摩洛哥元素、日落视野无遮挡、赠下午茶','出片率极高；半山位置进出需接送'],
+         ['龙凤悦海景客栈','洱海东岸','约200-400元/晚','免费接站、楼顶天空之境观景台、拍苍洱倒影','性价比海景；装修非奢华路线'],
+         ['六阅·海东方悬崖海景酒店','海东镇','约800-1500元/晚（预估）','悬崖托斯卡纳风、金可儿床垫、B&O音响、悬崖餐厅','硬件近五星；价格偏高']],
+  tip:'务必要求房东提供房间实拍视频防图文不符；连住2晚以上普遍有9折左右折扣；9月中旬非国庆峰值，提前7-10天订即可',
+  copy:'双廊 海景民宿 日落',avoid:'半山民宿进出靠接送，先确认接送是否收费',img:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/6118c5f5e46eca25639c344414327605c1456934.jpg'}
+}},
+'丽江':{nights:'D9-D11、D13-D14 · 共5晚（D12住泸沽湖）',segs:[['大研 / 束河（D9-D11）','09-18 入住','09-21 退房','3 晚'],['泸沽湖（D12）','09-21 入住','09-22 退房','1 晚'],['大研（D13-D14）','09-22 入住','09-24 退房','2 晚']],tiers:{
+ '高性价比':{area:'大研古城南门/忠义市场片区、束河古镇',price:'180-350元/晚（淡季口径，9月中旬适用）',
+  strategy:'适配第一次来丽江、怕吵闹、要赶雪山的旅客；片区逻辑为南门近入口管家可搬行李、楼下菜市场小吃公交直达雪山；选型标准为远离新华街酒吧50米以上',
+  items:[['梦田·Garden草木','五一街','约100-200元/晚','花草森系小院、老板免费搬行李、全屋智能','干净平价；单间面积小'],
+         ['摆渡居（束河）','束河古镇','约200-350元/晚','超大纳西庭院、含早餐、人少清净','避世感强；夜间配套少、去大研打车约25元'],
+         ['锦江之星（大水车店）','古城北门','约180-280元/晚','连锁品控、有停车场与洗衣房、不用拖石板路','省心；装饰普通']],
+  tip:'锦江荟、华住会会员官方渠道领券；古城民宿普遍支持连住优惠',
+  copy:'丽江古城南门 民宿 高性价比',avoid:'石板路拖行李费力，选提供搬行李服务的店；远离酒吧街50米',img:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/3b679cdb1e5138bf707da2ad442116b178d03ab4.jpg'},
+ '品质星级':{area:'狮子山半山（阅古楼片区）、古城外围品质酒店',price:'450-1000元/晚（淡季口径）',
+  strategy:'适配追求景观与舒适均衡的旅客；片区逻辑为狮子山是古城制高点，露台俯瞰古城+玉龙雪山、看日照金山；选型标准为确认免费搬运行李服务（全是台阶）',
+  items:[['狮子山半山观景民宿（阅古楼周边观景客栈）','狮子山半山','约450-800元/晚','古城全景+雪山视野、日出夜景绝美','景观绝佳；台阶多行李重，务必确认搬运服务'],
+         ['大研古城英迪格/和府洲际（片区样本）','古城南门外围','约900-1500元/晚（预估）','国际品牌、车可达门口','服务与便利；价格高且少了古城内氛围'],
+         ['束河古镇品质庭院客栈（片区样本）','束河','约400-700元/晚（预估）','安静私密、庭院品质高','松弛感强；出行需打车']],
+  tip:'IHG优悦会会员含早餐/升级权益；观景房建议订房时备注「高楼层/朝雪山向」',
+  copy:'丽江狮子山 观景民宿 雪山',avoid:'狮子山全是台阶，行李务必让管家搬；观景房确认朝雪山向',img:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/ffaab33d9bec5da9089c183b872d9d7eca8a3083.jpg'},
+ '网红特色':{area:'白沙古镇（雪山最近）、泸沽湖里格半岛/大落水（D12）',price:'250-800元/晚',
+  strategy:'适配想看日照金山、追求极致出片的旅客；片区逻辑为白沙商业化极低、200多元即可住一线雪山露台；泸沽湖选里格半岛视野最佳、大落水配套最全',
+  items:[['白沙古镇雪山观景民宿（片区样本）','白沙古镇','约200-400元/晚','一线雪山露台、商业化低、适合看日照金山','景观与安静；餐饮外卖少、交通不便'],
+         ['泸沽湖里格半岛湖景客栈（片区样本）','里格半岛','约400-800元/晚（预估）','270度湖景、日出机位','景观绝佳；岛上行李需步行一段'],
+         ['泸沽湖大落水村湖景民宿（片区样本）','大落水村','约300-600元/晚（预估）','配套最全、乘船方便','便利；旅行团较多略吵']],
+  tip:'泸沽湖9月非最旺季，提前3-5天订即可；湖景房认准「一线湖景」标签并索要实拍；里格半岛台阶多，轻装进入',
+  copy:'泸沽湖 里格半岛 湖景客栈',avoid:'湖景房认准「一线湖景」并查实拍；里格半岛车辆无法直达，轻装进入',img:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/78656c8c2a9b0102588b88d17c7bf0a21995ff78.jpg'}
+}}};
+
+/* ============ 数据：核心景点清单（20个） ============ */
+const SPOTS=[
+{n:'石林风景区',city:'昆明',dur:'4-5小时',open:'07:30-17:30（以当日公示为准）',book:'是，「游云南」App/小程序',price:'130元（预估），电动车25元',keys:'喀斯特徒步、阿诗玛文化',shot:'上午顺光拍大石林，穿纯色衣服与灰黑石峰对比',story:'约2.7亿年前这里是一片汪洋，碳酸盐岩经溶蚀成今日剑状石峰，彝族撒尼人世代游牧于此。撒尼叙事长诗《阿诗玛》入选国家级非遗，小石林尽头那座独立石峰就是传说中阿诗玛的化身。',day:'D2 · 09-11',avoid:'景区门口「免费导游」实为购物团；电动车票按需购买',img:'https://kimi-web-img.kimi.ai/img/picn.huitu.com/0e154b8f977898443b48bfd624c4e7eed64fbd06.jpg'},
+{n:'云南省博物馆',city:'昆明',dur:'2-3小时',open:'09:00-17:00，周一闭馆，16:30停止入馆',book:'是，提前3-7天预约，免费',price:'免费',keys:'古滇国青铜器、云南通史',shot:'建筑外观几何线条出片，室内禁用闪光灯',story:'镇馆之宝牛虎铜案出土于江川李家山，是古滇国青铜文明的缩影——司马迁笔下受赐「滇王之印」的王国曾雄踞滇池畔数百年。「妙香佛国」展厅则讲述南诏大理国的佛教艺术。',day:'D3 · 09-12',avoid:'周一闭馆别跑空；馆内禁用闪光灯',img:'https://kimi-web-img.kimi.ai/img/pic.huitu.com/8b488939fc1646fef902d95630f21e4e01dca442.jpg'},
+{n:'翠湖公园',city:'昆明',dur:'1.5-2小时',open:'4-11月 06:30-22:00',book:'否',price:'免费',keys:'本地人生活观察、Citywalk起点',shot:'清晨薄雾与荷塘，适合人文扫街',story:'明代这里还是滇池的湖湾，清初吴三桂填湖建府，民国辟为公园。每年11月至次年3月，红嘴鸥自西伯利亚来越冬，「春城鸥影」已延续近四十年。',day:'D3 · 09-12',avoid:'红嘴鸥仅11月-3月在；路边高价鸥粮别买',img:IMG.cuihu},
+{n:'西山龙门',city:'昆明',dur:'3-4小时',open:'08:30-17:30',book:'建议提前线上购票',price:'龙门石窟30元+索道单程25元（预估）',keys:'悬崖石窟、俯瞰滇池',shot:'龙门观景台拍滇池全景，上午光线佳',story:'龙门石窟开凿于清乾隆至咸丰年间，道士吴来清率工匠在绝壁上凿石数十年，一锤一錾开出这条悬崖栈道。登顶「一登龙门，身价百倍」，五百里滇池尽收眼底。',day:'D4 · 09-13',avoid:'雨后栈道湿滑；节假日缆车排队1小时起',img:IMG.dianchi},
+{n:'云南民族村',city:'昆明',dur:'3-4小时',open:'日场09:00-17:00 / 夜场17:00-22:00',book:'建议「游云南」预约',price:'90元（预估），夜场50元起',keys:'少数民族村寨、歌舞表演',shot:'下午傣寨竹楼光影，民族服饰租赁拍照',story:'汇聚云南25个世居民族的原生村寨建筑——傣家竹楼、白族三坊一照壁、彝族土掌房皆按原样迁建。每日多场歌舞由各村寨青年演出，是快速认识多元云南的索引。',day:'备选',avoid:'夜场演出需另购票；村内餐饮偏贵，建议饭后进',img:null},
+{n:'斗南花市',city:'昆明',dur:'1.5-2小时',open:'09:00-21:00',book:'否',price:'免费',keys:'亚洲最大鲜切花市场、买花体验',shot:'傍晚交易高峰色彩最盛，买束花当道具',story:'从1983年第一枝剑兰试种起步，如今是亚洲最大的鲜切花交易市场。每天午后大宗拍卖的电子钟落槌声，决定着千里之外全国花店的行情。',day:'备选',avoid:'买花寄快递比自带划算；晚市散客报价虚高，多问两家',img:null},
+{n:'大理古城',city:'大理',dur:'半天 × 多次',open:'全天开放',book:'否',price:'免费',keys:'人民路民谣、床单厂艺术区、赶三月街（农历每月初二/九/十六/廿三）',shot:'清晨7-9点石板路无人，五华楼登楼拍古城全景',story:'明洪武十五年（1382年）在羊苴咩城遗址上筑城，棋盘式格局延续至今。五华楼原为南诏国宾馆；「风花雪月」——下关风、上关花、苍山雪、洱海月，是大理的四张名片。',day:'D4 · 09-13',avoid:'人民路酒吧先问价再坐；银器茶叶别在景区买',img:'https://kimi-web-img.kimi.ai/img/upload.wikimedia.org/bd0949c02b18a167ccd12b254d0819181cbfac87.jpg'},
+{n:'苍山（感通索道/玉带云游路）',city:'大理',dur:'4-5小时',open:'索道约08:30-16:30（以当日公告为准）',book:'索道票建议提前线上购',price:'进山门票30-35元+索道另计（预估）',keys:'玉带云游路徒步、寂照庵素斋',shot:'上午俯瞰洱海全景，山脊线配云海',story:'苍山十九峰十八溪，峰峰积雪溪溪入海，是第四纪冰川遗迹的天然博物馆。山腰寂照庵以多肉庭院走红，庵内不敬香火敬花草，素斋常年排队。',day:'D5 · 09-14',avoid:'大风天索道随时停运，出发前查公告；山顶比古城低8-10℃',img:'https://kimi-web-img.kimi.ai/img/dimg04.c-ctrip.com/c7b6885c72a27f84aba043e74baef3566593b1c4.jpg'},
+{n:'崇圣寺三塔',city:'大理',dur:'2-3小时',open:'约07:30-18:30（以当日公示为准）',book:'建议线上购票',price:'75元（预估）',keys:'南诏佛教文化、三塔倒影',shot:'下午游三塔倒影公园拍经典倒影机位',story:'主塔千寻塔建于南诏劝丰祐时期（约9世纪），方形十六级密檐，历经千年多次大地震屹立不倒；1978年维修时在塔顶发现南诏大理国文物600余件。',day:'D9 · 09-18',avoid:'景区电瓶车非必需；倒影公园需另购票',img:'https://kimi-web-img.kimi.ai/img/pic.huitu.com/c876f54e8d648afdf0fc9291e1e25140171c3ed6.jpg'},
+{n:'洱海生态廊道（才村-磻溪S湾-龙龛）',city:'大理',dur:'3-4小时',open:'全天开放',book:'否',price:'免费（共享单车约15元/半小时）',keys:'骑行、日出打卡',shot:'龙龛码头日出、磻溪S湾清晨傍晚无人群',story:'洱海是云南第二大高原湖泊、白族人的母亲湖。129公里生态廊道机动车禁入，才村至磻溪一段保留了最完整的湿地与古渡村落景观。',day:'D6 · 09-15',avoid:'共享单车按半小时计费，务必停进电子围栏',img:IMG.swan},
+{n:'喜洲古镇',city:'大理',dur:'3小时',open:'全天开放',book:'否',price:'免费（严家大院25元预估）',keys:'白族民居、扎染体验、喜洲粑粑',shot:'秋季稻田金黄+转角楼，穿浅色文艺风',story:'茶马古道上的白族商贸重镇，清末民国「喜洲商帮」四大家族的严家大院堪称白族民居博物馆——三坊一照壁、四合五天井的规制在此保存最完整。',day:'D6 · 09-15',avoid:'稻田拍照别踩庄稼；扎染体验先谈好价格',img:'https://kimi-web-img.kimi.ai/img/picn.huitu.com/6a20bc9fd39a1f21edc8f788c4c94d576f8cbedb.jpg'},
+{n:'双廊古镇',city:'大理',dur:'半天-1天',open:'全天开放',book:'否',price:'免费',keys:'临海咖啡馆、玉几岛外围',shot:'下午拍苍山洱海同框，日落前1小时金色光线',story:'古称「拴廊」，曾是洱海东岸渔村，因杨丽萍的太阳宫、月亮宫闻名。「苍山不墨千秋画，洱海无弦万古琴」，说的就是从双廊望出去的视野。',day:'D7 · 09-16',avoid:'临海咖啡馆低消高；玉几岛进岛另收费',img:IMG.shuanglang},
+{n:'理想邦（大理圣托里尼）',city:'大理',dur:'2小时',open:'全天开放',book:'否',price:'免费',keys:'蓝白悬崖建筑群',shot:'16:00后前往避开强光，俯瞰洱海',story:'依山而建的蓝白建筑群，因神似圣托里尼走红。虽是近年新建的小镇，但悬崖机位俯瞰洱海的视野确实出色，适合当作环海东路的拍照驿站。',day:'D7 · 09-16',avoid:'免费区域足够拍，收费机位非必需',img:'https://kimi-web-img.kimi.ai/img/img.wenlvnews.com/0b17e3d3b834920cbdd226ed38fa79d503be6f92.jpeg'},
+{n:'沙溪古镇',city:'大理',dur:'1天',open:'全天开放',book:'否',price:'免费',keys:'茶马古道集市、古戏台',shot:'玉津桥晨雾（周五赶集日最热闹，9/18为周五可调整）',story:'茶马古道上唯一幸存的古集市，寺登街、古戏台与兴教寺明代壁画构成完整的西南集镇标本；2002年与长城同批入选世界濒危建筑名录后修复重生。',day:'D8 · 09-17',avoid:'回大理的拼车末班约17:00，别错过',img:'https://kimi-web-img.kimi.ai/img/pic.huitu.com/ccc3403167f012a854ef3eed6908c489a1bfed6b.jpg'},
+{n:'丽江古城（大研）',city:'丽江',dur:'半天 × 多次',open:'全天开放',book:'否',price:'免费（古城维护费政策以官方为准）',keys:'四方街、木府、纳西古乐',shot:'清晨10点前/傍晚18点后进古城避人流，狮子山俯瞰全景',story:'始建于宋末元初，纳西族木氏土司治所，1997年列入世界文化遗产。全城无城墙——传说木氏忌「困」字；四方街曾是茶马古道滇藏线的物资集散地。',day:'D9 · 09-18',avoid:'警惕酒吧街酒托套路；巷内老店比主街餐厅实惠',img:'https://kimi-web-img.kimi.ai/img/assets.699pic.com/7b74e975c1b214423914d134fb8eb7f5b834bc3a.v1'},
+{n:'玉龙雪山',city:'丽江',dur:'1天',open:'常规约07:00-18:00，16:30停止检票（以当日公示为准）',book:'必须：门票+环保车提前7天「玉龙雪山服务」小程序；索道提前7天「丽江旅游集团」小程序每日20:00放票',price:'进山费100元+环保车20元；冰川大索道约120-140元 / 云杉坪约40-60元 / 牦牛坪约60元（预估）',keys:'冰川公园4680打卡、云杉坪草甸、牦牛坪全景',shot:'大索道优先7:00-10:00时段；云杉坪草甸配雪山适合浅色系',story:'纳西语称「欧鲁」，意为天山，十三座雪峰连绵如巨龙，是纳西族保护神「三朵」的化身。北半球纬度最低的终年积雪山脉，主峰扇子陡5596米至今无人登顶。',day:'D10 · 09-19',avoid:'索道票只信官方小程序；「免排队」黄牛是骗局；租羽绒服记得砍价',img:'https://kimi-web-img.kimi.ai/img/picn.huitu.com/c1118ad8fe0f4a9929b796d542b210972d08a399.jpg'},
+{n:'蓝月谷',city:'丽江',dur:'1.5-2小时',open:'随景区开放',book:'含在进山费内，无需单独预约',price:'含进山费（电瓶车全段40元可选）',keys:'高原湖泊徒步',shot:'沿湖步行栈道比电瓶车更出片，上午湖水最蓝',story:'雪山融水穿谷而过，因富含铜离子与碳酸钙沉淀呈现层次分明的蓝绿色。纳西人称白水河，河床白色钙华是千年水流沉积的地质年轮。',day:'D10 · 09-19',avoid:'电瓶车可不坐；正午光线最硬，上午湖水最蓝',img:IMG.lanyue},
+{n:'束河古镇',city:'丽江',dur:'半天',open:'全天开放',book:'否',price:'免费',keys:'茶马古道博物馆、咖啡馆发呆',shot:'青龙桥流水人家，上午光线柔和',story:'纳西语称「绍坞」，意为高峰下的村寨，茶马古道上保存完好的重要集镇，比大研更早成市。青龙桥建于明万历年间，是丽江最大的古石桥。',day:'D11 · 09-20',avoid:'门口「讲解员」收费非必需；古镇本身免费',img:'https://kimi-web-img.kimi.ai/img/ak-d.tripcdn.com/6aa71f91954f40fb6f3754e3628e03ae195740ab.jpg'},
+{n:'白沙古镇',city:'丽江',dur:'半天',open:'全天开放',book:'否',price:'免费（白沙壁画约30元预估）',keys:'纳西原乡、雪山远景咖啡',shot:'主街尽头拍雪山压顶构图，清晨看日照金山',story:'木氏土司发祥地、丽江坝子最早的纳西聚居地。白沙壁画绘于明代，融汉传佛教、藏传佛教与道教神系于一壁，是纳西族开放包容的见证。',day:'D11 · 09-20',avoid:'白沙壁画殿内禁止拍照',img:'https://kimi-web-img.kimi.ai/img/picn.huitu.com/a8a63b86cdd1dd321203fc788983463ff7353882.jpg'},
+{n:'泸沽湖',city:'丽江（宁蒗）',dur:'2天1晚',open:'全天开放',book:'否',price:'进山门票约70元（预估），猪槽船50-100元',keys:'里格半岛、草海走婚桥、摩梭家访',shot:'里格观景台拍半岛全景，女神湾日落，湖景客栈阳台星空',story:'摩梭人是中国唯一仍存续母系大家庭的族群，「男不娶、女不嫁」的走婚制延续千年，祖母屋是家族的核心。湖面海拔2685米，9月水性杨花开满湖湾。',day:'D12 · 09-21',avoid:'猪槽船先谈价再上船；家访推销银器可礼貌拒绝',img:'https://kimi-web-img.kimi.ai/img/assets.699pic.com/89dad7f45c34976c407ca4cd1f2d2ea539a0cb19.v1'}
+];
+</script>
+
+<script>
+/* ============ 数据：高赞餐厅标记（小红书/携程必打卡榜 · 近似定位，以导航为准） ============ */
+const FOOD=[
+{d:0,n:'建新园过桥米线（宝善街店）',lng:102.7122,lat:25.0348,rec:'标准过桥米线、脆哨、凉米线',price:'人均约32元',avoid:'饭点排队；点标准过桥即可，不必上豪华套餐'},
+{d:0,n:'南强街巷夜市',lng:102.7068,lat:25.0352,rec:'烤豆腐、泡鲁达、小吃拼盘',price:'人均约40元',avoid:'跟着本地人的队伍买，纯网红摊位溢价高'},
+{d:1,n:'端仕小锅（文林街店）',lng:102.7001,lat:25.0516,rec:'小锅米线、卤饵丝',price:'人均约15-18元',avoid:'昆明必打卡榜No.3；早高峰拼桌是常态'},
+{d:1,n:'福照楼汽锅鸡（锦江店）',lng:102.7228,lat:25.0300,rec:'非遗汽锅鸡',price:'人均约70-80元',avoid:'汽锅鸡点小份够两人，别贪多'},
+{d:2,n:'园西路小吃街（云大旁）',lng:102.7005,lat:25.0550,rec:'烤豆腐、泡鲁达',price:'人均约30元',avoid:'学生街价格友好，饭点人多'},
+{d:4,n:'再回首凉鸡米线（人民路店）',lng:100.1630,lat:25.6942,rec:'凉鸡米线',price:'人均约15元',avoid:'下午常提前售罄，请赶早餐时段'},
+{d:4,n:'石井私房菜（大理古城）',lng:100.1645,lat:25.6960,rec:'白族酸辣鱼、黄焖鸡',price:'人均约50元',avoid:'藏在巷子深处，跟着导航走到底'},
+{d:5,n:'喜洲粑粑（四方街炭火摊）',lng:100.1755,lat:25.8570,rec:'甜咸双拼粑粑',price:'人均约10元',avoid:'认准炭火现烤；电烤的口感差一截'},
+{d:6,n:'双廊白族鱼鲜（古镇临海）',lng:100.1970,lat:25.9060,rec:'酸辣鱼、洱海虾',price:'人均约50元',avoid:'鱼类按斤称，下单前先确认时价'},
+{d:8,n:'忠义市场（夜市+早市）',lng:100.2288,lat:26.8718,rec:'鸡豆凉粉、烤饵块、烤乳扇',price:'人均约25元',avoid:'夜市烧烤先问价再点单；早市丽江粑粑最地道'},
+{d:9,n:'阿婆腊排骨（五一街兴仁上段38号）',lng:100.2342,lat:26.8790,rec:'腊排骨火锅小锅',price:'人均约60-85元',avoid:'饭点排队1小时起，建议错峰；认准老字号，山寨店多；口味偏咸可加汤'},
+{d:10,n:'88号小吃店（五一街兴仁上段88号）',lng:100.2348,lat:26.8796,rec:'鸡豆凉粉、纳西烤鱼',price:'人均约55元',avoid:'40年老店店面小；别被门口拉客带去山寨「分店」'},
+{d:12,n:'云雪丽餐厅（木府店 · 忠义巷149号）',lng:100.2308,lat:26.8728,rec:'纳西烤鱼',price:'人均约50元',avoid:'饭点等位，可先电话询问'},
+{d:11,n:'大落水村摩梭家常菜',lng:100.7880,lat:27.7050,rec:'湖鱼、水性杨花炒蛋',price:'人均约45元',avoid:'湖鱼按斤先问价；猪膘肉浅尝即可'}
+];
+
+/* ============ 数据：当日推荐酒店坐标（按确认行程入住段预写近似定位，以导航为准） ============ */
+const HOTEL_MARKS=[
+{d:0,n:'昆明余光艺术酒店（昆明站店）',lng:102.7242,lat:25.0178,area:'昆明站 / 环城南路片区',price:'约133元/晚起（2026-08-29 参考）',seg:'09-10 入住 · 09-13 退房 · 3 晚',avoid:'特价无窗房慎选；D4赶动车选昆明站步行圈',copy:'昆明站附近 酒店 高性价比 09-10入住 3晚'},
+{d:1,n:'昆明余光艺术酒店（昆明站店）',lng:102.7242,lat:25.0178,area:'昆明站 / 环城南路片区',price:'约133元/晚起（2026-08-29 参考）',seg:'09-10 入住 · 09-13 退房 · 3 晚',avoid:'特价无窗房慎选；D4赶动车选昆明站步行圈',copy:'昆明站附近 酒店 高性价比 09-10入住 3晚'},
+{d:2,n:'昆明余光艺术酒店（昆明站店）',lng:102.7242,lat:25.0178,area:'昆明站 / 环城南路片区',price:'约133元/晚起（2026-08-29 参考）',seg:'09-10 入住 · 09-13 退房 · 3 晚',avoid:'特价无窗房慎选；D4赶动车选昆明站步行圈',copy:'昆明站附近 酒店 高性价比 09-10入住 3晚'},
+{d:3,n:'大理无由民宿（古城内）',lng:100.1648,lat:25.6938,area:'大理古城巷弄',price:'约200-400元/晚（预估）',seg:'09-13 入住 · 09-16 退房 · 3 晚',avoid:'古城民宿图片美化普遍，下单前索要实拍视频；石板路拖行李费力',copy:'大理古城 民宿 高性价比 09-13入住 3晚'},
+{d:4,n:'大理无由民宿（古城内）',lng:100.1648,lat:25.6938,area:'大理古城巷弄',price:'约200-400元/晚（预估）',seg:'09-13 入住 · 09-16 退房 · 3 晚',avoid:'古城民宿图片美化普遍，下单前索要实拍视频；石板路拖行李费力',copy:'大理古城 民宿 高性价比 09-13入住 3晚'},
+{d:5,n:'大理无由民宿（古城内）',lng:100.1648,lat:25.6938,area:'大理古城巷弄',price:'约200-400元/晚（预估）',seg:'09-13 入住 · 09-16 退房 · 3 晚',avoid:'古城民宿图片美化普遍，下单前索要实拍视频；石板路拖行李费力',copy:'大理古城 民宿 高性价比 09-13入住 3晚'},
+{d:6,n:'云栖·设海景酒店（云七毗舍）',lng:100.2108,lat:25.9058,area:'双廊古镇一线海景',price:'约600-1200元/晚（预估）',seg:'09-16 入住 · 09-17 退房 · 1 晚',avoid:'热门房型需提前订；半山 / 亲水位置先确认接送是否收费',copy:'双廊 海景民宿 日落 09-16入住 1晚'},
+{d:7,n:'大理无由民宿（古城内）',lng:100.1648,lat:25.6938,area:'大理古城巷弄',price:'约200-400元/晚（预估）',seg:'09-17 入住 · 09-18 退房 · 1 晚',avoid:'古城民宿图片美化普遍，下单前索要实拍视频；石板路拖行李费力',copy:'大理古城 民宿 高性价比 09-17入住 1晚'},
+{d:8,n:'梦田·Garden草木',lng:100.2345,lat:26.8795,area:'大研古城五一街 / 南门片区',price:'约100-200元/晚',seg:'09-18 入住 · 09-21 退房 · 3 晚',avoid:'单间面积小；远离酒吧街50米，确认免费搬行李服务',copy:'丽江古城南门 民宿 高性价比 09-18入住 3晚'},
+{d:9,n:'梦田·Garden草木',lng:100.2345,lat:26.8795,area:'大研古城五一街 / 南门片区',price:'约100-200元/晚',seg:'09-18 入住 · 09-21 退房 · 3 晚',avoid:'单间面积小；远离酒吧街50米，确认免费搬行李服务',copy:'丽江古城南门 民宿 高性价比 09-18入住 3晚'},
+{d:10,n:'梦田·Garden草木',lng:100.2345,lat:26.8795,area:'大研古城五一街 / 南门片区',price:'约100-200元/晚',seg:'09-18 入住 · 09-21 退房 · 3 晚',avoid:'单间面积小；远离酒吧街50米，确认免费搬行李服务',copy:'丽江古城南门 民宿 高性价比 09-18入住 3晚'},
+{d:11,n:'泸沽湖里格半岛湖景客栈（片区样本）',lng:100.7882,lat:27.7218,area:'里格半岛一线湖景',price:'约400-800元/晚（预估）',seg:'09-21 入住 · 09-22 退房 · 1 晚',avoid:'认准「一线湖景」并索要实拍；里格台阶多，轻装进入',copy:'泸沽湖 里格半岛 湖景客栈 09-21入住 1晚'},
+{d:12,n:'梦田·Garden草木',lng:100.2345,lat:26.8795,area:'大研古城五一街 / 南门片区',price:'约100-200元/晚',seg:'09-22 入住 · 09-24 退房 · 2 晚',avoid:'单间面积小；远离酒吧街50米，确认免费搬行李服务',copy:'丽江古城南门 民宿 高性价比 09-22入住 2晚'},
+{d:13,n:'梦田·Garden草木',lng:100.2345,lat:26.8795,area:'大研古城五一街 / 南门片区',price:'约100-200元/晚',seg:'09-22 入住 · 09-24 退房 · 2 晚',avoid:'单间面积小；远离酒吧街50米，确认免费搬行李服务',copy:'丽江古城南门 民宿 高性价比 09-22入住 2晚'}
+];
+</script>
+
+<script>
+/* ============ 数据：行程模拟（高性价比口径 · 作息+三餐+附近餐馆小吃） ============ */
+/* 每日 steps: [时刻, 图标, 事项, 说明]；cost 为当日餐饮+市内花费小计（不含大交通/住宿） */
+const SIM=[
+{cost:'当日餐饮+市内交通约 ¥160（不含机票）',steps:[
+ ['05:50','起','起床','长春家中，行李前一晚已打包'],
+ ['05:58','洗','洗漱',''],
+ ['06:08','妆','化妆 · 轻薄底妆 + 防晒','航班日一切从简'],
+ ['06:20','行','出发去机场','机场巴士/网约车 → 龙嘉机场，约40分钟（¥25）'],
+ ['07:55','行','FM9485 起飞','经停亳州不下机（¥950起，含正餐）'],
+ ['12:30','午','机上正餐','靠窗位补觉，为下午存体力'],
+ ['14:35','行','抵达昆明长水机场','取行李，地铁6号线进市区（¥7，约1小时）'],
+ ['16:10','宿','入住酒店放行李','昆明站片区高性价比酒店（¥130-200/晚），稍作休整'],
+ ['17:30','晚','晚餐 · 建新园过桥米线','宝善街店，经典过桥米线（¥35）'],
+ ['19:00','游','昆明老街 + 南屏街漫步','逛酒杯楼，来一杯酸奶紫米露（¥10）'],
+ ['21:30','宿','回酒店休整','补水面膜，高原第一天别熬夜'],
+ ['23:00','夜','就寝','']]},
+{cost:'当日约 ¥410（含石林门票与往返车费）',steps:[
+ ['07:00','起','起床',''],
+ ['07:08','洗','洗漱',''],
+ ['07:18','妆','化妆 · 防晒是主角',''],
+ ['07:35','早','早餐 · 端仕小锅','小锅米线（¥15）'],
+ ['08:00','行','出发去石林','景区直通车/拼车（¥60，约1.5小时）'],
+ ['09:30','游','石林 · 大石林','门票¥130 + 电动车¥25，剑峰池、望峰亭'],
+ ['12:00','午','午餐 · 景区外彝家菜','荞饭配烤肉（¥40）'],
+ ['13:30','游','小石林','阿诗玛石峰，下午顺光好拍'],
+ ['15:30','行','返程回市区','拼车回（¥60）'],
+ ['17:30','宿','酒店休息',''],
+ ['18:30','晚','晚餐 · 福照楼汽锅鸡','锦江店，非遗汽锅鸡（人均¥70）'],
+ ['20:00','游','翠湖夜散步','免费，看本地人夜生活'],
+ ['23:00','夜','就寝','']]},
+{cost:'当日约 ¥135（门票全免）',steps:[
+ ['07:30','起','起床',''],
+ ['07:38','洗','洗漱',''],
+ ['07:48','妆','化妆 · 轻薄底妆',''],
+ ['08:05','早','早餐 · 文山早点','翠湖店鸡汤米线（¥18）'],
+ ['08:40','游','翠湖公园','看本地人晨练，免费'],
+ ['09:30','游','陆军讲武堂 + 云南大学','外观免费，银杏道拍照'],
+ ['11:30','午','午餐 · 园西路小吃街','烤豆腐 + 泡鲁达（¥30）'],
+ ['13:00','游','云南省博物馆','提前3天已预约，免费；重点看古滇国青铜器'],
+ ['16:00','游','官渡古镇','眼镜粑粑¥5 + 官渡米线（¥25）'],
+ ['18:30','晚','晚餐 · 南强街巷夜市','小吃拼盘（¥40）'],
+ ['20:30','宿','回酒店整理行李','明早转场大理'],
+ ['22:30','夜','就寝','']]},
+{cost:'当日约 ¥300（含动车与打车）',steps:[
+ ['07:30','起','起床',''],
+ ['07:38','洗','洗漱',''],
+ ['07:48','妆','化妆 · 防晒打底',''],
+ ['08:05','早','早餐 · 破酥包 + 豆浆','酒店附近（¥12）'],
+ ['09:00','游','滇池海埂大坝','远眺西山睡美人，免费'],
+ ['11:00','宿','回酒店取行李',''],
+ ['11:40','午','午餐 · 昆明站旁老字号米线','（¥20）'],
+ ['13:00','行','进站候车',''],
+ ['14:56','行','动车 昆明 → 大理','二等¥145，约2小时10分'],
+ ['17:06','行','抵达大理站','打车进古城（¥50）'],
+ ['18:00','宿','入住古城巷弄民宿','高性价比档（¥150-250/晚）'],
+ ['19:00','晚','晚餐 · 人民路白族酸辣鱼','加一份烤乳扇（¥70）'],
+ ['20:30','游','五华楼夜景','洋人街感受氛围，免费'],
+ ['23:00','夜','就寝','']]},
+{cost:'当日约 ¥285（含苍山门票索道）',steps:[
+ ['07:30','起','起床',''],
+ ['07:38','洗','洗漱',''],
+ ['07:48','妆','化妆 · 防晒打底',''],
+ ['08:10','早','早餐 · 再回首凉鸡米线','人民路老店（¥15）'],
+ ['08:40','行','打车至感通索道','（¥15）'],
+ ['09:10','游','乘索道上苍山','进山¥35 + 索道约¥85（预估）'],
+ ['09:40','游','玉带云游路徒步','精华段约2小时，俯瞰洱海全景'],
+ ['11:30','午','午餐 · 寂照庵素斋','多肉小院里的素斋（¥20）'],
+ ['13:00','行','下山回古城',''],
+ ['14:00','游','五华楼 + 床单厂艺术区','登楼免费，逛独立小店'],
+ ['17:00','咖','古城咖啡馆歇脚','（¥35）'],
+ ['18:30','晚','晚餐 · 白族家常菜','酸辣鱼或黄焖鸡（¥50）'],
+ ['20:00','夜','民谣小酒馆','一杯精酿听 live（¥45）'],
+ ['23:00','夜','就寝','']]},
+{cost:'当日约 ¥290（含扎染体验）',steps:[
+ ['06:40','起','起床','追日出要趁早'],
+ ['06:48','洗','洗漱',''],
+ ['06:55','妆','快速化妆 · 从简','日出不等人，出门再补防晒'],
+ ['07:10','行','打车至龙龛码头','（¥20）'],
+ ['07:30','游','洱海日出','龙龛码头经典机位'],
+ ['08:30','游','生态廊道骑行','共享单车骑到磻溪S湾（¥15）'],
+ ['10:00','早','廊道咖啡馆早午餐','（¥35）'],
+ ['11:30','行','前往喜洲','电瓶车/打车（¥25）'],
+ ['12:00','午','午餐 · 喜洲破酥粑粑','配凉鸡米线（¥25）'],
+ ['13:30','游','转角楼 + 稻田','扎染体验（¥80）'],
+ ['16:30','行','返回古城',''],
+ ['18:30','晚','晚餐 · 野生菌火锅','务必煮够20分钟（¥90）'],
+ ['20:30','游','古城散步',''],
+ ['23:00','夜','就寝','']]},
+{cost:'当日约 ¥270',steps:[
+ ['08:00','起','起床',''],
+ ['08:08','洗','洗漱',''],
+ ['08:18','妆','化妆 · 白裙度假妆','今天拍洱海'],
+ ['08:35','早','早餐 · 稀豆粉 + 油条','古城早点铺（¥12）'],
+ ['09:30','行','拼车前往双廊','（¥80，约1小时）'],
+ ['10:30','游','玉几岛外围 + 临海咖啡','（¥40）'],
+ ['12:30','午','午餐 · 双廊白族鱼鲜','酸辣鱼（¥50）'],
+ ['14:00','游','环海东路','挖色小普陀、文笔村彩虹公路'],
+ ['16:30','游','理想邦看日落','蓝白悬崖建筑群，免费'],
+ ['18:30','宿','入住双廊海景客栈','一线海景房（¥300-600/晚）'],
+ ['19:00','晚','晚餐 · 临海餐厅','看苍山洱海暮色（¥70）'],
+ ['21:00','夜','客栈露台看星空',''],
+ ['22:30','夜','就寝','']]},
+{cost:'当日约 ¥310',steps:[
+ ['07:30','起','起床',''],
+ ['07:38','洗','洗漱',''],
+ ['07:48','妆','化妆 · 轻薄底妆',''],
+ ['08:05','早','早餐 · 客栈米线','（¥15）'],
+ ['08:30','行','拼车前往沙溪','（¥60，约2小时）'],
+ ['10:30','游','寺登街 + 古戏台','茶马古道唯一幸存的古集市'],
+ ['12:00','午','午餐 · 沙溪马帮菜','（¥45）'],
+ ['13:30','游','玉津桥 + 欧阳大院','黑惠江边发呆'],
+ ['15:00','咖','古镇咖啡馆','（¥35）'],
+ ['16:30','行','拼车回大理','（¥60）'],
+ ['19:00','晚','晚餐 · 古城南门小吃','烤乳扇 + 凉鸡米线（¥35）'],
+ ['21:00','宿','回客栈整理',''],
+ ['23:00','夜','就寝','']]},
+{cost:'当日约 ¥250（含动车）',steps:[
+ ['08:00','起','起床',''],
+ ['08:08','洗','洗漱',''],
+ ['08:18','妆','化妆 · 轻薄底妆',''],
+ ['08:35','早','早餐 · 乳扇粥 + 粑粑','（¥15）'],
+ ['09:30','游','崇圣寺三塔','门票¥75，三塔倒影公园经典机位'],
+ ['12:00','午','午餐 · 三塔旁白族餐馆','（¥40）'],
+ ['13:30','行','打车至大理站','（¥45）'],
+ ['14:30','行','动车 大理 → 丽江','约2小时（二等约¥80）'],
+ ['16:30','宿','入住南门客栈','管家帮搬行李（¥100-200/晚）'],
+ ['18:00','晚','晚餐 · 忠义市场','鸡豆凉粉 + 烤乳扇（¥25）'],
+ ['19:30','游','四方街 + 大水车夜景','海拔2400m，首日勿饮酒'],
+ ['22:00','夜','就寝','早睡适应海拔']]},
+{cost:'当日约 ¥425（含雪山门票索道）',steps:[
+ ['06:30','起','起床','先喝杯热水再出门'],
+ ['06:38','洗','洗漱',''],
+ ['06:48','妆','化妆 · 物理防晒代替浓妆','雪山紫外线强'],
+ ['07:05','早','早餐 · 纳西粑粑 + 酥油茶','（¥15）'],
+ ['07:40','行','101路雪山专线','忠义市场发车（¥15）'],
+ ['08:30','游','冰川公园大索道','进山¥100 + 环保车¥20 + 索道¥140，按预约时段进入'],
+ ['09:30','游','4680 石碑打卡','慢行少说话，氧气瓶备用（¥20）'],
+ ['11:30','午','午餐 · 景区简餐','自备干粮 + 热饮（¥35）'],
+ ['13:00','游','蓝月谷','环湖栈道徒步比电瓶车出片'],
+ ['15:30','行','专线返程回古城','（¥15）'],
+ ['17:00','宿','客栈休息','雪山日体力消耗大'],
+ ['18:30','晚','晚餐 · 阿婆腊排骨火锅','古城老店（¥60）'],
+ ['22:00','夜','就寝','']]},
+{cost:'当日约 ¥240',steps:[
+ ['08:30','起','睡到自然醒','雪山日后主动休整'],
+ ['08:42','洗','洗漱',''],
+ ['08:55','妆','化妆 · 轻薄底妆',''],
+ ['09:10','早','早餐 · 忠义市场烤饵块','配豆浆（¥12）'],
+ ['10:00','行','打车至束河','（¥15）'],
+ ['10:20','游','青龙桥 + 四方听音','茶马古道博物馆'],
+ ['12:00','午','午餐 · 束河纳西风味馆','纳西烤鱼（¥45）'],
+ ['13:30','咖','束河咖啡馆发呆','（¥35）'],
+ ['15:00','行','前往白沙古镇','打车（¥20）'],
+ ['15:30','游','白沙壁画 + 雪山远景咖啡','壁画¥30 + 咖啡¥40'],
+ ['17:30','行','回大研古城',''],
+ ['18:30','晚','晚餐 · 忠义市场夜市','包浆豆腐 + 鸡豆凉粉（¥35）'],
+ ['20:30','游','古城夜景',''],
+ ['22:30','夜','就寝','']]},
+{cost:'当日约 ¥275（不含湖景房）',steps:[
+ ['07:00','起','起床',''],
+ ['07:08','洗','洗漱',''],
+ ['07:16','妆','快速化妆 · 从简','赶早班车'],
+ ['07:30','早','早餐 · 南门米线','（¥15）'],
+ ['08:00','行','旅游专线车去泸沽湖','（¥80，4小时盘山路，提前吃晕车药）'],
+ ['10:00','游','中途观景台','远眺金沙江峡谷'],
+ ['12:00','午','午餐 · 大落水摩梭家常菜','（¥45）'],
+ ['14:00','游','里格半岛观景台','湖边看水性杨花'],
+ ['16:00','宿','入住里格湖景客栈','270°湖景（¥400-600/晚）'],
+ ['17:30','游','湖边看日落',''],
+ ['19:00','晚','晚餐 · 客栈湖鱼','猪膘肉浅尝即可（¥60）'],
+ ['21:00','夜','阳台看星空',''],
+ ['22:30','夜','就寝','']]},
+{cost:'当日约 ¥360（含环湖包车与船票）',steps:[
+ ['07:00','起','起床 · 看湖上晨雾',''],
+ ['07:12','洗','洗漱',''],
+ ['07:22','妆','快速化妆 · 从简',''],
+ ['07:35','早','早餐 · 客栈米线/酥油茶','（¥20）'],
+ ['08:30','行','环湖包车','拼乘人均¥100'],
+ ['09:00','游','草海走婚桥','摩梭走婚文化地标'],
+ ['10:00','游','女神湾','湖水最清的一段'],
+ ['11:00','游','猪槽船游湖','（¥50-100）'],
+ ['12:00','午','午餐 · 大落水简餐','（¥35）'],
+ ['13:00','行','专线车返回丽江','（¥80，约4小时）'],
+ ['17:00','宿','抵古城回客栈休整',''],
+ ['18:30','晚','晚餐 · 纳西烤鱼','大研古城（¥50）'],
+ ['20:00','游','大研花巷散步',''],
+ ['22:00','夜','就寝','']]},
+{cost:'当日约 ¥275（含木府门票与伴手礼）',steps:[
+ ['09:00','起','睡到自然醒','机动日不赶路'],
+ ['09:12','洗','洗漱',''],
+ ['09:25','妆','化妆 · 旅拍日认真化','今天拍雪山倒影'],
+ ['09:45','早','早午餐 · 古城米线','（¥25）'],
+ ['11:00','游','木府','门票¥60，纳西土司的「紫禁城」'],
+ ['13:30','咖','古城咖啡馆晒太阳','（¥35）'],
+ ['15:00','游','黑龙潭公园','免费，拍雪山倒影'],
+ ['16:30','购','买伴手礼','鲜花饼（¥50）'],
+ ['18:30','晚','晚餐 · 大研花巷文艺小馆','（¥55）'],
+ ['20:00','宿','回客栈整理行李','明早返程'],
+ ['22:30','夜','就寝','']]},
+{cost:'当日约 ¥80（不含大交通）',steps:[
+ ['06:00','起','起床',''],
+ ['06:08','洗','快速洗漱',''],
+ ['06:15','妆','快速收拾','赶 C124 早班车'],
+ ['06:20','早','早餐 · 打包粑粑 + 热水','（¥10）'],
+ ['06:40','行','打车至丽江站','（¥20）'],
+ ['07:20','行','C124 丽江 → 昆明','二等¥190，11:10 抵达'],
+ ['11:10','行','地铁去长水机场','6号线直达约40分钟（¥7）'],
+ ['12:30','午','机场午餐','（¥45）'],
+ ['14:00','行','值机安检',''],
+ ['15:30','行','低价经停航班返长春','下午时段约¥800-1000，GJ8141 / 3U8275 等反向班期'],
+ ['22:00','夜','抵达长春','十五日行程圆满结束']]}
+];
+</script>
+
+<script>
+/* ============ 通用工具 ============ */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let toastTimer=null;
+function showToast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400);}
+function copyText(txt){
+  const done=()=>showToast('已复制搜索词：'+txt);
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+}
+function fallbackCopy(txt,done){const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){showToast('复制失败，请手动复制：'+txt);}document.body.removeChild(ta);}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b){copyText(b.getAttribute('data-copy'));}});
+
+/* ============ 日历条（地图上方辅助带，不引发页面跳动） ============ */
+let curDay=0;
+function renderDayStrip(){
+  $('#dayStrip').innerHTML=DAYS.map((d,i)=>
+    `<button class="chip${i===curDay?' on':''}" data-i="${i}">
+      <span class="cd">${d.d}<small>${d.date}</small></span>
+      <span class="cc">周${d.week} · ${d.city}</span>
+    </button>`).join('');
+  $$('#dayStrip .chip').forEach(c=>c.addEventListener('click',()=>selectDay(+c.dataset.i)));
+}
+function selectDay(i){
+  curDay=i;
+  $$('#dayStrip .chip').forEach((c,ci)=>c.classList.toggle('on',ci===i));
+  const strip=$('#dayStrip'),chip=strip.children[i];
+  strip.scrollLeft=Math.max(0,chip.offsetLeft-strip.clientWidth/2+chip.clientWidth/2); // 仅条内定位，页面不动
+  renderDayFloat(DAYS[i]);
+  if(window.setMapMode) setMapMode('day',i); // 点选日期自动切到当日视图
+}
+
+/* ============ 当日浮动面板 ============ */
+function wxIcon(w){if(!w||w==='—')return'';if(/雪/.test(w))return'❄️';if(/雨/.test(w))return'🌦️';if(/晴/.test(w))return'☀️';if(/阴/.test(w))return'☁️';return'⛅';}
+function renderDayFloat(d){
+  const rainy=/雨|雪/.test(d.weather||'');
+  const chips=[d.city,d.alt!=='—'?'海拔 '+d.alt:'',d.energy?'体力 '+d.energy:'','交通 '+d.traffic,d.stay!=='—'?'宿 '+d.stay:''].filter(Boolean);
+  $('#dayFloat').innerHTML=`
+    <p class="dm">${d.d} · ${d.date} 周${d.week} · ${d.lunar}</p>
+    <h3>${d.theme}</h3>
+    <div class="df-chips">${chips.map(c=>`<span>${c}</span>`).join('')}</div>
+    <div class="df-sec"><b>上午</b>${d.am}</div>
+    <div class="df-sec"><b>下午</b>${d.pm}</div>
+    <div class="df-sec"><b>晚间</b>${d.night}</div>
+    ${d.weather!=='—'?`<div class="df-wx"><div class="t">${wxIcon(d.weather)} ${d.weather} · ${d.temp}</div><div class="src">${d.wtype} · <a id="wxRefresh">手动刷新实时预报</a>（≤7天可调取）</div></div>`:''}
+    <div class="rain-alt${rainy?' show':''}">有降水可能 · 室内备选：${rainAlt(d.city)}</div>`;
+  const wr=$('#wxRefresh'); if(wr) wr.addEventListener('click',()=>refreshWeather(d));
+}
+function rainAlt(city){
+  if(city.includes('昆明'))return '云南省博物馆、官渡古镇室内街区';
+  if(city.includes('大理'))return '床单厂艺术区、白族扎染体验坊';
+  if(city.includes('泸沽湖'))return '湖景客栈观景、摩梭家访';
+  if(city.includes('丽江'))return '木府、束河咖啡馆、纳西古乐演出';
+  return '室内休整';
+}
+
+/* ============ 天气刷新（静态默认 + 手动按时效刷新） ============ */
+function wxCityOf(city){
+  if(city.includes('昆明'))return '昆明';
+  if(city.includes('大理'))return '大理';
+  if(city.includes('泸沽湖')||city.includes('宁蒗'))return '宁蒗';
+  if(city.includes('丽江'))return '丽江';
+  if(city.includes('长春'))return '长春';
+  return '昆明';
+}
+function refreshWeather(d){
+  const diff=Math.round((new Date(d.full+'T12:00:00+08:00')-Date.now())/86400000);
+  if(diff<0){showToast('该日期已过去，显示历史参考值');return;}
+  if(diff>15){showToast('超出15天预报期，当前为历史同期气候参考值');return;}
+  if(diff>7){showToast('8-15天为趋势预报，仅供参考：'+d.weather+' '+d.temp);return;}
+  if(!window.AMap||!AMap.Weather){showToast('天气组件未加载，请检查网络');return;}
+  const city=wxCityOf(d.city);
+  AMap.Weather.getForecast(city,(err,data)=>{
+    if(err||!data||!data.forecasts||!data.forecasts.length){showToast('天气查询失败，保留参考值');return;}
+    const f=data.forecasts[0];
+    d.weather=f.dayWeather+'转'+f.nightWeather;
+    d.wtype='实时预报';
+    d.temp=f.nightTemp+'-'+f.dayTemp+'℃';
+    renderDayFloat(d);
+    showToast(city+' '+d.date+' 预报已更新');
+    if(/雨|雪/.test(f.dayWeather))showToast('有降水预报，可启用室内备选方案');
+  });
+}
+
+/* ============ 交通方案：方向页签 × 方案页签（只显示当前选择） ============ */
+const ts={dir:'go',plan:0};
+function renderTransport(){
+  $('#dirTabs').innerHTML=[['go','去程 · 长春 → 昆明','09-10'],['back','返程 · 丽江 → 长春','09-24']]
+    .map(([k,t,dt])=>`<button class="tab${ts.dir===k?' on':''}" data-k="${k}"><b>${t}</b><i>${dt}</i></button>`).join('');
+  const plans=ts.dir==='go'?GO_PLANS:BACK_PLANS;
+  $('#planTabs').innerHTML=plans.map((p,i)=>`<button class="tab${ts.plan===i?' on':''}" data-i="${i}"><b>${p.tag}</b><i>${p.title}</i></button>`).join('');
+  const p=plans[ts.plan];
+  $('#planStage').innerHTML=`
+    <article class="plan-card">
+      <div>
+        <p class="no">${p.tag}</p>
+        <h4>${p.title}</h4>
+        <p class="dur">总耗时 ${p.time}</p>
+        <p><b>路线说明　</b>${p.route}</p>
+        <p><b>选择策略　</b>${p.strategy}</p>
+        <p><b>优点　</b>${p.pros}</p>
+        <p><b>缺点　</b>${p.cons}</p>
+        <p class="price-note">参考价 · 搜索于 2026-08-29，实时票价以 12306 / 航司为准</p>
+        <p><button class="btn sm" data-copy="${esc(p.copy)}">复制查询关键词</button></p>
+      </div>
+      <div><table class="qt"><thead><tr><th>班次 / 组合</th><th>时刻</th><th>参考价</th><th>提示</th></tr></thead>
+        <tbody>${p.rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody></table></div>
+    </article>`;
+  $$('#dirTabs .tab').forEach(b=>b.addEventListener('click',()=>{ts.dir=b.dataset.k;ts.plan=0;renderTransport();}));
+  $$('#planTabs .tab').forEach(b=>b.addEventListener('click',()=>{ts.plan=+b.dataset.i;renderTransport();}));
+}
+
+/* ============ 住宿：城市页签 × 档位页签（只显示当前组合） ============ */
+const hs={city:'昆明',tier:'高性价比'};
+const TIERS=['高性价比','品质星级','网红特色'];
+function renderStay(){
+  $('#cityTabs').innerHTML=Object.keys(HOTELS).map(c=>
+    `<button class="tab${hs.city===c?' on':''}" data-k="${c}"><b>${c}</b><i>${HOTELS[c].nights}</i></button>`).join('');
+  $('#tierTabs').innerHTML=TIERS.map(t=>
+    `<button class="tab${hs.tier===t?' on':''}" data-k="${t}"><b>${t}</b><i>${HOTELS[hs.city].tiers[t].price}</i></button>`).join('');
+  const t=HOTELS[hs.city].tiers[hs.tier];
+  /* 与行程日期绑定的入住日历；特色档位优先匹配其对应分段（双廊 / 泸沽湖） */
+  const segs=HOTELS[hs.city].segs||[];
+  let seg=segs[0];
+  if(hs.tier==='网红特色'&&hs.city==='大理'&&segs[1])seg=segs[1];
+  if(hs.tier==='网红特色'&&hs.city==='丽江'&&segs[1])seg=segs[1];
+  const mtCopy=seg?`${t.copy} ${seg[1].replace(' 入住','')}入住 ${seg[3]}`:t.copy;
+  const xcCopy=seg?`${t.copy} ${seg[1]} ${seg[2]} 按价格排序`:t.copy;
+  $('#stayStage').innerHTML=`
+    <article class="stay-card">
+      <div class="ph"><img src="${t.img}" alt="${hs.city}${hs.tier}住宿参考" loading="lazy" onload="this.classList.add('ld')" onerror="this.style.display='none'"></div>
+      <div class="bd">
+        <p class="lv">${hs.city} · ${hs.tier} · ${HOTELS[hs.city].nights}</p>
+        <h4>${t.area}</h4>
+        <p class="pr">${t.price}</p>
+        <p><b>选择策略　</b>${t.strategy}</p>
+        <div class="segs">${segs.map(s=>`<span class="seg"><b>${s[0]}</b>　${s[1]} → ${s[2]} · ${s[3]}</span>`).join('')}</div>
+        <ul>${t.items.map(it=>`<li><b>${it[0]}</b>　${it[1]} · ${it[2]}<br>优势：${it[3]} ｜ 口碑：${it[4]}</li>`).join('')}</ul>
+        <p>${t.tip}</p>
+        <p class="avoid"><b>住宿避雷　</b>${t.avoid}</p>
+        <p class="price-note">参考价 · 搜索于 2026-08-29。查<b>当日最低价</b>：复制下方查询词到美团 / 携程，按行程入住日期筛选并按价格从低到高排序</p>
+        <p style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-copy="${esc(mtCopy)}">复制美团查询词（含日期）</button><button class="btn sm" data-copy="${esc(xcCopy)}">复制携程查询词（含日期）</button></p>
+      </div>
+    </article>`;
+  $$('#cityTabs .tab').forEach(b=>b.addEventListener('click',()=>{hs.city=b.dataset.k;renderStay();}));
+  $$('#tierTabs .tab').forEach(b=>b.addEventListener('click',()=>{hs.tier=b.dataset.k;renderStay();}));
+}
+
+/* ============ 景点：城市筛选（只显示当前城市） ============ */
+const ss={city:'昆明'};
+const SPOT_CITIES=['昆明','大理','丽江'];
+function renderSpots(){
+  $('#spotTabs').innerHTML=SPOT_CITIES.map(c=>{
+    const n=SPOTS.filter(s=>s.city.startsWith(c)).length;
+    return `<button class="tab${ss.city===c?' on':''}" data-k="${c}"><b>${c}</b><i>${n} 个</i></button>`;
+  }).join('');
+  const dayKey=s=>{const m=/D(\d+)/.exec(s.day||'');return m?+m[1]:99;};
+  const list=SPOTS.filter(s=>s.city.startsWith(ss.city)).sort((a,b)=>dayKey(a)-dayKey(b));
+  $('#spotStage').innerHTML=list.map(s=>`
+    <article class="spot">
+      <div class="ph">${s.img
+        ?`<img src="${s.img}" alt="${esc(s.n)}" loading="lazy" onload="this.classList.add('ld')" onerror="this.outerHTML=tileHTML('${esc(s.n)}','${s.city}')">`
+        :tileHTML(s.n,s.city)}</div>
+      <div class="bd">
+        <p class="city">${s.city}<span class="spot-day">${s.day}</span></p>
+        <h4>${s.n}</h4>
+        <div class="spot-meta"><span><b>时长</b> ${s.dur}</span><span><b>开放</b> ${s.open}</span><span><b>预约</b> ${s.book}</span><span><b>门票</b> ${s.price}</span></div>
+        <p><b>历史人文　</b>${s.story}</p>
+        <p><b>深度体验　</b>${s.keys}</p>
+        <p><b>出片提示　</b>${s.shot}</p>
+        <p class="avoid"><b>避雷　</b>${s.avoid}</p>
+      </div>
+    </article>`).join('');
+  $$('#spotTabs .tab').forEach(b=>b.addEventListener('click',()=>{ss.city=b.dataset.k;renderSpots();}));
+}
+function tileHTML(name,city){
+  return `<div class="tile"><b>${name.slice(0,4)}</b><span>${city}</span></div>`;
+}
+</script>
+
+<script>
+/* ============ 高德 3D 地形地图（页面核心） ============ */
+const DAY_COLORS=['#476e80','#a96f45','#7a8b6f','#8c6d8f','#b0855b','#5d7f8f','#96784f','#6f7f5a','#8f6a5a','#4f7a72','#9a7a9a','#5f8a9a','#a08050','#707a8f','#96553f'];
+const TYPE_COLOR={spot:'#476e80',hotel:'#a96f45',transit:'#8c847a',food:'#b5542d'};
+const TYPE_NAME={spot:'景点',hotel:'住宿',transit:'枢纽',food:'餐厅'};
+/* 餐厅标记并入当日点位（近似定位） */
+FOOD.forEach(f=>{DAYS[f.d].points.push({n:f.n,lng:f.lng,lat:f.lat,type:'food',rec:f.rec,price:f.price,avoid:f.avoid});});
+/* 当日推荐酒店标记并入对应日期（同一连住段坐标复用，近似定位） */
+HOTEL_MARKS.forEach(h=>{DAYS[h.d].points.push({n:h.n,lng:h.lng,lat:h.lat,type:'hotel',rec:'当日推荐',area:h.area,price:h.price,seg:h.seg,stay:h.seg,desc:h.area,avoid:h.avoid,copy:h.copy});});
+const isMobile=/Android|iPhone|iPad|Mobi/i.test(navigator.userAgent);
+let map=null, dayGroups=[];
+
+function haversine(a,b){const R=6371,rad=Math.PI/180,dLat=(b[1]-a[1])*rad,dLng=(b[0]-a[0])*rad;
+  const s=Math.sin(dLat/2)**2+Math.cos(a[1]*rad)*Math.cos(b[1]*rad)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s));}
+
+/* 弹窗：导航走 uri.amap.com —— 手机唤起高德 App，电脑打开高德网页版 */
+function iwHTML(p,d){
+  const nav='https://uri.amap.com/marker?position='+p.lng+','+p.lat+'&name='+encodeURIComponent(p.n)+'&src=tourplan&callnative=1';
+  if(p.type==='food') return `<div class="iw">
+    <span class="iw-close" onclick="event.stopPropagation();window.closeIw&&window.closeIw()">×</span>
+    <span class="iw-day">${d.d} · ${d.date} · 推荐用餐</span>
+    <h5>${p.n}</h5>
+    <span class="iw-tag" style="background:${TYPE_COLOR.food}">餐厅</span>
+    <p><b>推荐菜</b>　${p.rec}</p>
+    <p>${p.price} ｜ 定位为近似位置，以导航为准</p>
+    <p class="iw-avoid">避雷：${p.avoid}</p>
+    <a class="iw-nav" href="${nav}" target="_blank" rel="noopener">${isMobile?'唤起高德 App 导航 →':'在高德地图中打开 →'}</a>
+  </div>`;
+  if(p.type==='hotel'&&p.rec==='当日推荐') return `<div class="iw">
+    <span class="iw-close" onclick="event.stopPropagation();window.closeIw&&window.closeIw()">×</span>
+    <span class="iw-day">${d.d} · ${d.date} · 当日推荐住宿</span>
+    <h5>${p.n}</h5>
+    <span class="iw-tag" style="background:${TYPE_COLOR.hotel}">住宿</span>
+    <p><b>片区</b>　${p.area}</p>
+    <p><b>参考</b>　${p.price} ｜ ${p.seg}</p>
+    <p class="iw-avoid">避雷：${p.avoid}</p>
+    <p><button class="btn sm" data-copy="${esc(p.copy)}">复制预订搜索词</button></p>
+    <a class="iw-nav" href="${nav}" target="_blank" rel="noopener">${isMobile?'唤起高德 App 导航 →':'在高德地图中打开 →'}</a>
+  </div>`;
+  return `<div class="iw">
+    <span class="iw-close" onclick="event.stopPropagation();window.closeIw&&window.closeIw()">×</span>
+    ${p.img?`<img class="iw-img" src="${p.img}" alt="">`:''}
+    <span class="iw-day">${d.d} · ${d.date} · ${d.theme}</span>
+    <h5>${p.n}</h5>
+    <span class="iw-tag" style="background:${TYPE_COLOR[p.type]}">${TYPE_NAME[p.type]}</span>
+    <p>海拔约 ${p.alt}m ｜ ${p.stay}</p>
+    <p>${p.desc}</p>
+    <a class="iw-nav" href="${nav}" target="_blank" rel="noopener">${isMobile?'唤起高德 App 导航 →':'在高德地图中打开 →'}</a>
+  </div>`;
+}
+
+function initMap(){
+  if(!window.AMap){$('#mapFallback').style.display='flex';return;}
+  try{
+    map=new AMap.Map('amap',{viewMode:'3D',terrain:true,zoom:7,center:[101.4,25.7],pitch:42,mapStyle:'amap://styles/whitesmoke'});
+  }catch(e){$('#mapFallback').style.display='flex';return;}
+  const info=new AMap.InfoWindow({offset:new AMap.Pixel(0,-14),closeWhenClickMap:true,isCustom:true});
+  window.closeIw=()=>info.close();
+  const textStyle={'background':'rgba(251,250,246,.9)','border':'1px solid #dcd5c6','border-radius':'99px','padding':'2px 8px','font-size':'10.5px','color':'#575046'};
+  dayGroups=DAYS.map((d,i)=>{
+    const color=DAY_COLORS[i], ovs=[];
+    ovs.push(new AMap.Polyline({path:d.route,strokeColor:color,strokeWeight:4,strokeOpacity:.85,lineJoin:'round',showDir:true,zIndex:10}));
+    /* 长距离段：每天最多一条直线距离参考标注（取最长段中点） */
+    let maxKm=0,maxMid=null;
+    for(let k=0;k<d.route.length-1;k++){
+      const km=haversine(d.route[k],d.route[k+1]);
+      if(km>maxKm){maxKm=km;maxMid=[(d.route[k][0]+d.route[k+1][0])/2,(d.route[k][1]+d.route[k+1][1])/2];}
+    }
+    if(maxKm>25&&maxMid) ovs.push(new AMap.Text({text:'约 '+Math.round(maxKm)+' km（直线）',position:maxMid,anchor:'center',style:textStyle,zIndex:15}));
+    d.points.forEach(p=>{
+      const isRecHotel=p.type==='hotel'&&p.rec==='当日推荐';
+      const m=new AMap.CircleMarker({center:[p.lng,p.lat],radius:isRecHotel?7:5.5,strokeColor:'#fff',strokeWeight:2,fillColor:TYPE_COLOR[p.type],fillOpacity:1,zIndex:isRecHotel?24:20,cursor:'pointer'});
+      m.on('click',()=>{info.setContent(iwHTML(p,d));info.open(map,[p.lng,p.lat]);});
+      ovs.push(m);
+    });
+    if(d.points.length){
+      const f=d.points[0];
+      ovs.push(new AMap.Marker({position:[f.lng,f.lat],content:'<div class="dtag" style="background:'+color+'">'+d.d+'</div>',offset:new AMap.Pixel(-16,-30),zIndex:30,anchor:'bottom-center'}));
+    }
+    map.add(ovs);
+    return {overlays:ovs};
+  });
+
+  window.setMapMode=function(mode,idx){
+    dayGroups.forEach((g,i)=>{const show=mode==='all'||i===idx;g.overlays.forEach(o=>show?o.show():o.hide());});
+    $('#viewAll').classList.toggle('on',mode==='all');
+    $('#viewDay').classList.toggle('on',mode==='day');
+    const pad=window.innerWidth>900?[60,380,60,60]:[40,40,40,40];
+    if(mode==='all'){
+      const all=[];dayGroups.forEach(g=>all.push(...g.overlays));
+      map.setFitView(all,true,pad);map.setPitch(42);
+    }else{
+      map.setFitView(dayGroups[idx].overlays,true,window.innerWidth>900?[80,400,80,80]:[50,50,50,50]);
+    }
+  };
+  setMapMode('all');
+  $('#viewAll').addEventListener('click',()=>setMapMode('all'));
+  $('#viewDay').addEventListener('click',()=>setMapMode('day',curDay));
+}
+
+/* ============ 背景音乐（单曲循环 · 图书馆风格钢琴） ============ */
+const TRACK={name:'Deliberate Thought · 春城',url:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Deliberate%20Thought.mp3'};
+const audio=new Audio(TRACK.url); audio.loop=true; audio.preload='auto'; audio.volume=0;
+let playing=false, targetVol=0.22, rampTimer=null;
+function rampTo(v,dur){
+  dur=dur||600; clearInterval(rampTimer);
+  const start=audio.volume, steps=Math.max(1,Math.round(dur/50)); let k=0;
+  rampTimer=setInterval(()=>{k++;audio.volume=Math.min(1,Math.max(0,start+(v-start)*k/steps));if(k>=steps)clearInterval(rampTimer);},50);
+}
+function startPlay(){
+  if(playing)return;
+  $('#trackName').textContent=TRACK.name;
+  audio.play().then(()=>{playing=true;rampTo(targetVol,1400);$('#playBtn').textContent='❚❚';})
+    .catch(()=>{playing=false;$('#playBtn').textContent='▶';});
+}
+function stopPlay(){rampTo(0,300);setTimeout(()=>audio.pause(),320);playing=false;$('#playBtn').textContent='▶';}
+
+/* ============ 行程模拟（时间轴自动推进，页面不跳动） ============ */
+let simDay=0, simIdx=0, simTimer=null, simSpeed=1;
+const SIM_STEP=1400;
+const POSE={'起':'wake','洗':'wash','妆':'makeup','早':'eat','午':'eat','晚':'eat','夜':'rest'};
+/* 按步骤语义细分动作：购物 / 咖啡放松 / 坐车 / 坐船游湖 / 酒店小憩 / 安检 / 坐飞机 / 坐高铁 */
+const POSE_RULES=[
+  [/安检|值机|登机口/,'security'],
+  [/起飞|航班|坐飞机|抵达.*机场/,'plane'],
+  [/(?:^|[^电])动车|高铁|火车|进站候车|列车/,'train'],
+  [/猪槽船|坐船|游湖|乘船/,'boat'],
+  [/咖啡|下午茶|歇脚/,'coffee'],
+  [/购物|伴手礼|买花|买束花|买鲜花饼|逛店|采购/,'shop'],
+  [/入住酒店|入住湖景|入住古城|入住.*民宿|酒店休息|酒店小憩|回酒店休整|稍作休整|小憩/,'hotel'],
+  [/打车|拼车|包车|公交|专线|巴士|网约车|地铁|骑行|返回|前往|出发|转场|返程/,'car'],
+  [/休息|住宿/,'rest']
+];
+function simPoseFor(step){
+  const icon=step[1], text=(step[2]||'')+' '+(step[3]||'');
+  if(POSE[icon]) return POSE[icon];
+  for(const [re,pose] of POSE_RULES){ if(re.test(text)) return pose; }
+  if(icon==='行') return 'car';
+  if(icon==='购') return 'shop';
+  if(icon==='咖') return 'coffee';
+  if(icon==='宿') return 'rest';
+  return 'travel';
+}
+function simCharUpdate(step){
+  const img=$('#simCharImg'); if(!img) return;
+  const pose=simPoseFor(step);
+  $('#simCharLabel').textContent=step[2];
+  if(img.dataset.pose===pose) return;
+  img.dataset.pose=pose;
+  img.style.opacity=0;
+  setTimeout(()=>{img.onload=()=>{img.style.opacity=1;};img.src='assets/act-'+pose+'.png';},200);
+}
+function renderSimDays(){
+  $('#simDays').innerHTML=DAYS.map((d,i)=>`<button class="${i===simDay?'on':''}" data-i="${i}">${d.d}</button>`).join('');
+  $$('#simDays button').forEach(b=>b.addEventListener('click',()=>{simStop();simSetDay(+b.dataset.i);}));
+}
+function renderSim(){
+  const d=DAYS[simDay], sim=SIM[simDay], n=sim.steps.length;
+  const cur=sim.steps[Math.min(simIdx,n-1)];
+  simCharUpdate(cur);
+  $('#simClock').textContent=cur[0];
+  $('#simDate').textContent=`${d.d} · ${d.date} 周${d.week} · ${d.city}`;
+  $('#simTheme').textContent=d.theme;
+  $('#simBar').style.width=(n>1?(simIdx/(n-1))*100:100)+'%';
+  $('#simCost').textContent=sim.cost;
+  $$('#simDays button').forEach((b,i)=>b.classList.toggle('on',i===simDay));
+  $('#simTl').innerHTML=sim.steps.map((s,i)=>
+    `<div class="tl-i${i<simIdx?' done':''}${i===simIdx?' on':''}">
+      <span class="tt">${s[0]}</span><span class="dot">${s[1]}</span>
+      <div><h6>${s[2]}</h6>${s[3]?`<p>${s[3]}</p>`:''}</div>
+    </div>`).join('');
+  const tl=$('#simTl'), item=tl.children[Math.min(simIdx,n-1)];
+  if(item) tl.scrollTop=Math.max(0,item.offsetTop-tl.clientHeight/2+item.offsetHeight/2); // 仅容器内滚动
+}
+function simSetDay(i){
+  simDay=i; simIdx=0; renderSim();
+  if(typeof selectDay==='function') selectDay(i); // 地图联动到当日
+}
+function simStep(){
+  const n=SIM[simDay].steps.length;
+  if(simIdx>=n-1){
+    if($('#simAuto').checked&&simDay<14) simSetDay(simDay+1);
+    else simStop();
+    return;
+  }
+  simIdx++; renderSim();
+}
+function simPlay(){
+  if(simTimer){simStop();return;}
+  $('#simPlay').textContent='❚❚ 暂停';
+  simTimer=setInterval(simStep, SIM_STEP/simSpeed);
+}
+function simStop(){
+  clearInterval(simTimer); simTimer=null;
+  const b=$('#simPlay'); if(b) b.textContent='▶ 播放';
+}
+$('#simPlay').addEventListener('click',simPlay);
+$('#simPrev').addEventListener('click',()=>{simStop();simSetDay(Math.max(0,simDay-1));});
+$('#simNext').addEventListener('click',()=>{simStop();simSetDay(Math.min(14,simDay+1));});
+$('#simSpeed').addEventListener('change',e=>{
+  simSpeed=+e.target.value;
+  if(simTimer){clearInterval(simTimer);simTimer=setInterval(simStep,SIM_STEP/simSpeed);}
+});
+
+/* ============ 初始化 ============ */
+renderDayStrip();
+renderDayFloat(DAYS[0]);
+renderTransport();
+renderStay();
+renderSpots();
+renderSimDays();
+renderSim();
+initMap();
+
+$('#playBtn').addEventListener('click',()=>playing?stopPlay():startPlay());
+$('#vol').addEventListener('input',e=>{targetVol=e.target.value/100;if(playing)rampTo(targetVol,150);});
+/* 自动播放尝试；被浏览器拦截则在首次页面点击时解锁（点击播放器本身除外） */
+startPlay();
+window.addEventListener('pointerdown',function unlock(e){
+  if(!e.target.closest('#player')&&!playing)startPlay();
+  window.removeEventListener('pointerdown',unlock);
+});
+/* 页面不可见时音量压到近乎静音，回来再恢复 */
+document.addEventListener('visibilitychange',()=>{
+  if(!playing)return;
+  if(document.hidden)rampTo(targetVol*0.1,300);else rampTo(targetVol,700);
+});
+</script>
+</body>
+</html>
