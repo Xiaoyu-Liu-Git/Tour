@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>洛陕七日 · 北京—洛阳—西安—沈阳（2026.09.06—09.12）</title>
+<meta name="description" content="北京出发，洛阳—西安7天确认表旅行方案：以地图为中心的七日轨迹、人物动作模拟、餐厅与当日酒店标记、交通住宿对比、景点攻略与行前风险。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f3ed; --bg-soft:#eceade; --ink:#26221c; --ink-2:#575046; --ink-3:#8c847a;
+  --lake:#6f93a4; --lake-deep:#476e80; --terra:#a96f45; --line:#dcd5c6; --card:#fbfaf6;
+  --serif:'Noto Serif SC','Songti SC','STSong',serif;
+  --sans:'Noto Sans SC',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased}
+::selection{background:var(--lake);color:#fff}
+h1,h2,h3,h4,.serif{font-family:var(--serif)}
+img{display:block;max-width:100%}
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(18px,3.5vw,48px)}
+section{padding-top:clamp(56px,7vw,88px)}
+.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+.eyebrow b{color:var(--terra);font-weight:500}
+h2.sec{font-size:clamp(24px,2.8vw,38px);font-weight:900;line-height:1.3;margin:8px 0 6px}
+.sec-sub{color:var(--ink-2);font-size:13.5px;max-width:620px}
+/* ---------- Hero（精简） ---------- */
+.hero{min-height:54vh;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:44px;overflow:hidden;position:relative;
+  background:linear-gradient(178deg,#eef0e9 0%,var(--bg) 40%,#eae6d9 100%)}
+.hero svg.ridge{position:absolute;inset:auto 0 0 0;width:100%;height:34vh;opacity:.85;pointer-events:none}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero h1{font-size:clamp(36px,5.6vw,80px);font-weight:900;line-height:1.15}
+.hero h1 em{font-style:normal;color:var(--lake-deep)}
+.hero-meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:20px;color:var(--ink-2);font-size:13px}
+.hero-meta span{border-top:1px solid var(--ink);padding-top:7px}
+/* ---------- 通用小元件 ---------- */
+.btn{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:12.5px;padding:8px 16px;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;border-radius:99px;transition:all .3s var(--ease)}
+.btn:hover{background:var(--ink);color:var(--bg);transform:translateY(-1px)}
+.btn.blue{border-color:var(--lake-deep);color:var(--lake-deep)}
+.btn.blue:hover{background:var(--lake-deep);color:#fff}
+.btn.terra{border-color:var(--terra);color:var(--terra)}
+.btn.terra:hover{background:var(--terra);color:#fff}
+.btn.sm{padding:5px 13px;font-size:11.5px}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{padding:8px 20px;border:1px solid var(--line);border-radius:99px;background:var(--card);cursor:pointer;font-size:13px;color:var(--ink-2);transition:all .3s var(--ease)}
+.tab:hover{border-color:var(--ink-3)}
+.tab.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tab.lake.on{background:var(--lake-deep);border-color:var(--lake-deep);color:#fff}
+.price-note{font-size:11.5px;color:var(--ink-3)}
+/* ---------- 核心：地图 ---------- */
+#journey{padding-top:clamp(40px,5vw,64px)}
+.journey-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.view-toggle{display:flex;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px}
+.view-toggle .btn{border:none;border-radius:99px}
+.view-toggle .btn.on{background:var(--ink);color:var(--bg)}
+.daystrip{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.chip{flex:0 0 auto;min-width:92px;padding:9px 12px;border:1px solid var(--line);background:var(--card);cursor:pointer;transition:all .3s var(--ease);border-radius:10px}
+.chip:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(38,34,28,.08)}
+.chip.on{background:var(--lake-deep);border-color:var(--lake-deep);color:#f4f3ed}
+.chip .cd{font-family:var(--serif);font-weight:900;font-size:17px;line-height:1.2}
+.chip .cd small{font-family:var(--sans);font-weight:400;font-size:10.5px;opacity:.75;margin-left:4px}
+.chip .cc{font-size:10.5px;opacity:.8;margin-top:2px;white-space:nowrap}
+.mapwrap{position:relative;height:min(74vh,780px);min-height:520px;border:1px solid var(--line);background:var(--bg-soft)}
+#amap{position:absolute;inset:0}
+.map-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:40px;color:var(--ink-3);font-size:13.5px;background:repeating-linear-gradient(45deg,#efece3 0 14px,#e9e5d9 14px 15px)}
+.day-float{position:absolute;left:16px;top:16px;bottom:16px;width:min(350px,86vw);background:rgba(251,250,246,.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:12px;padding:20px 22px;overflow-y:auto;z-index:5;box-shadow:0 14px 40px rgba(38,34,28,.10)}
+.day-float .dm{font-size:11px;letter-spacing:.18em;color:var(--terra)}
+.day-float h3{font-size:21px;font-weight:900;margin:4px 0 10px}
+.df-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.df-chips span{font-size:11px;padding:3px 10px;border:1px solid var(--line);border-radius:99px;color:var(--ink-2);background:rgba(255,255,255,.6)}
+.df-sec{padding:9px 0;border-top:1px dashed var(--line);font-size:12.8px;color:var(--ink-2)}
+.df-sec b{display:block;font-size:11px;color:var(--ink-3);font-weight:500;letter-spacing:.1em;margin-bottom:2px}
+.df-wx{margin-top:10px;padding:12px 14px;background:var(--bg-soft);border-radius:10px;font-size:12.5px;color:var(--ink-2)}
+.df-wx .t{font-size:15px;color:var(--ink);font-weight:500}
+.df-wx .src{font-size:10.5px;color:var(--ink-3);margin-top:4px}
+.rain-alt{display:none;margin-top:10px;padding:10px 12px;background:#e9f0ec;border-left:3px solid var(--lake);font-size:12px;color:var(--ink-2);border-radius:0 8px 8px 0}
+.rain-alt.show{display:block}
+.map-legend{position:absolute;right:16px;bottom:16px;z-index:5;background:rgba(251,250,246,.92);backdrop-filter:blur(8px);border:1px solid var(--line);padding:9px 14px;font-size:11px;color:var(--ink-2);border-radius:8px;max-width:300px}
+/* ---------- 单卡展示（交通/酒店） ---------- */
+.stage{margin-top:22px}
+.plan-card{background:var(--card);border:1px solid var(--line);padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,40px)}
+.plan-card h4{font-size:22px;font-weight:900;margin:4px 0 6px}
+.plan-card .no{font-size:11px;letter-spacing:.22em;color:var(--terra)}
+.plan-card .dur{font-size:13px;color:var(--lake-deep);font-weight:500}
+.plan-card p{font-size:13.5px;color:var(--ink-2);margin-top:10px}
+.plan-card p b,.stay-card p b{color:var(--ink)}
+.plan-card ul{list-style:none}
+.plan-card li{padding:11px 0;border-top:1px dashed var(--line);font-size:13px;color:var(--ink-2)}
+.plan-card li b{color:var(--ink);font-weight:500}
+.stay-card{background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);overflow:hidden}
+.stay-card .ph{min-height:340px;background:var(--bg-soft);position:relative}
+.stay-card .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease)}
+.stay-card .ph img.ld{opacity:1}
+.stay-card .bd{padding:clamp(22px,3vw,34px)}
+.stay-card .lv{font-size:11px;letter-spacing:.22em;color:var(--terra)}
+.stay-card h4{font-size:20px;font-weight:900;margin:4px 0 4px}
+.stay-card .pr{color:var(--lake-deep);font-size:13px;font-weight:500}
+.stay-card p{font-size:13px;color:var(--ink-2);margin-top:10px}
+.stay-card ul{list-style:none;margin-top:8px}
+.stay-card li{padding:9px 0;border-top:1px dashed var(--line);font-size:12.8px;color:var(--ink-2)}
+/* ---------- 景点 ---------- */
+.spot{background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:300px minmax(0,1fr);overflow:hidden;margin-bottom:16px}
+.spot .ph{min-height:220px;background:var(--bg-soft);position:relative}
+.spot .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease)}
+.spot .ph img.ld{opacity:1}
+.spot .tile{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;background:linear-gradient(150deg,#e3e8e4,#dfe4ea)}
+.spot .tile b{font-family:var(--serif);font-size:30px;color:var(--lake-deep)}
+.spot .tile span{font-size:11px;letter-spacing:.24em;color:var(--ink-3)}
+.spot .bd{padding:22px 26px}
+.spot .city{font-size:10.5px;letter-spacing:.24em;color:var(--lake-deep)}
+.spot h4{font-size:20px;font-weight:900;margin:2px 0 8px}
+.spot-meta{display:flex;flex-wrap:wrap;gap:5px 16px;font-size:12px;color:var(--ink-2);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.spot-meta b{color:var(--ink);font-weight:500}
+.spot .bd p{font-size:13px;color:var(--ink-2);margin-top:9px}
+.spot .bd p b{color:var(--ink)}
+/* ---------- 穿搭 / 量化 / 风险 ---------- */
+.grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.gcell{background:var(--card);padding:22px}
+.gcell h5{font-family:var(--serif);font-size:15.5px;font-weight:900;color:var(--lake-deep);margin-bottom:8px}
+.gcell ul{list-style:none;font-size:12.8px;color:var(--ink-2)}
+.gcell li{padding:6px 0;border-top:1px dashed var(--line)}
+.swatches{display:flex;gap:8px;margin-top:12px}
+.sw{width:34px;height:34px;border-radius:50%;border:1px solid var(--line)}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.panel{background:var(--card);border:1px solid var(--line);padding:24px 26px}
+.panel h5{font-family:var(--serif);font-size:16px;font-weight:900;margin-bottom:10px;color:var(--terra)}
+.panel.blue h5{color:var(--lake-deep)}
+.panel ul{list-style:none;font-size:13px;color:var(--ink-2)}
+.panel li{padding:8px 0 8px 18px;border-top:1px dashed var(--line);position:relative}
+.panel li:before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;border:1px solid var(--lake-deep);border-radius:50%}
+.panel.warn li:before{border-color:#9a5b3c}
+table.qt{width:100%;border-collapse:collapse;font-size:12.8px;background:var(--card)}
+table.qt th,table.qt td{padding:10px 13px;border:1px solid var(--line);text-align:left;vertical-align:top}
+table.qt th{background:var(--bg-soft);font-weight:500;color:var(--ink-2);font-size:11.5px}
+table.qt td b{color:var(--lake-deep)}
+.emg{background:#f3ece2;border:1px solid #e0d2ba;padding:16px 20px;font-size:12.5px;color:var(--ink-2);margin-top:18px;border-radius:10px}
+/* ---------- 补充：页签副标 / 天气刷新 / 地图弹窗 ---------- */
+.tab b{font-weight:500}
+.tab i{font-style:normal;font-size:10.5px;opacity:.65;margin-left:7px}
+.df-wx .src a{color:var(--lake-deep);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.iw{font-family:var(--sans);max-width:250px;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(38,34,28,.18);padding:14px 16px;position:relative}
+.iw-close{position:absolute;right:8px;top:8px;width:22px;height:22px;border-radius:50%;background:#ece7db;color:#8c847a;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:all .25s}
+.iw-close:hover{background:var(--ink);color:#fff}
+.iw .iw-img{width:100%;height:110px;object-fit:cover;border-radius:6px;margin-bottom:8px;display:block}
+.iw h5{font-size:14.5px;font-weight:700;color:var(--ink)}
+.iw .iw-tag{display:inline-block;font-size:10px;letter-spacing:.12em;padding:2px 8px;border-radius:99px;color:#fff;margin:4px 0 6px}
+.iw p{font-size:12px;color:var(--ink-2);margin:3px 0;line-height:1.6}
+.iw .iw-nav{display:inline-block;margin-top:8px;font-size:12px;color:var(--lake-deep);text-decoration:underline;text-underline-offset:3px}
+.iw .iw-day{font-size:10.5px;color:var(--terra);letter-spacing:.14em}
+.dtag{padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700;color:#fff;border:1.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.dlab{font-size:10.5px;color:var(--ink-2);background:rgba(251,250,246,.88);padding:2px 7px;border-radius:99px;border:1px solid var(--line)}
+/* ---------- 地图弹窗关闭按钮（清晰可见） ---------- */
+.amap-info-content{position:relative;border-radius:10px!important}
+.amap-info-close{position:absolute;right:8px!important;top:6px!important;width:22px;height:22px;border-radius:50%;background:#ece7db!important;cursor:pointer;opacity:1!important;z-index:5;display:flex!important;align-items:center;justify-content:center}
+.amap-info-close::before{content:'×';font-size:15px;font-weight:700;color:#8c847a;line-height:1;font-family:var(--sans)}
+.amap-info-close:hover{background:var(--ink)!important}
+.amap-info-close:hover::before{color:#fff}
+/* ---------- 行程模拟 ---------- */
+.sim-box{display:grid;grid-template-columns:280px 1fr 230px;border:1px solid var(--line);background:#fff;margin-top:22px;border-radius:14px;overflow:hidden}
+.sim-char{border-left:1px solid var(--line);background:#faf8f2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 14px;gap:12px}
+.sim-char .frame{width:100%;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#f4f3ed}
+.sim-char img{width:100%;display:block;transition:opacity .3s;animation:simFloat 3.2s ease-in-out infinite}
+@keyframes simFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.sim-char .act-label{font-size:12.5px;color:var(--ink-2);text-align:center;line-height:1.6}
+.sim-char .act-label b{display:block;font-family:var(--serif);font-size:13.5px;color:var(--lake-deep)}
+.sim-side{padding:24px 22px;border-right:1px solid var(--line);background:#faf8f2}
+.sim-clock{font-family:var(--serif);font-size:50px;font-weight:600;color:var(--lake-deep);letter-spacing:1px;line-height:1.05;font-variant-numeric:tabular-nums}
+.sim-date{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.sim-theme{font-family:var(--serif);font-size:16px;color:var(--ink);margin-top:2px}
+.sim-prog{height:3px;background:#e7e2d6;margin:14px 0 8px;border-radius:99px;overflow:hidden}
+.sim-prog i{display:block;height:100%;width:0;background:var(--terra);transition:width .45s var(--ease)}
+.sim-cost{font-size:12px;color:var(--ink-3);line-height:1.6}
+.sim-ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center}
+.sim-ctl select{height:32px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:0 8px;font-size:12px;color:var(--ink-2);cursor:pointer}
+.sim-auto{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-3);margin-top:12px;cursor:pointer}
+.sim-days{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:14px}
+.sim-days button{border:1px solid var(--line);background:#fff;border-radius:8px;font-size:10.5px;padding:5px 0;color:var(--ink-2);cursor:pointer;transition:all .25s}
+.sim-days button.on{background:var(--lake-deep);border-color:var(--lake-deep);color:#fff}
+.sim-tl{position:relative;max-height:580px;overflow-y:auto;padding:20px 26px;scrollbar-width:thin}
+.tl-i{display:grid;grid-template-columns:52px 28px 1fr;column-gap:10px;padding:8px 0;border-bottom:1px dashed #ece6d8;opacity:.42;transition:opacity .4s}
+.tl-i.done{opacity:.72}
+.tl-i.on{opacity:1}
+.tl-i .tt{font-family:var(--serif);font-size:13.5px;font-weight:600;color:var(--lake-deep);font-variant-numeric:tabular-nums;padding-top:4px}
+.tl-i .dot{width:26px;height:26px;border-radius:50%;background:#f0ede3;display:flex;align-items:center;justify-content:center;font-size:10.5px;color:var(--ink-2);transition:all .3s}
+.tl-i.on .dot{background:var(--lake-deep);color:#fff;box-shadow:0 0 0 4px rgba(71,110,128,.15)}
+.tl-i h6{font-size:13.5px;font-weight:600;color:var(--ink);padding-top:4px}
+.tl-i p{font-size:12px;color:var(--ink-3);margin-top:2px;line-height:1.65}
+.tl-i .cost{color:var(--terra)}
+/* ---------- 穿搭卡通示意 ---------- */
+.outfit-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
+.ofit{border:1px solid var(--line);background:#fff;border-radius:12px;overflow:hidden}
+.ofit img{width:100%;display:block;background:#f4f3ed}
+.ofit figcaption{font-size:12.3px;color:var(--ink-2);padding:12px 16px 14px;line-height:1.75}
+.ofit b{display:block;font-family:var(--serif);font-size:14.5px;color:var(--ink);margin-bottom:2px}
+/* ---------- 住宿：行程入住日历 ---------- */
+.segs{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 4px}
+.seg{border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:11.5px;color:var(--ink-2);background:#faf8f2}
+.seg b{color:var(--lake-deep);font-weight:600}
+/* ---------- 播放器 / Toast / 页脚 ---------- */
+.player{position:fixed;right:20px;bottom:20px;z-index:99;display:flex;align-items:center;gap:11px;background:rgba(251,250,246,.85);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:99px;padding:9px 16px 9px 10px;box-shadow:0 10px 30px rgba(38,34,28,.12)}
+.player button{width:36px;height:36px;border-radius:50%;border:1px solid var(--ink);background:transparent;cursor:pointer;font-size:13px;color:var(--ink);transition:all .3s var(--ease)}
+.player button:hover{background:var(--ink);color:var(--bg)}
+.player .tn{font-size:11.5px;color:var(--ink-2);max-width:170px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player input[type=range]{width:80px;accent-color:var(--lake-deep)}
+.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%) translateY(16px);background:var(--ink);color:var(--bg);font-size:12.5px;padding:11px 20px;border-radius:8px;opacity:0;pointer-events:none;transition:all .4s var(--ease);z-index:120;max-width:86vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 80px;text-align:center;color:var(--ink-3);font-size:11.5px}
+@media(max-width:900px){
+  .day-float{position:static;width:auto;margin:0;border-radius:0;border-left:0;border-right:0;box-shadow:none}
+  .mapwrap{height:auto;min-height:0;display:flex;flex-direction:column}
+  #amap{position:relative;height:60vh;min-height:420px}
+  .plan-card,.stay-card{grid-template-columns:1fr}
+  .stay-card .ph{min-height:220px}
+  .spot{grid-template-columns:1fr}
+  .spot .ph{min-height:200px}
+  .sim-box{grid-template-columns:1fr}
+  .sim-side{border-right:0;border-bottom:1px solid var(--line)}
+  .sim-clock{font-size:40px}
+  .sim-tl{max-height:60vh}
+  .sim-char{display:none}
+  .outfit-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <svg class="ridge" viewBox="0 0 1440 400" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,400 L0,260 L180,180 L340,250 L520,120 L700,230 L900,90 L1100,220 L1280,150 L1440,240 L1440,400 Z" fill="#e4ded0"/>
+    <path d="M0,400 L0,320 L220,240 L420,310 L640,200 L860,300 L1080,190 L1300,290 L1440,230 L1440,400 Z" fill="#d8d2c2" opacity=".8"/>
+    <path d="M0,400 L0,370 L300,310 L560,360 L820,290 L1120,350 L1440,300 L1440,400 Z" fill="#cdc5b2" opacity=".7"/>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow">LUOYANG · XI’AN HERITAGE WEEK · <b>2026.09.06 — 09.12</b></p>
+    <h1>洛陕七日<br>从<em>隋唐洛阳</em>走到<em>盛唐长安</em></h1>
+    <div class="hero-meta">
+      <span>北京出发 · 爸爸/妈妈/女儿 3 人 · 高性价比 · 休闲度假+出片+美食</span>
+      <span>洛阳 3 晚 → 西安 3 晚 · 行程严格按上传确认表不改</span>
+      <span>全程约 14—29℃ · 海拔 60—2200m（老君山最高）</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ 行程模拟：把每一天走一遍 ============ -->
+<section class="wrap" id="sim">
+  <p class="eyebrow">SIMULATION · <b>行程模拟</b></p>
+  <h2 class="sec">跟着确认表，把七天走一遍</h2>
+  <p class="sec-sub">按确认表：D1 北京—洛阳高铁，D4 洛阳—西安高铁，D7 西安—沈阳航班/高铁；每天早上均含起床/洗漱/化妆，三餐与转场均排入时间轴。点「播放」自动推进，可调倍速，播完默认进入下一日。</p>
+  <div class="sim-box">
+    <div class="sim-side">
+      <div class="sim-clock" id="simClock">--:--</div>
+      <p class="sim-date" id="simDate"></p>
+      <p class="sim-theme" id="simTheme"></p>
+      <div class="sim-prog"><i id="simBar"></i></div>
+      <p class="sim-cost" id="simCost"></p>
+      <p class="sim-cost">用药提醒：妈妈每日按医嘱定时服药/测血糖，时间轴在早餐与晚餐节点同步提醒；外出随身备糖与饮用水。</p>
+      <div class="sim-ctl">
+        <button class="btn sm" id="simPlay">▶ 播放</button>
+        <button class="btn sm" id="simPrev">上一日</button>
+        <button class="btn sm" id="simNext">下一日</button>
+        <select id="simSpeed"><option value="1">×1</option><option value="2">×2</option><option value="4">×4</option></select>
+      </div>
+      <label class="sim-auto"><input type="checkbox" id="simAuto" checked> 播完自动进入下一日</label>
+      <div class="sim-days" id="simDays"></div>
+    </div>
+    <div class="sim-tl" id="simTl"></div>
+    <div class="sim-char">
+      <div class="frame"><img id="simCharImg" src="assets/act-rest.png" alt="行程模拟人物状态示意"></div>
+      <p class="act-label">正在模拟<b id="simCharLabel">—</b></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 核心：行程地图 ============ -->
+<section class="wrap" id="journey">
+  <div class="journey-head">
+    <div>
+      <p class="eyebrow">JOURNEY MAP · <b>七日轨迹</b></p>
+      <h2 class="sec">地图上的七天</h2>
+    </div>
+    <div class="view-toggle">
+      <button class="btn sm" id="viewDay">当日行程</button>
+      <button class="btn sm on" id="viewAll">完整全程</button>
+    </div>
+  </div>
+  <div class="daystrip" id="dayStrip"></div>
+  <div class="mapwrap">
+    <div id="amap"></div>
+    <div class="map-fallback" id="mapFallback"><div>地图未能加载：请检查网络或高德 Key 配置。<br>所有点位坐标已预写死，联网环境下刷新即可呈现 3D 地形轨迹。</div></div>
+    <aside class="day-float" id="dayFloat"></aside>
+    <div class="map-legend">点击地图标记查看详情：蓝=景点 · 棕=住宿 / 当日推荐酒店 · 灰=枢纽 · 橘=高赞餐厅（均为近似定位，以导航为准）。弹窗内可复制预订搜索词或一键导航（手机唤起高德 App，电脑打开高德网页版）。路线距离为直线参考值。</div>
+  </div>
+</section>
+
+<!-- ============ 大交通 ============ -->
+<section class="wrap" id="transport">
+  <p class="eyebrow">TRANSPORT · <b>往返大交通</b></p>
+  <h2 class="sec">去程北京→洛阳 ／ 返程西安→沈阳</h2>
+  <p class="sec-sub">选择方向与方案，仅展示当前方案详情。班次票价为 2026-08-31 参考样本，以 12306 / 航司平台为准；中转均写明衔接缓冲。</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+    <div class="tabs" id="dirTabs"></div>
+    <div class="tabs" id="planTabs"></div>
+  </div>
+  <div class="stage" id="planStage"></div>
+</section>
+
+<!-- ============ 住宿 ============ -->
+<section class="wrap" id="stay">
+  <p class="eyebrow">STAY · <b>住宿选择</b></p>
+  <h2 class="sec">两座城市，各三档</h2>
+  <p class="sec-sub">先选城市、再选档位，仅展示当前档位详情。房价为 2026-08-31 参考区间，以预订平台为准；复制词已含入住/退房日期。三口之家优先亲子房/双床房，并确认早餐时间与可冷藏药品条件。</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+    <div class="tabs" id="cityTabs"></div>
+    <div class="tabs" id="tierTabs"></div>
+  </div>
+  <div class="stage" id="stayStage"></div>
+</section>
+
+<!-- ============ 景点 ============ -->
+<section class="wrap" id="spots">
+  <p class="eyebrow">DEEP GUIDE · <b>景点深度攻略</b></p>
+  <h2 class="sec">每个地方的故事、动线与机位</h2>
+  <p class="sec-sub">按城市筛选，卡片已按确认表行动日期排序。开放时间与门票以景区官方公告为准；餐厅/酒店/门票不提供编造链接，统一复制搜索词。</p>
+  <div class="tabs" id="spotTabs" style="margin-top:20px"></div>
+  <div class="stage" id="spotStage"></div>
+</section>
+
+<!-- ============ 穿搭与出片 ============ -->
+<section class="wrap" id="dress">
+  <p class="eyebrow">OUTFIT · <b>穿搭与出片</b></p>
+  <h2 class="sec">三层分层法，应对 14—29℃ 与老君山 2200 米</h2>
+  <p class="sec-sub">9 月初洛阳/西安白天暖、早晚凉；老君山山顶比市区低约 8—12℃。防晒、薄外套、雨具与舒适鞋全程必备。下方 <b>4 套为本次行程专属搭配</b>，已按 D1—D5 的天气与场景分配，直接照穿即可。</p>
+  <div class="outfit-row">
+    <figure class="ofit"><img src="assets/西安、洛阳、老君山旅游穿搭推荐图生成需求 (2).png" alt="洛阳古城夜游日穿搭推荐" loading="lazy">
+      <figcaption><b>洛阳古城夜游日 · D1 洛邑古城 / D3 应天门·明堂天堂夜</b>豆青印花吊带裙 + 白色纱披 + 玉簪发钗，汉服元素但不夸张。浅色在暖红灯笼里显气色，纱披既可挡夜风又能遮肉；裙摆飘逸，拍文峰塔倒影与城门中轴对称都出片。</figcaption></figure>
+    <figure class="ofit"><img src="assets/西安、洛阳、老君山旅游穿搭推荐图生成需求 (4).png" alt="老君山山岳日穿搭推荐" loading="lazy">
+      <figcaption><b>老君山山岳日 · D2 老君山</b>雾蓝连衣裙 + 山水印花长外套 + 短靴（建议现场换防滑运动鞋）。长外套防风保暖，内搭裙装保留拍照的轻盈感；配色取意“金顶云海”，雾天拍近景松枝与道观、晴天拍金顶都很出片。</figcaption></figure>
+    <figure class="ofit"><img src="assets/西安、洛阳、老君山旅游穿搭推荐图生成需求 (3).png" alt="洛阳人文日间穿搭推荐" loading="lazy">
+      <figcaption><b>洛阳人文日间 · D3 洛阳博物馆 + 龙门石窟</b>浅粉底印花连衣裙 + 奶油白针织开衫 + 草编帽 + 小白鞋。温柔浪漫，开衫应对博物馆空调与傍晚转凉，草帽挡午后阳光；与龙门石灰岩、博物馆几何墙面形成柔焦对比，长时间步行也不累。</figcaption></figure>
+    <figure class="ofit"><img src="assets/西安、洛阳、老君山旅游穿搭推荐图生成需求 (1).png" alt="西安城市漫游日穿搭推荐" loading="lazy">
+      <figcaption><b>西安城市漫游日 · D4-D5 城墙 / 陕博 / 大雁塔 / 不夜城</b>米白/浅卡其长风衣 + 同色系半裙 + 小白鞋 + 斜挎小包。配色干净、走路带风，早晚温差大时风衣一披即可；与古城灰墙、红墙形成柔和对比，室内外切换不突兀。</figcaption></figure>
+  </div>
+  <div class="grid4" style="margin-top:24px">
+    <div class="gcell"><h5>上衣 · 分层</h5><ul><li>短袖 T 恤 ×3（白天打底）</li><li>薄长袖 ×2（早晚与防晒）</li><li>针织开衫/薄卫衣 ×1（古城夜游）</li><li>抓绒 ×1（老君山）</li><li>防风冲锋衣 ×1（山顶与演出夜）</li></ul></div>
+    <div class="gcell"><h5>下装与鞋履</h5><ul><li>休闲长裤 ×2 · 牛仔裤 ×1</li><li>长裙 ×1（古城/不夜城出片）</li><li>防滑运动鞋 ×1（老君山主力）</li><li>平底休闲鞋 ×1（石板路）</li><li>拖鞋 ×1 · 不穿高跟鞋</li></ul></div>
+    <div class="gcell"><h5>配饰与装备</h5><ul><li>遮阳帽 · 墨镜 · 薄围巾</li><li>SPF50+ 防晒 · 润唇膏</li><li>折叠伞/便携雨衣</li><li>充电宝 · 保温杯 · 小背包</li><li>晕车药（临潼/老君山山路）· 创可贴</li></ul></div>
+    <div class="gcell"><h5>出片配色</h5>
+      <p style="font-size:12.8px;color:var(--ink-2)">白 / 米 / 浅蓝 / 砖红 / 木棕，避开大面积荧光色。黄金时段：07:00-08:30 与 17:30-19:00。</p>
+      <div class="swatches"><span class="sw" style="background:#f6f2e8"></span><span class="sw" style="background:#b8cdd6"></span><span class="sw" style="background:#c9a35f"></span><span class="sw" style="background:#a9603c"></span><span class="sw" style="background:#8f7a64"></span></div></div>
+  </div>
+  <div class="panel blue" style="margin-top:18px"><h5>分景点出片速查</h5><ul>
+    <li>洛邑古城/应天门：浅色系 + 蓝调时刻，文峰塔与城门中轴对称</li>
+    <li>龙门石窟：纯色衣与石灰岩对比，下午西山侧光，东山礼佛台拍全景</li>
+    <li>老君山：雾蓝/山水印花长外套做视觉锚点（亮色亦可），雾天改拍松枝与道观近景</li>
+    <li>西安城墙/钟鼓楼：傍晚环城，安全岛内拍车流；大唐不夜城避开周末人潮峰值</li>
+  </ul></div>
+</section>
+
+<!-- ============ 费用与体力 ============ -->
+<section class="wrap" id="budget">
+  <p class="eyebrow">BUDGET & ENERGY · <b>费用与体力</b></p>
+  <h2 class="sec">一笔明白账，一条先紧后松的体力曲线</h2>
+  <div class="two-col" style="margin-top:24px">
+    <div class="panel" style="padding:0;overflow:auto"><table class="qt">
+      <tr><th>费用分项</th><th>参考区间（3人家庭）</th><th>说明</th></tr>
+      <tr><td>去程 北京→洛阳</td><td><b>约 1059-1323 元</b></td><td>高铁二等座样本×3；儿童票/学生优惠以12306规则为准</td></tr>
+      <tr><td>洛阳→西安（D4）</td><td><b>约 495-627 元</b></td><td>高铁二等座样本×3，约1.2-1.6小时</td></tr>
+      <tr><td>返程 西安→沈阳</td><td><b>约 1761-3900 元</b></td><td>飞机预估 / G1282 样本 889.5×3 / 中转组合样本；优先选白天到达</td></tr>
+      <tr><td>住宿 6 晚</td><td><b>约 1800-5400 元</b></td><td>洛阳3晚 + 西安3晚；1间亲子房/套房或2间双床房价格差异大</td></tr>
+      <tr><td>门票体验</td><td><b>约 1400-3900 元</b></td><td>龙门/老君山/城墙/兵马俑/华清宫/长恨歌按票档；儿童与老人优惠以景区为准</td></tr>
+      <tr><td>餐饮</td><td><b>约 1800-3300 元</b></td><td>水席、牛肉汤、泡馍、临潼大盘鸡；妈妈用餐需规律、少糖、主食定量</td></tr>
+      <tr><td>市内/城际接驳</td><td><b>约 600-1200 元</b></td><td>地铁、打车、老君山/临潼拼车；三人打车常比公共交通更稳</td></tr>
+      <tr><td><b>合计（均衡档）</b></td><td><b>约 8500-19000 元</b></td><td>AI 预估样本（2026-08-31，按3名成人口径），实际以平台与儿童优惠为准</td></tr>
+    </table></div>
+    <div class="panel blue"><h5>体力节奏与海拔适应</h5><ul>
+      <li>高强度日：D2 老君山（约2200m）与 D6 兵马俑—丽山园—华清宫—长恨歌连轴，前后均安排转场/夜游缓冲</li>
+      <li>低强度日：D1 抵达夜游、D4 午后入西安、D7 返程；D3/D5 为中等步行量</li>
+      <li>海拔梯度：北京/沈阳约60m → 洛阳约150m → 老君山约2200m → 西安约410m，无高原反应风险但山顶风大</li>
+      <li>D6 若体力不足：华清宫后提前休息，长恨歌场次不要选太晚</li>
+      <li>每天步数预估：D3/D5 约1.2-1.6万步，D2/D6 约1.8-2.4万步，D1/D4/D7 约0.6-1万步</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ 风险与行前准备 ============ -->
+<section class="wrap" id="prep">
+  <p class="eyebrow">PREPARE & RISK · <b>行前准备与风险</b></p>
+  <h2 class="sec">出发之前，把这些收进心里</h2>
+  <div class="two-col" style="margin-top:24px">
+    <div class="panel warn"><h5>专属风险提示</h5><ul>
+      <li>预约紧张：陕西历史博物馆免费票、洛阳博物馆周一闭馆规则、长恨歌场次都要提前复核；黄牛代约风险高</li>
+      <li>老君山天气：D2 山顶比市区低约8-12℃，大风/大雾可导致索道降速或停运；别卡末班下山</li>
+      <li>临潼连轴：D6 兵马俑—丽山园—华清宫—长恨歌强度最高，长恨歌散场提前约车</li>
+      <li>古城夜拍：洛邑古城/大唐不夜城人潮密集，看紧手机与镜头盖；收费拍照位先问价</li>
+      <li>妈妈糖尿病：用药与测血糖时间不因行程改变；D2老君山、D6临潼连轴前必须吃正餐，不空腹上山/看演出</li>
+      <li>低血糖预案：心慌、出汗、手抖、头晕时立即停止步行，补15-20g快速碳水（糖果/含糖饮料），15分钟未缓解或意识不清拨打120</li>
+      <li>饮食肠胃：泡馍/水席/胡辣汤口味重且主食量大，妈妈选清汤、少糖、分餐；景区冷饮与石榴汁别贪多，备肠胃药</li>
+      <li>中转容错：若返程选 D44+G107 等跨夜组合，33分钟换乘偏极限，建议改45分钟以上缓冲</li>
+      <li>票价浮动：本页所有价格均为2026-08-31参考/预估/样本，不承诺下单时仍有效</li>
+    </ul></div>
+    <div class="panel"><h5>行前准备清单</h5><ul>
+      <li>证件：身份证随身；学生/老人/军人等优惠证件带上，以景区政策为准</li>
+      <li>预约：陕西历史博物馆、洛阳博物馆、龙门石窟、老君山、兵马俑/华清宫、长恨歌按官方渠道提前预约</li>
+      <li>车票：D1 北京西→洛阳龙门、D4 洛阳龙门→西安北、D7 西安→沈阳三段分别设开票提醒与候补</li>
+      <li>住宿：洛阳连住3晚、西安连住3晚；复制词已含09-06/09-09入住与09-09/09-12退房</li>
+      <li>药品与监测：妈妈日常用药按医嘱带足全程+2天余量，血糖仪/试纸/针头或胰岛素（如使用）随身不托运；需冷藏药品提前确认酒店冰箱与车载冷藏包</li>
+      <li>装备：防滑运动鞋、冲锋衣、折叠伞、充电宝、保温杯、肠胃药、创可贴、少量现金、快速碳水零食（糖果/饼干/果汁）</li>
+      <li>保险：建议购买含意外医疗与行程变更的短期旅行险；慢性病急性发作是否承保以条款为准，出发前把病史与用药清单拍照存档</li>
+      <li>复核节点：09-03复核 D1-D3 天气与老君山索道；09-05复核全程车票；09-08复核陕博/长恨歌预约</li>
+    </ul></div>
+  </div>
+  <div class="emg"><b>紧急信息</b> ｜ 报警 110 · 急救 120 ｜ 洛阳旅游投诉 0379-12301 ｜ 西安旅游投诉 029-12301 ｜ 西安咸阳机场问询 029-96788 ｜ 沈阳桃仙机场问询 024-96833 ｜ 洛阳市中心医院 0379-63892222 ｜ 西京医院 029-84775507 ｜ 家庭出行建议把妈妈用药时间设为手机闹钟，并每日互相同步定位与体力状态</div>
+</section>
+</main>
+
+<footer>洛陕七日 · 数据为 2026-08-31 参考/预估/样本值，以官方平台为准 ｜ 背景音乐为免版权素材（Kevin MacLeod · incompetech.com），仅供个人体验</footer>
+
+<!-- ============ 播放器 / Toast ============ -->
+<div class="player" id="player">
+  <button id="playBtn" title="播放 / 暂停">▶</button>
+  <span class="tn" id="trackName">准备就绪</span>
+  <input type="range" id="vol" min="0" max="100" value="22" title="音量">
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- 高德 JS API 2.0：已配置 Web 端 Key（tour）。如需更换，请替换下方 key 与 securityJsCode -->
+<script>
+window._AMapSecurityConfig = { securityJsCode: 'f1229e78fd9ed0bb65a9cf99940b0ace' }; // 高德安全密钥（Web端 tour）
+</script>
+<script src="https://webapi.amap.com/maps?v=2.0&key=3f99ce7e2d085fb39666bdaffd9cddf9&plugin=AMap.Weather"></script>
+<script>
+/* =====================================================
+   全部数据为 2026-08-31 预生成静态参考值（唯一行程依据：用户上传确认表图片）
+   ===================================================== */
+const DAYS=[
+  {"d":"D1","date":"09-06","full":"2026-09-06","week":"日","lunar":"白露前","city":"北京→洛阳","track":"transition","theme":"高铁入洛 · 洛邑古城夜","am":"北京西站乘高铁前往洛阳龙门（样本班次 G655 08:26→12:31，以12306为准）","pm":"抵达后入住老城区/洛邑古城附近，午后休整","night":"洛邑古城夜景，汉服与文峰塔灯光","traffic":"高铁 + 打车/地铁","stay":"洛阳","weather":"多云间晴","wtype":"静态气候参考","temp":"20-29℃","alt":"140-350m","energy":"低","points":[
+    {"n":"北京西站","lng":116.321,"lat":39.895,"alt":60,"stay":"出发","desc":"建议提前45-60分钟到站，高铁检票口以12306为准","type":"transit"},
+    {"n":"洛阳龙门站","lng":112.464,"lat":34.606,"alt":150,"stay":"12:31抵达","desc":"打车约25分钟进老城区；样本二等座¥367起","type":"transit"},
+    {"n":"洛阳老城区酒店","lng":112.477,"lat":34.628,"alt":150,"stay":"3晚","desc":"连住段：洛邑古城/丽景门步行圈，便于夜游","type":"hotel"},
+    {"n":"洛邑古城","lng":112.479,"lat":34.629,"alt":150,"stay":"2小时","desc":"确认表景点；汉服夜景与文峰塔灯光","type":"spot"}
+  ],"route":[[116.321,39.895],[114.6,37.3],[112.464,34.606],[112.477,34.628],[112.479,34.629]]},
+  {"d":"D2","date":"09-07","full":"2026-09-07","week":"一","lunar":"白露","city":"洛阳·栾川","track":"luoyang","theme":"老君山一日 · 金顶云海","am":"早起前往老君山（确认表），索道+步行到金顶道观群","pm":"十里画屏栈道慢行，体力一般则索道上下","night":"返回洛阳老城，清淡晚餐，拉伸恢复","traffic":"旅游专线/拼车 + 索道","stay":"洛阳","weather":"山区多云，午后易有雾","wtype":"静态气候参考","temp":"山上14-22℃ · 市区19-28℃","alt":"150-2200m","energy":"高","points":[
+    {"n":"老君山金顶","lng":111.65,"lat":33.78,"alt":2190,"stay":"1天","desc":"确认表景点；山顶温差大，备防风外套","type":"spot"},
+    {"n":"老君山索道下站","lng":111.655,"lat":33.785,"alt":800,"stay":"换乘","desc":"索道组合以景区公告为准，旺季早到","type":"transit"}
+  ],"route":[[112.477,34.628],[112.05,34.25],[111.655,33.785],[111.65,33.78],[112.05,34.25],[112.477,34.628]]},
+  {"d":"D3","date":"09-08","full":"2026-09-08","week":"二","lunar":"白露后","city":"洛阳","track":"luoyang","theme":"洛阳博物馆 · 龙门石窟 · 应天门明堂天堂","am":"洛阳博物馆（确认表）：提前预约，重点看河洛文明与唐三彩","pm":"龙门石窟（确认表）：西山石窟 → 东山石窟 → 香山寺远眺","night":"应天门 → 明堂天堂夜景，按确认表顺序游览","traffic":"打车/公交","stay":"洛阳","weather":"多云","wtype":"静态气候参考","temp":"20-28℃","alt":"140-350m","energy":"中","points":[
+    {"n":"洛阳博物馆","lng":112.443,"lat":34.616,"alt":150,"stay":"2-3小时","desc":"确认表景点；免费需预约，周一通常闭馆需复核","type":"spot"},
+    {"n":"龙门石窟","lng":112.47,"lat":34.556,"alt":170,"stay":"3-4小时","desc":"确认表景点；卢舍那大佛，门票参考¥90","type":"spot"},
+    {"n":"应天门","lng":112.467,"lat":34.628,"alt":150,"stay":"1小时","desc":"确认表景点；隋唐洛阳城宫城正南门，夜秀以公告为准","type":"spot"},
+    {"n":"明堂天堂","lng":112.47,"lat":34.632,"alt":150,"stay":"1小时","desc":"确认表景点；武则天礼制与佛塔遗址片区","type":"spot"}
+  ],"route":[[112.477,34.628],[112.443,34.616],[112.47,34.556],[112.467,34.628],[112.47,34.632],[112.477,34.628]]},
+  {"d":"D4","date":"09-09","full":"2026-09-09","week":"三","lunar":"七月廿八","city":"洛阳→西安","track":"transition","theme":"午后入长安 · 城墙与钟鼓楼","am":"洛阳龙门乘高铁赴西安北（样本 G1833 11:34→13:09，以12306为准）","pm":"入住钟楼/南门附近；广仁寺 → 西安城墙（永宁门）","night":"钟楼 → 鼓楼 → 回民街，按确认表顺序夜游","traffic":"高铁 + 地铁/步行","stay":"西安","weather":"多云","wtype":"静态气候参考","temp":"19-27℃","alt":"380-450m","energy":"中","points":[
+    {"n":"洛阳龙门站","lng":112.464,"lat":34.606,"alt":150,"stay":"11:34出发","desc":"样本二等座¥187起，约1.5小时","type":"transit"},
+    {"n":"西安北站","lng":108.941,"lat":34.379,"alt":390,"stay":"13:09抵达","desc":"地铁2号线进钟楼约35-45分钟","type":"transit"},
+    {"n":"西安钟楼片区酒店","lng":108.947,"lat":34.259,"alt":410,"stay":"3晚","desc":"连住段：钟楼/永宁门之间，夜游步行友好","type":"hotel"},
+    {"n":"广仁寺","lng":108.918,"lat":34.267,"alt":410,"stay":"1小时","desc":"确认表景点；陕西唯一藏传佛教格鲁派寺院","type":"spot"},
+    {"n":"西安城墙·永宁门","lng":108.94,"lat":34.254,"alt":410,"stay":"2小时","desc":"确认表景点；傍晚登墙看城市中轴","type":"spot"},
+    {"n":"西安钟楼","lng":108.946,"lat":34.261,"alt":410,"stay":"外观+登楼可选","desc":"确认表景点；夜景车流环绕","type":"spot"},
+    {"n":"西安鼓楼","lng":108.941,"lat":34.264,"alt":410,"stay":"外观","desc":"确认表景点；与钟楼相望","type":"spot"},
+    {"n":"回民街","lng":108.94,"lat":34.266,"alt":410,"stay":"晚餐","desc":"确认表地点；主街看热闹，深巷吃味道","type":"spot"}
+  ],"route":[[112.464,34.606],[110.7,34.5],[108.941,34.379],[108.947,34.259],[108.918,34.267],[108.94,34.254],[108.946,34.261],[108.941,34.264],[108.94,34.266]]},
+  {"d":"D5","date":"09-10","full":"2026-09-10","week":"四","lunar":"七月廿九","city":"西安","track":"xian","theme":"陕博 · 大雁塔 · 大唐不夜城","am":"陕西历史博物馆（确认表；务必提前预约，免费票紧张）","pm":"大雁塔 → 大悦城歇脚/晚餐","night":"大唐不夜城步行街（确认表），看灯光与演出，注意返程人流","traffic":"地铁 + 步行","stay":"西安","weather":"多云","wtype":"静态气候参考","temp":"18-27℃","alt":"400-450m","energy":"中","points":[
+    {"n":"陕西历史博物馆","lng":108.963,"lat":34.229,"alt":420,"stay":"2-3小时","desc":"确认表“历史博物馆”按陕西历史博物馆处理；免费需预约","type":"spot"},
+    {"n":"大雁塔","lng":108.964,"lat":34.219,"alt":430,"stay":"1.5小时","desc":"确认表景点；大慈恩寺与玄奘译经地","type":"spot"},
+    {"n":"大唐不夜城","lng":108.97,"lat":34.218,"alt":430,"stay":"夜景","desc":"确认表景点；步行街免费，演出以当日公告为准","type":"spot"}
+  ],"route":[[108.947,34.259],[108.963,34.229],[108.964,34.219],[108.967,34.218],[108.97,34.218],[108.947,34.259]]},
+  {"d":"D6","date":"09-11","full":"2026-09-11","week":"五","lunar":"八月初一","city":"西安·临潼","track":"xian","theme":"秦始皇陵 · 华清宫 · 长恨歌","am":"秦始皇陵博物院（兵马俑）→ 丽山园（确认表），早点出发避开团队峰","pm":"华清宫（确认表），按体力选择园内步行","night":"《长恨歌》演出（确认表；场次与停演以公告为准），回西安城区住宿","traffic":"地铁9号线/旅游专线 + 打车","stay":"西安","weather":"多云","wtype":"静态气候参考","temp":"17-26℃","alt":"400-500m","energy":"高","points":[
+    {"n":"秦始皇陵博物院（兵马俑）","lng":109.278,"lat":34.384,"alt":500,"stay":"3小时","desc":"确认表景点；一号坑最震撼，讲解员按需选择","type":"spot"},
+    {"n":"丽山园","lng":109.29,"lat":34.376,"alt":520,"stay":"1.5小时","desc":"确认表景点；秦陵遗址公园与铜车马相关展陈","type":"spot"},
+    {"n":"华清宫","lng":109.213,"lat":34.361,"alt":470,"stay":"2小时","desc":"确认表景点；唐御汤遗址与西安事变旧址","type":"spot"},
+    {"n":"长恨歌演出","lng":109.214,"lat":34.358,"alt":470,"stay":"夜间","desc":"确认表项目；户外观演备薄外套","type":"spot"}
+  ],"route":[[108.947,34.259],[109.278,34.384],[109.29,34.376],[109.213,34.361],[109.214,34.358],[108.947,34.259]]},
+  {"d":"D7","date":"09-12","full":"2026-09-12","week":"六","lunar":"八月初二","city":"西安→沈阳","track":"transition","theme":"返程 · 长安到盛京","am":"按返程方案前往西安咸阳机场/西安北站","pm":"推荐飞行方案当日抵沈；火车方案见“返程3套”","night":"抵达沈阳，行程结束","traffic":"飞机 / 高铁","stay":"—","weather":"—","wtype":"—","temp":"—","alt":"—","energy":"低","points":[
+    {"n":"西安咸阳国际机场","lng":108.751,"lat":34.447,"alt":480,"stay":"返程","desc":"飞行方案：提前2小时到机场","type":"transit"},
+    {"n":"沈阳桃仙国际机场","lng":123.485,"lat":41.64,"alt":60,"stay":"抵达","desc":"或火车方案抵达沈阳站/沈阳北站","type":"transit"}
+  ],"route":[[108.947,34.259],[108.751,34.447],[111.5,37.8],[123.485,41.64]]}
+];
+</script>
+
+<script>
+/* ============ 数据：城际大交通（去程3套 / 返程3套） ============ */
+const GO_PLANS=[{"id":"fast","tag":"① 少折腾方案","title":"高铁直达 · 中午到洛阳","route":"北京西站 → 洛阳龙门站，京广—徐兰高铁走廊，当日中午抵达","strategy":"适配确认表 D1 下午还要逛洛邑古城；选型逻辑为到达时间可控、出站打车进城快；班次票价为 2026-08-31 检索样本，以12306为准","rows":[["G655","08:26 北京西 → 12:31 洛阳龙门","二等座约¥367起（样本）","4小时05分，抵达后午餐+入住，下午不赶"],["G653","07:39 北京西 → 11:52 洛阳龙门","二等座约¥390-441（样本）","更早到但需早起；确认表不强制早起则非首选"],["G321","07:00 北京西 → 10:00 洛阳龙门","二等座约¥441（样本）","标杆车约3小时，票价高，适合想最大化D1下午的人"]],"time":"约3—4.3小时","pros":"当天中午/午后抵达，衔接D1夜游最稳","cons":"周末票紧俏，需提前锁定","copy":"北京西到洛阳龙门 高铁 9月6日 G655"},{"id":"std","tag":"② 价格优先方案","title":"郑州东中转换乘","route":"北京西 → 郑州东 → 洛阳龙门，郑州东同站换乘","strategy":"适配想压低票价的旅客；选型逻辑为拆分京广段与徐兰段，利用郑州东密集车次；中转必须留足换乘缓冲","rows":[["G3649 + G373","10:23 北京西 → 14:05 郑州东 ｜ 14:21 郑州东 → 14:57 洛阳龙门","两段合计约¥380.5起（样本）","换乘16分钟偏极限，建议改签至30分钟以上缓冲"],["G561 + G2007","10:40 北京西 → 14:31 郑州东 ｜ 14:50 郑州东 → 15:26 洛阳龙门","两段合计约¥367起（样本）","换乘19分钟仍偏紧；带娃/行李多不建议"],["G673 + G7957","13:46 北京西 → 17:36 郑州东 ｜ 17:52 郑州东 → 18:28 洛阳龙门","两段合计约¥368起（样本）","到洛阳偏晚，D1夜游需压缩洛邑古城"]],"time":"约4.2—4.8小时（含换乘）","pros":"票价常低于直达标杆车，班次组合多","cons":"换乘<20分钟风险高，务必留缓冲","copy":"北京西到洛阳龙门 郑州东换乘 9月6日"},{"id":"sleep","tag":"③ 早到备选方案","title":"标杆/丰台始发组合","route":"北京丰台/北京西早班高铁 → 洛阳龙门，争取上午抵达","strategy":"适配想把D1下午完整留给隋唐洛阳城片区的人；注意部分早班从北京丰台始发，出发前确认车站","rows":[["G651","06:38 北京丰台 → 10:42 洛阳龙门","二等座约¥372（样本）","北京丰台离家远者慎选，地铁首班车时间要复核"],["G3931","07:39 北京西 → 11:52 洛阳龙门","二等座约¥390（样本）","与G653时段接近，按余票二选一"],["G1591","09:40 北京西 → 14:01 洛阳龙门","二等座约¥353（样本）","价格样本较低，但D1景点顺序需后移"]],"time":"约3.7—4.4小时","pros":"上午/中午抵达，D1节奏更松","cons":"早班对出发地通勤要求高","copy":"北京到洛阳龙门 早班高铁 9月6日"}];
+const BACK_PLANS=[{"id":"fly","tag":"① 最省时方案","title":"西安直飞/经停 → 沈阳","route":"西安咸阳机场 → 沈阳桃仙机场；优先直飞，无直飞时选同机场中转联程","strategy":"适配确认表 D7 只要求“西安—沈阳”且想当天到家；选型逻辑为空中时间约2.5—3小时，远比10小时45分直达高铁省时；价格为2026-08-31样本口径，以航司/OTA为准","rows":[["直飞航班样本","上午/中午 咸阳T3/T5 → 桃仙T3","约¥700-1300（预估样本）","飞行约2.5-3小时；提前2小时到机场，地铁14号线/机场城际进城约1小时"],["同机场中转样本","西安 → 北京/济南/烟台 → 沈阳","约¥650-1200（预估样本）","必须买联程票，行李直挂；中转停留建议≥2小时"],["高铁替代","G1282 11:32 西安北 → 22:17 沈阳","二等座约¥889.5（样本）","若航班溢价过高，坐直达高铁当日到"]],"time":"飞行约5—7小时门到门；高铁10小时45分","pros":"D7当天抵达，体力消耗最低","cons":"机票波动大，低价舱退改严格","copy":"西安到沈阳 机票 9月12日 直飞"},{"id":"rail","tag":"② 稳定直达方案","title":"G1282 直达高铁","route":"西安北站 → 沈阳站，徐兰—京广—津保—津秦—沈大走廊直达","strategy":"适配不想坐飞机、行李多或恐高旅客；选型逻辑为一票到底不换乘，11:32出发22:17到，白天行车不熬夜","rows":[["G1282","11:32 西安北 → 22:17 沈阳","二等座约¥889.5（样本）","直达约10小时45分；备餐食、颈枕、充电宝"],["同车变更接续样本","D2544 西安北09:10 → 太原南12:41 ｜ G2640 太原南13:01 → 沈阳20:49","合计以12306为准","无需下车换乘的接续方案样本，总历时约11小时39分"],["普速备选","K546 西安00:05 → 沈阳北02:39（+1）","硬座约¥224起（样本）","26小时34分，不适合D7当天轻松抵达"]],"time":"约10小时45分","pros":"时刻稳定、不受天气流控影响小","cons":"久坐疲劳，晚间抵达","copy":"西安北到沈阳 G1282 9月12日"},{"id":"cheap","tag":"③ 高性价比方案","title":"北京/天津中转换乘","route":"西安 → 北京/天津/唐山 → 沈阳，利用京沈高铁密集班次","strategy":"适配预算优先且能接受换乘；选型逻辑为高铁组合总价常低于直达G1282，或选择夕发朝至动卧/普速；中转必须写清缓冲","rows":[["D44 + G107","20:35 西安 → 北京西 ｜ 北京西换乘33分 → 12:14(+1) 沈阳北","合计约¥587（样本）","跨夜且换乘33分偏紧，行李多不建议"],["G1294 + G1283","11:21 西安北 → 唐山 ｜ 换乘22分 → 22:17 沈阳","合计约¥888.5（样本）","换乘22分太极限，建议拉长到45分钟以上"],["G1712 + G1271","08:25 西安北 → 天津西 ｜ 换乘48分 → 19:19 沈阳","合计约¥799（样本）","换乘48分可接受，傍晚抵达"]],"time":"约11—16小时（含换乘）","pros":"价格与时间可取舍，班次密集","cons":"换乘站大，走错站风险高；跨夜方案耗体力","copy":"西安到沈阳 高铁 中转 9月12日"}];
+
+/* ============ 数据：住宿（2城 × 3档） ============ */
+const HOTELS={"洛阳":{"nights":"D1-D3 · 共3晚","segs":[["老城区/洛邑古城（D1-D3）","09-06 入住","09-09 退房","3 晚"]],"tiers":{"高性价比":{"area":"洛邑古城—丽景门步行圈、洛阳龙门站转场圈","price":"¥150-320/晚（样本）","strategy":"适配D1-D3连住不挪窝；片区逻辑为夜游步行回店、D4去洛阳龙门打车约25分钟；选型标准为评分4.6+、近地铁/主路、可寄存行李","items":[["全季/汉庭（洛阳应天门/丽景门店样本）","老城步行圈","约¥220-320/晚","连锁品控稳定、打车方便","省心；节假日老城价格波动大"],["洛邑古城周边民宿（片区样本）","文峰塔/民主街附近","约¥160-280/晚","夜景近、汉服拍照方便","氛围好；周末酒吧/旅拍噪音需避"],["洛阳龙门站片区连锁（转场备选）","龙门站/宝龙广场","约¥180-300/晚","D4赶高铁最稳","离老城景区远，只适合赶车"]],"tip":"美团/携程按“09-06入住、09-09退房、3晚”筛选；洛阳周末与汉服季涨价明显，先锁可取消","copy":"洛阳 洛邑古城 酒店 高性价比","avoid":"古城内旅拍店密集，要求“不临街/非一楼”；特价无窗房慎选","img":"assets/hotel.jpeg"},"品质星级":{"area":"应天门—天堂明堂景观圈、洛龙新区","price":"¥450-900/晚（样本）","strategy":"适配重视睡眠与早餐的旅客；选型标准为高层景观、近地铁、含早；D2老君山回来后能快速休整","items":[["洛阳亚丁/华阳类高星酒店（片区样本）","洛龙/开元湖","约¥500-850/晚","服务稳定、早餐好","品质稳；离老城夜游需打车"],["应天门景观酒店（片区样本）","隋唐洛阳城周边","约¥550-900/晚","夜景观赏便利","景观溢价；确认是否真朝景区"],["洛阳龙门站高星（转场备选）","洛龙区","约¥450-800/晚","D4出发省心","离老城远"]],"tip":"连锁会员（华住/亚朵/洲际）提前注册领券；连住3晚可询延迟退房","copy":"洛阳 应天门 景观 酒店 4星","avoid":"“应天门景观”可能只是远眺一角，下单前要实拍朝向视频","img":"assets/hotel.jpeg"},"网红特色":{"area":"洛邑古城汉服主题民宿、隋唐洛阳城夜游圈","price":"¥260-650/晚（样本）","strategy":"适配D1夜游出片；选型标准为汉服妆造步行可达、天台/庭院可看应天门灯光、有行李搬运","items":[["洛邑古城汉服主题民宿（片区样本）","文峰塔步行3-8分钟","约¥260-520/晚","妆造—拍摄—回店动线短","出片；周末人声嘈杂"],["明堂天堂景观民宿（片区样本）","老城区中州路附近","约¥300-650/晚","夜游后步行回店","位置佳；老房隔音一般"],["丽景门四合院客栈（片区样本）","丽景门内","约¥280-600/晚","院落氛围浓","石板路拖箱费力"]],"tip":"问清是否含汉服妆造折扣；拍照客多，选可取消房型防止临时涨价","copy":"洛阳 洛邑古城 汉服 民宿","avoid":"民宿图精修普遍，索要房间实拍；确认是否独卫与电梯","img":"assets/hotel.jpeg"}}},"西安":{"nights":"D4-D6 · 共3晚","segs":[["钟楼/永宁门（D4-D6）","09-09 入住","09-12 退房","3 晚"]],"tiers":{"高性价比":{"area":"钟楼—南门之间、地铁2号线沿线","price":"¥180-380/晚（样本）","strategy":"适配D4-D6连住；片区逻辑为钟鼓楼/回民街/城墙步行圈，D5陕博大雁塔地铁直达，D7去机场/北站都方便","items":[["全季/桔子（钟楼南门店样本）","永宁门—钟楼之间","约¥260-380/晚","步行到城墙与钟楼","位置强；周末涨价快"],["回民街背街连锁（样本）","北院门/洒金桥外圈","约¥200-320/晚","吃饭方便、地铁近","便利；主街噪音大，选背街"],["西安北站连锁（转场备选）","北站/行政中心","约¥220-350/晚","D7若坐高铁最省心","离夜游核心区远"]],"tip":"复制词含“09-09入住 09-12退房 3晚”；优先选可免费取消、近地铁2号线","copy":"西安 钟楼 南门 酒店 高性价比","avoid":"回民街主街楼上民宿夜间吵闹；北院门拉客“老乡店”不进","img":"assets/hotel.jpeg"},"品质星级":{"area":"南门/SKP、曲江大雁塔、钟楼老牌高星","price":"¥500-1200/晚（样本）","strategy":"适配想在D6临潼高强度后睡好的人；选型标准为品牌服务、隔音、早餐与打车便利","items":[["南门/钟楼国际连锁（片区样本）","永宁门外","约¥600-1000/晚","城墙景观、车可达门口","稳定；景观房溢价"],["曲江高星（大雁塔/不夜城样本）","曲江新区","约¥650-1200/晚","D5夜游步行回店","夜游方便；D4老城动线略绕"],["钟楼老牌酒店（样本）","钟楼环岛","约¥500-900/晚","位置无敌","楼龄偏老，选翻新楼层"]],"tip":"IHG/万豪/雅高会员提前注册；D6长恨歌散场晚，选打车回城便利的酒店","copy":"西安 南门 钟楼 五星级酒店","avoid":"“城墙景观”需确认朝向；曲江周末房价高于钟楼","img":"assets/hotel.jpeg"},"网红特色":{"area":"大唐不夜城唐风民宿、城墙根院落、钟楼观景公寓","price":"¥300-800/晚（样本）","strategy":"适配出片与氛围优先；选型标准为唐风/庭院设计、步行可到大唐不夜城或城墙、能提供实拍视频","items":[["大唐不夜城唐风民宿（片区样本）","大雁塔南广场周边","约¥350-800/晚","夜游后步行回店","氛围强；节假日溢价"],["城墙根院落客栈（片区样本）","顺城巷","约¥300-650/晚","清晨城墙根很出片","老院落隔音/台阶需确认"],["钟楼观景公寓（片区样本）","钟楼高层","约¥320-700/晚","夜景窗景","公寓服务非标准化"]],"tip":"网红房先查差评关键词“隔音、电梯、实拍不符”；连住3晚可私聊折扣","copy":"西安 大唐不夜城 唐风 民宿","avoid":"“不夜城步行5分钟”可能是到街口而非核心区；高层公寓确认电梯与消防","img":"assets/hotel.jpeg"}}}};
+
+/* ============ 数据：核心景点清单（按确认表行动日期排序） ============ */
+const SPOTS=[
+  {"n":"洛邑古城","city":"洛阳","dur":"2小时","open":"全天开放，灯光/演出以当日公告为准","book":"否；热门妆造店建议提前预约","price":"免费（演出/妆造另计）","keys":"文峰塔、汉服夜景、隋唐里坊氛围","shot":"蓝调时刻拍文峰塔倒影，汉服选浅色系避免与红灯笼撞色","story":"洛邑古城依托老城东关历史街区复兴而来，“洛邑”是洛阳古称，周代王城与汉魏故城的记忆都压在这片土地上。夜晚灯起时，石板路与仿古建筑像把隋唐里坊重新点亮。","day":"D1 · 09-06","avoid":"妆造摄影先谈清底片/精修数量；主街小吃溢价，深巷更实惠","img":"images/洛邑古城.jpeg"},
+  {"n":"老君山","city":"洛阳","dur":"1天","open":"索道与登山道以景区公告为准","book":"是，门票+索道建议提前线上购","price":"门票参考¥100，索道往返组合另计","keys":"金顶道观群、十里画屏、云海","shot":"金顶亮宝台拍云海与道观群，穿防风外套；雾天改拍近景松枝","story":"老君山属伏牛山主峰，传为老子归隐修炼地，明神宗曾敕建道观。金顶道观群依山脊铺开，晴日如金线悬于云海，雨雾天则只剩松涛与钟声。","day":"D2 · 09-07","avoid":"山顶比市区低约8-12℃；索道大风停运常见，别把钱压在最后一班下山","img":"images/老君山.jpeg"},
+  {"n":"洛阳博物馆","city":"洛阳","dur":"2-3小时","open":"09:00-17:00，周一通常闭馆（需复核）","book":"是，免费需预约","price":"免费","keys":"河洛文明、唐三彩、石刻","shot":"建筑外立面几何线条适合广角；馆内禁用闪光灯","story":"洛阳是十三朝古都，博物馆把“河图洛书”的传说、二里头夏都的疑云、汉魏洛阳城与隋唐东都串成一条线。唐三彩不是明器专属，它也曾是盛唐洛阳向世界输出的审美。","day":"D3 · 09-08","avoid":"周一闭馆规则要复核；镇馆展柜人多，先冲二楼再回看一楼","img":"images/洛阳博物馆.jpeg"},
+  {"n":"龙门石窟","city":"洛阳","dur":"3-4小时","open":"约08:00-18:00（以当日公示为准）","book":"是，官方公众号/小程序","price":"门票参考¥90；电瓶车/游船可选","keys":"卢舍那大佛、伊阙两岸石窟群","shot":"下午西山侧光；卢舍那大佛低角度仰拍，东山礼佛台拍全景","story":"始凿于北魏孝文帝迁都洛阳之后，盛于唐。卢舍那大佛相传以武则天容貌气质为参照，微笑跨越千年；伊河两山对峙如门，故称“伊阙”。","day":"D3 · 09-08","avoid":"“免费讲解”常带去购物点；西山到东山步行多，别穿新鞋","img":"images/龙门石窟.jpeg"},
+  {"n":"应天门","city":"洛阳","dur":"1小时","open":"遗址展示与夜秀以官方公告为准","book":"登阙/演出建议线上预约","price":"外围免费；登阙/演出票参考¥30-80","keys":"隋唐洛阳城宫城正南门、灯光秀","shot":"广场中轴拍对称构图，夜景用长焦压缩人群","story":"应天门是隋唐洛阳城宫城紫微城的正南门，武则天曾在此举行登基与受朝仪典。城门为双向三出阙形制，今天我们看到的遗址展示层压在考古剖面之上。","day":"D3 · 09-08","avoid":"夜秀场次会随季节调整，别按网传旧时间表死等","img":"images/应天门.jpeg"},
+  {"n":"明堂天堂","city":"洛阳","dur":"1小时","open":"约09:00-21:00（以当日公示为准）","book":"建议线上购票","price":"联票参考¥90-120","keys":"武周礼制建筑、天堂俯瞰老城","shot":"天堂高层回廊拍应天门与老城灯线，手持夜景提高ISO","story":"明堂是武则天布政、祭天、受朝的中心礼制建筑，天堂则是其礼佛高塔。两者在武周时期象征“君权神授”的叙事，如今遗址保护棚内还能看到原址柱础与夯土。","day":"D3 · 09-08","avoid":"联票比单买划算；夜间登塔排队，闭馆前1小时停止入场要留意","img":"images/明堂.jpeg"},
+  {"n":"广仁寺","city":"西安","dur":"1小时","open":"约08:00-17:00（以公告为准）","book":"否","price":"免费","keys":"藏传佛教格鲁派寺院、康熙敕建","shot":"红墙金顶适合纯色衣，殿内不拍佛像","story":"广仁寺建于清康熙年间，是陕西唯一藏传佛教格鲁派寺院，曾为蒙藏高僧入陕驻锡之地。汉地城墙西北角里藏着藏式金顶，这种并置本身就是长安包容性的注脚。","day":"D4 · 09-09","avoid":"进寺顺时针，不踩门槛；旅拍别占礼佛通道","img":"images/广仁寺.jpeg"},
+  {"n":"西安城墙","city":"西安","dur":"2小时","open":"约08:00-22:00，门点不同（以公告为准）","book":"建议线上购票","price":"门票参考¥54；自行车租赁另计","keys":"永宁门登城、环城骑行、城市中轴","shot":"永宁门瓮城拍对称，傍晚城墙上拍钟楼方向车灯轨迹","story":"西安城墙主体为明洪武年间在唐长安皇城基础上扩建，周长约13.7公里，是中国现存最完整的古代城垣之一。城砖、马面、敌楼与护城河仍在定义这座城的尺度。","day":"D4 · 09-09","avoid":"租车看清计费与还车点；夏天正午别骑行，9月傍晚最舒服","img":"images/西安城墙.jpeg"},
+  {"n":"西安钟楼","city":"西安","dur":"外观0.5小时，登楼可选","open":"登楼约08:30-21:30（以公告为准）","book":"登楼建议线上购票","price":"登楼参考¥30，联票另计","keys":"明代钟楼、环岛夜景","shot":"环岛东南角安全岛拍车流环绕，登楼拍四条大街放射线","story":"钟楼始建于明洪武十七年，原在今广济街口，万历十年整体迁建现址。六百年来它一直是西安城的方向感中心，晨钟暮鼓换成了环岛车流。","day":"D4 · 09-09","avoid":"环岛车流大，拍照只在安全岛/围栏内；登楼性价比一般，外观已足够","img":"images/钟楼.jpeg"},
+  {"n":"西安鼓楼","city":"西安","dur":"外观0.5小时","open":"登楼约08:30-21:30（以公告为准）","book":"登楼可选","price":"登楼参考¥30","keys":"与钟楼相望、回民街入口","shot":"鼓楼北侧框住回民街人流，夜景暖光适合手持","story":"鼓楼比钟楼略早，楼上曾置大鼓报时。明清西安府城的晨昏节律由钟鼓二楼共同管理，如今它们更像一对对望的城市灯塔。","day":"D4 · 09-09","avoid":"鼓楼广场拉客小吃车别跟；买酸梅汤先看价再扫码","img":"images/西安鼓楼.jpeg"},
+  {"n":"回民街","city":"西安","dur":"1-2小时","open":"全天，店铺多在10:00-23:00","book":"否","price":"免费逛街，餐饮人均¥30-80","keys":"北院门、洒金桥、大皮院","shot":"主街拍人潮烟火，深巷拍蒸汽与炭火；人像用大光圈虚化招牌","story":"回民街不是一条街，而是北院门、大皮院、洒金桥等片区的统称。唐代以来西域商旅在长安聚居，明清形成回坊格局，泡馍、腊牛肉、甑糕都是时间熬出来的味道。","day":"D4 · 09-09","avoid":"主街“网红大串”溢价高；泡馍自己掰更地道，别点游客套餐","img":"images/回民街.jpeg"},
+  {"n":"陕西历史博物馆","city":"西安","dur":"2-3小时","open":"09:00-17:30，周一通常闭馆（需复核）","book":"必须提前预约，免费票紧张","price":"基本陈列免费；特展另计","keys":"何家村窖藏、唐墓壁画、周秦汉唐","shot":"大厅中轴与斗拱元素适合对称构图；馆内禁闪光灯","story":"“给我一天，还你万年”并不夸张。何家村窖藏的鎏金舞马衔杯银壶、唐墓壁画里的仕女与胡商，把长安从礼制、乐舞到国际贸易一层层摊开。","day":"D5 · 09-10","avoid":"预约放票时间以官方为准，黄牛代约风险高；讲解器/讲解员按需，不然信息过载","img":"images/陕西博物馆.jpeg"},
+  {"n":"大雁塔","city":"西安","dur":"1.5小时","open":"大慈恩寺约08:00-17:30，广场喷泉以公告为准","book":"进寺/登塔建议线上购票","price":"大慈恩寺参考¥40，登塔另计","keys":"玄奘译经、唐代佛塔、南广场","shot":"南广场玄奘像与大雁塔同框，傍晚拍塔身暖色","story":"唐永徽三年玄奘为保存经卷主持建塔，雁塔晨钟为关中八景之一。今天的广场很热闹，但塔里仍藏着丝路取经的重量。","day":"D5 · 09-10","avoid":"音乐喷泉场次随季节调整；登塔楼梯陡，体力一般可不登","img":"images/大雁塔.jpeg"},
+  {"n":"大唐不夜城","city":"西安","dur":"夜景1-2小时","open":"全天，演出多在晚间（以公告为准）","book":"否","price":"免费","keys":"盛唐主题步行街、行为艺术演出","shot":"贞观之治雕塑群低角度，避开正午；演出提前20分钟占位","story":"不夜城不是古迹，而是用灯光、雕塑与演出把“盛唐想象”做成一条可行走的街。它适合当作大雁塔夜游的情绪延伸，而不是历史课堂本身。","day":"D5 · 09-10","avoid":"周末人流极大，看紧手机；演出点别被收费拍照位诱导","img":"images/大唐不夜城.jpeg"},
+  {"n":"秦始皇陵博物院（兵马俑）","city":"西安","dur":"3小时","open":"约08:30-17:00（以公告为准）","book":"是，官方公众号/网站","price":"门票参考¥120","keys":"一号坑军阵、二号坑兵种、三号坑指挥部","shot":"一号坑入口高处拍军阵纵深；别开闪光灯，别翻越护栏","story":"1974年打井惊现的陶俑军阵，是秦始皇陵陪葬体系的一角。每个俑的冠式、甲片、鞋履都对应军阶，站在坑边看到的不是“泥人”，而是一套被黄土保存的帝国制度。","day":"D6 · 09-11","avoid":"早到避团队；馆内“免费拍照”多为套路；讲解认准官方或口碑讲解员","img":"images/秦始皇帝陵博物院.jpeg"},
+  {"n":"丽山园","city":"西安","dur":"1.5小时","open":"随秦始皇陵博物院开放（以公告为准）","book":"与博物院联票/景区政策以官方为准","price":"含/联票政策以官方为准","keys":"秦陵封土、遗址公园、铜车马相关展陈","shot":"封土远景用长焦压缩，草木季相作前景","story":"丽山园围绕秦始皇陵封土与陵园遗址展开，铜车马曾在此震惊世界——两乘青铜车马按真车二分之一制作，缰绳、伞盖、弩机都能活动，是先秦冶金与机械的高峰。","day":"D6 · 09-11","avoid":"园区大，观光车按需；把体力留给兵马俑一号坑再看封土","img":"images/丽山园.jpeg"},
+  {"n":"华清宫","city":"西安","dur":"2小时","open":"约07:30-18:00（以公告为准）","book":"建议线上购票","price":"门票参考¥120","keys":"唐御汤遗址、西安事变旧址","shot":"九龙湖拍飞霜殿倒影，傍晚灯起更有层次","story":"华清宫因温泉而兴，唐玄宗与杨贵妃的故事让这里成为盛唐爱情叙事的舞台；1936年西安事变也在五间厅留下弹痕。浪漫与转折，共用一个园林。","day":"D6 · 09-11","avoid":"与《长恨歌》票分开买；温泉体验另收费，别误入口泉池","img":"images/华清宫.jpeg"},
+  {"n":"长恨歌","city":"西安","dur":"演出约70分钟","open":"夜间场次，以官方公告/停演通知为准","book":"强烈建议提前购票","price":"参考¥238-988分区","keys":"实景山水演出、骊山灯光、唐明皇杨贵妃","shot":"演出禁止专业摄影多为常态，拍海报与场外灯即可","story":"《长恨歌》把白居易长诗放回华清宫与骊山之间，水幕、山体灯与威亚共同完成叙事。它的价值不在史实，而在用山水当幕布复活了长安的想象力。","day":"D6 · 09-11","avoid":"雨雾/大风可能停演或改期；买中区性价比最高，回城车先约好","img":"images/长恨歌.jpeg"}
+];
+</script>
+
+<script>
+/* ============ 数据：高赞餐厅标记（近似定位，以导航为准） ============ */
+const FOOD=[
+  {"d":0,"n":"真不同饭店（老城水席样本）","lng":112.476,"lat":34.627,"rec":"牡丹燕菜、连汤肉片","price":"人均约¥70-110","avoid":"水席分量大，两人点小套；饭点排队"},
+  {"d":0,"n":"洛邑古城酸奶/小吃摊","lng":112.479,"lat":34.6295,"rec":"老酸奶、浆面条","price":"人均约¥20-40","avoid":"主街溢价，先看价再点"},
+  {"d":1,"n":"老君山景区简餐/栾川豆腐","lng":111.652,"lat":33.783,"rec":"栾川豆腐、山野菜","price":"人均约¥35-60","avoid":"山上餐饮贵，自备能量棒；豆腐宴按人头问价"},
+  {"d":2,"n":"南关小碗牛肉汤（龙门大道样本）","lng":112.468,"lat":34.6,"rec":"牛肉汤+饼丝","price":"人均约¥18-30","avoid":"早午最鲜，下午汤底一般"},
+  {"d":2,"n":"洛阳博物馆附近简餐","lng":112.4435,"lat":34.617,"rec":"浆面条、糊涂面","price":"人均约¥25-45","avoid":"馆内外卖慢，错峰吃"},
+  {"d":3,"n":"老米家大雨泡馍（回民街样本）","lng":108.939,"lat":34.267,"rec":"牛肉泡馍、糖蒜","price":"人均约¥35-55","avoid":"泡馍自己掰；主街分店多，认准评价高的"},
+  {"d":3,"n":"定家小酥肉（大皮院样本）","lng":108.937,"lat":34.268,"rec":"小酥肉、酸梅汤","price":"人均约¥30-50","avoid":"排队长；小酥肉偏油，配酸梅汤"},
+  {"d":4,"n":"子午路张记肉夹馍（陕博/大雁塔样本）","lng":108.961,"lat":34.226,"rec":"腊汁肉夹馍、凉皮","price":"人均约¥20-35","avoid":"饭点排队，优质馍偏肥"},
+  {"d":4,"n":"大唐不夜城唐食坊（样本）","lng":108.971,"lat":34.2185,"rec":"葫芦鸡、关中四小碗","price":"人均约¥80-120","avoid":"景区餐厅价高，口味求稳点招牌"},
+  {"d":5,"n":"临潼大盘鸡/石榴汁（样本）","lng":109.216,"lat":34.36,"rec":"大盘鸡、临潼石榴汁","price":"人均约¥45-70","avoid":"石榴汁现榨再买；大盘鸡分量足别多点"},
+  {"d":5,"n":"长恨歌散场简餐","lng":109.2145,"lat":34.3575,"rec":"肉夹馍/热汤面","price":"人均约¥25-45","avoid":"散场打车排队，先吃东西错峰"}
+];
+
+/* ============ 数据：当日推荐酒店坐标（D1—D(N-1)；同一连住段坐标复用） ============ */
+const HOTEL_MARKS=[{"d":0,"n":"全季/汉庭（洛阳应天门/丽景门店样本）","lng":112.474,"lat":34.626,"area":"洛邑古城—丽景门步行圈","price":"约¥220-320/晚（样本）","seg":"09-06 入住 · 09-09 退房 · 3 晚","avoid":"特价无窗房慎选；周末老城噪音，要求不临街","copy":"洛阳 洛邑古城 酒店 高性价比 09-06入住 3晚"},{"d":1,"n":"全季/汉庭（洛阳应天门/丽景门店样本）","lng":112.474,"lat":34.626,"area":"洛邑古城—丽景门步行圈","price":"约¥220-320/晚（样本）","seg":"09-06 入住 · 09-09 退房 · 3 晚","avoid":"特价无窗房慎选；周末老城噪音，要求不临街","copy":"洛阳 洛邑古城 酒店 高性价比 09-06入住 3晚"},{"d":2,"n":"全季/汉庭（洛阳应天门/丽景门店样本）","lng":112.474,"lat":34.626,"area":"洛邑古城—丽景门步行圈","price":"约¥220-320/晚（样本）","seg":"09-06 入住 · 09-09 退房 · 3 晚","avoid":"特价无窗房慎选；周末老城噪音，要求不临街","copy":"洛阳 洛邑古城 酒店 高性价比 09-06入住 3晚"},{"d":3,"n":"全季/桔子（西安钟楼南门店样本）","lng":108.944,"lat":34.257,"area":"钟楼—永宁门之间","price":"约¥260-380/晚（样本）","seg":"09-09 入住 · 09-12 退房 · 3 晚","avoid":"回民街主街楼上夜间吵；选背街高楼层","copy":"西安 钟楼 南门 酒店 高性价比 09-09入住 3晚"},{"d":4,"n":"全季/桔子（西安钟楼南门店样本）","lng":108.944,"lat":34.257,"area":"钟楼—永宁门之间","price":"约¥260-380/晚（样本）","seg":"09-09 入住 · 09-12 退房 · 3 晚","avoid":"回民街主街楼上夜间吵；选背街高楼层","copy":"西安 钟楼 南门 酒店 高性价比 09-09入住 3晚"},{"d":5,"n":"全季/桔子（西安钟楼南门店样本）","lng":108.944,"lat":34.257,"area":"钟楼—永宁门之间","price":"约¥260-380/晚（样本）","seg":"09-09 入住 · 09-12 退房 · 3 晚","avoid":"回民街主街楼上夜间吵；选背街高楼层","copy":"西安 钟楼 南门 酒店 高性价比 09-09入住 3晚"}];
+</script>
+
+<script>
+/* ============ 数据：行程模拟（每日起床/洗漱/化妆；高性价比口径） ============ */
+const SIM=[
+  {"cost":"当日餐饮+市内交通约¥180（不含高铁）","steps":[
+    ["06:50","起","起床","前一晚已收好身份证与充电宝"],
+    ["06:58","洗","洗漱",""],
+    ["07:08","妆","化妆 · 轻薄底妆+防晒","高铁日一切从简"],
+    ["07:25","早","早餐 · 豆浆饭团","路上吃（¥12）；妈妈随早餐按时吃药/测血糖（遵医嘱）"],
+    ["07:45","行","出发去北京西站","地铁/网约车，预留45-60分钟（¥25）"],
+    ["08:26","行","高铁 G655 发车","北京西→洛阳龙门，样本二等¥367起"],
+    ["12:31","行","抵达洛阳龙门站","打车进老城约25分钟（¥30）"],
+    ["13:10","午","午餐 · 老城浆面条","（¥28）"],
+    ["14:00","宿","入住酒店放行李","洛邑古城/丽景门步行圈，稍作休整"],
+    ["16:30","咖","老城咖啡馆歇脚","等蓝调时刻（¥32）"],
+    ["18:00","晚","晚餐 · 真不同水席","牡丹燕菜点小份（¥95）；妈妈晚间用药/复查血糖按医嘱，主食定量"],
+    ["19:30","游","洛邑古城夜景","文峰塔与汉服灯影"],
+    ["22:00","宿","回酒店休整",""],
+    ["23:00","夜","就寝",""]
+  ]},
+  {"cost":"当日约¥430（含老君山门票索道拼车）","steps":[
+    ["06:30","起","起床","先喝温水，山区日"],
+    ["06:38","洗","洗漱",""],
+    ["06:48","妆","快速化妆 · 从简","山顶风大别浓妆"],
+    ["07:05","早","早餐 · 酒店/包子豆浆","（¥15）；妈妈随早餐按时吃药/测血糖（遵医嘱）"],
+    ["07:30","行","拼车/专线去老君山","（¥80，约2小时）"],
+    ["09:30","行","乘索道上山","门票+索道组合以公告为准（¥260参考）"],
+    ["10:30","游","十里画屏 → 金顶道观群","慢行，雾天拍近景"],
+    ["12:30","午","午餐 · 山顶简餐/自备","热饮+能量棒（¥40）"],
+    ["14:30","游","金顶云海机位","防风外套穿上"],
+    ["15:30","行","索道下山返程","别卡末班"],
+    ["18:30","晚","晚餐 · 老城清淡汤面","（¥35）；妈妈晚间用药/复查血糖按医嘱，主食定量"],
+    ["20:00","宿","回酒店拉伸泡脚","高强度日恢复"],
+    ["22:00","夜","就寝",""]
+  ]},
+  {"cost":"当日约¥260（含龙门石窟门票）","steps":[
+    ["07:20","起","起床",""],
+    ["07:28","洗","洗漱",""],
+    ["07:38","妆","化妆 · 防晒打底",""],
+    ["07:55","早","早餐 · 牛肉汤+饼丝","（¥22）；妈妈随早餐按时吃药/测血糖（遵医嘱）"],
+    ["08:30","行","打车去洛阳博物馆","（¥35）"],
+    ["09:00","游","洛阳博物馆","免费需预约，重点看唐三彩"],
+    ["12:00","午","午餐 · 博物馆附近简餐","（¥35）"],
+    ["13:30","行","前往龙门石窟","打车（¥30）"],
+    ["14:00","游","龙门石窟西山","卢舍那大佛，门票¥90参考"],
+    ["17:00","游","东山石窟/香山寺远眺","按体力取舍"],
+    ["18:30","行","返回老城","打车（¥30）"],
+    ["19:00","晚","晚餐 · 老城小碗菜","（¥45）；妈妈晚间用药/复查血糖按医嘱，主食定量"],
+    ["20:30","游","应天门夜景","夜秀以公告为准"],
+    ["21:20","游","明堂天堂夜景","联票参考，闭馆前入场"],
+    ["22:30","夜","就寝",""]
+  ]},
+  {"cost":"当日约¥300（含洛阳-西安高铁）","steps":[
+    ["07:40","起","起床",""],
+    ["07:48","洗","洗漱",""],
+    ["07:58","妆","化妆 · 轻薄底妆",""],
+    ["08:15","早","早餐 · 豆腐汤","（¥15）；妈妈随早餐按时吃药/测血糖（遵医嘱）"],
+    ["09:30","宿","退房寄存/取行李",""],
+    ["10:10","行","前往洛阳龙门站","打车预留堵车（¥35）"],
+    ["11:34","行","高铁 G1833 发车","洛阳龙门→西安北，样本二等¥187"],
+    ["13:09","行","抵达西安北站","地铁2号线进钟楼（¥5）"],
+    ["14:00","宿","入住钟楼/南门酒店","连住3晚，稍作休整"],
+    ["15:00","午","午餐 · 钟楼小区面馆","油泼面（¥25）"],
+    ["16:00","游","广仁寺","红墙金顶，殿内不拍佛"],
+    ["17:30","游","西安城墙·永宁门","门票¥54参考，傍晚骑行/步行"],
+    ["19:30","游","钟楼 → 鼓楼","外观夜景"],
+    ["20:00","晚","晚餐 · 回民街深巷","老米家泡馍/定家小酥肉（¥60）；妈妈晚间用药/复查血糖按医嘱，主食定量"],
+    ["22:00","夜","就寝",""]
+  ]},
+  {"cost":"当日约¥260（陕博免费，大雁塔按票档）","steps":[
+    ["07:50","起","起床",""],
+    ["07:58","洗","洗漱",""],
+    ["08:08","妆","化妆 · 唐风夜游可加重唇色",""],
+    ["08:25","早","早餐 · 肉丸胡辣汤","（¥18）；妈妈随早餐按时吃药/测血糖（遵医嘱）"],
+    ["09:10","行","地铁去陕西历史博物馆",""],
+    ["09:30","游","陕西历史博物馆","提前预约免费；重点何家村窖藏"],
+    ["12:30","午","午餐 · 子午路张记","肉夹馍+凉皮（¥30）"],
+    ["14:00","游","大雁塔/大慈恩寺","进寺¥40参考，登塔可选"],
+    ["16:30","咖","大悦城咖啡歇脚","（¥35）"],
+    ["18:00","晚","大悦城晚饭","（¥80）；妈妈晚间用药/复查血糖按医嘱，主食定量"],
+    ["19:30","游","大唐不夜城","看演出，回程避开22:00峰值"],
+    ["22:30","夜","就寝",""]
+  ]},
+  {"cost":"当日约¥520（含兵马俑/华清宫/长恨歌样本）","steps":[
+    ["06:50","起","起床","高强度日"],
+    ["06:58","洗","洗漱",""],
+    ["07:08","妆","快速化妆 · 防晒",""],
+    ["07:25","早","早餐 · 酒店/肉夹馍","（¥20）；妈妈随早餐按时吃药/测血糖（遵医嘱）"],
+    ["08:00","行","地铁9号线/打车去临潼","（¥25-60）"],
+    ["09:00","游","秦始皇陵博物院（兵马俑）","门票¥120参考，一号坑先看"],
+    ["11:30","游","丽山园","铜车马与封土遗址"],
+    ["13:00","午","午餐 · 临潼大盘鸡","（¥60）"],
+    ["14:30","游","华清宫","门票¥120参考"],
+    ["18:00","晚","晚餐 · 景区外热汤面","（¥35）；妈妈晚间用药/复查血糖按医嘱，主食定量"],
+    ["19:30","游","《长恨歌》演出","参考¥238起，户外观演备外套"],
+    ["21:30","行","返回西安城区","提前约车/地铁末班复核"],
+    ["22:30","宿","回酒店休整",""],
+    ["23:10","夜","就寝",""]
+  ]},
+  {"cost":"当日约¥120（不含返程大交通）","steps":[
+    ["07:30","起","起床",""],
+    ["07:38","洗","洗漱",""],
+    ["07:48","妆","快速化妆 · 从简","返程日"],
+    ["08:05","早","早餐 · 酒店/胡辣汤","（¥18）；妈妈随早餐按时吃药/测血糖（遵医嘱）"],
+    ["09:00","购","买伴手礼","琼锅糖/石榴/陕拾叁（¥120）"],
+    ["10:30","宿","退房寄存行李",""],
+    ["11:00","行","前往西安咸阳机场","地铁14号线/机场城际，预留2小时（¥25）"],
+    ["13:00","行","值机安检",""],
+    ["14:10","行","航班起飞返沈阳","若选高铁则改西安北 G1282 11:32 发车"],
+    ["17:00","行","抵达沈阳桃仙机场","机场大巴/地铁进市区"],
+    ["18:00","晚","到家晚餐","七日行程圆满结束；妈妈晚间用药/复查血糖按医嘱，主食定量"]
+  ]}
+];
+</script>
+
+<script>
+/* ============ 通用工具 ============ */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let toastTimer=null;
+function showToast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400);}
+function copyText(txt){
+  const done=()=>showToast('已复制搜索词：'+txt);
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done));}
+  else fallbackCopy(txt,done);
+}
+function fallbackCopy(txt,done){const ta=document.createElement('textarea');ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(e){showToast('复制失败，请手动复制：'+txt);}document.body.removeChild(ta);}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(b){copyText(b.getAttribute('data-copy'));}});
+
+/* ============ 日历条（地图上方辅助带，不引发页面跳动） ============ */
+let curDay=0;
+function renderDayStrip(){
+  $('#dayStrip').innerHTML=DAYS.map((d,i)=>
+    `<button class="chip${i===curDay?' on':''}" data-i="${i}">
+      <span class="cd">${d.d}<small>${d.date}</small></span>
+      <span class="cc">周${d.week} · ${d.city}</span>
+    </button>`).join('');
+  $$('#dayStrip .chip').forEach(c=>c.addEventListener('click',()=>selectDay(+c.dataset.i)));
+}
+function selectDay(i){
+  curDay=i;
+  $$('#dayStrip .chip').forEach((c,ci)=>c.classList.toggle('on',ci===i));
+  const strip=$('#dayStrip'),chip=strip.children[i];
+  strip.scrollLeft=Math.max(0,chip.offsetLeft-strip.clientWidth/2+chip.clientWidth/2); // 仅条内定位，页面不动
+  renderDayFloat(DAYS[i]);
+  if(window.setMapMode) setMapMode('day',i); // 点选日期自动切到当日视图
+}
+
+/* ============ 当日浮动面板 ============ */
+function wxIcon(w){if(!w||w==='—')return'';if(/雪/.test(w))return'❄️';if(/雨/.test(w))return'🌦️';if(/晴/.test(w))return'☀️';if(/阴/.test(w))return'☁️';return'⛅';}
+function renderDayFloat(d){
+  const rainy=/雨|雪/.test(d.weather||'');
+  const chips=[d.city,d.alt!=='—'?'海拔 '+d.alt:'',d.energy?'体力 '+d.energy:'','交通 '+d.traffic,d.stay!=='—'?'宿 '+d.stay:''].filter(Boolean);
+  $('#dayFloat').innerHTML=`
+    <p class="dm">${d.d} · ${d.date} 周${d.week} · ${d.lunar}</p>
+    <h3>${d.theme}</h3>
+    <div class="df-chips">${chips.map(c=>`<span>${c}</span>`).join('')}</div>
+    <div class="df-sec"><b>上午</b>${d.am}</div>
+    <div class="df-sec"><b>下午</b>${d.pm}</div>
+    <div class="df-sec"><b>晚间</b>${d.night}</div>
+    ${d.weather!=='—'?`<div class="df-wx"><div class="t">${wxIcon(d.weather)} ${d.weather} · ${d.temp}</div><div class="src">${d.wtype} · <a id="wxRefresh">手动刷新实时预报</a>（≤7天可调取）</div></div>`:''}
+    <div class="rain-alt${rainy?' show':''}">有降水可能 · 室内备选：${rainAlt(d.city)}</div>`;
+  const wr=$('#wxRefresh'); if(wr) wr.addEventListener('click',()=>refreshWeather(d));
+}
+function rainAlt(city){
+  if(city.includes('洛阳'))return '洛阳博物馆、明堂天堂室内展厅、老城咖啡馆';
+  if(city.includes('栾川')||city.includes('老君山'))return '索道暂停时改山下民宿休整/栾川豆腐宴，不强行登山';
+  if(city.includes('临潼'))return '兵马俑室内坑馆、华清宫御汤遗址展厅';
+  if(city.includes('西安'))return '陕西历史博物馆、大慈恩寺、曲江书城/咖啡馆';
+  return '室内休整';
+}
+
+/* ============ 天气刷新（静态默认 + 手动按时效刷新） ============ */
+function wxCityOf(city){
+  if(city.includes('栾川')||city.includes('老君山'))return '栾川';
+  if(city.includes('洛阳'))return '洛阳';
+  if(city.includes('临潼'))return '西安';
+  if(city.includes('西安'))return '西安';
+  if(city.includes('北京'))return '北京';
+  if(city.includes('沈阳'))return '沈阳';
+  return '洛阳';
+}
+function refreshWeather(d){
+  const diff=Math.round((new Date(d.full+'T12:00:00+08:00')-Date.now())/86400000);
+  if(diff<0){showToast('该日期已过去，显示历史参考值');return;}
+  if(diff>7){showToast('超过 7 天，显示静态气候参考');return;}
+  if(!window.AMap||!AMap.Weather){showToast('天气组件未加载，请检查网络');return;}
+  const city=wxCityOf(d.city);
+  AMap.Weather.getForecast(city,(err,data)=>{
+    if(err||!data||!data.forecasts||!data.forecasts.length){showToast('天气查询失败，保留参考值');return;}
+    const f=data.forecasts[0];
+    d.weather=f.dayWeather+'转'+f.nightWeather;
+    d.wtype='实时预报';
+    d.temp=f.nightTemp+'-'+f.dayTemp+'℃';
+    renderDayFloat(d);
+    showToast(city+' '+d.date+' 预报已更新');
+    if(/雨|雪/.test(f.dayWeather))showToast('有降水预报，可启用室内备选方案');
+  });
+}
+
+/* ============ 交通方案：方向页签 × 方案页签（只显示当前选择） ============ */
+const ts={dir:'go',plan:0};
+function renderTransport(){
+  $('#dirTabs').innerHTML=[['go','去程 · 北京 → 洛阳','09-06'],['back','返程 · 西安 → 沈阳','09-12']]
+    .map(([k,t,dt])=>`<button class="tab${ts.dir===k?' on':''}" data-k="${k}"><b>${t}</b><i>${dt}</i></button>`).join('');
+  const plans=ts.dir==='go'?GO_PLANS:BACK_PLANS;
+  $('#planTabs').innerHTML=plans.map((p,i)=>`<button class="tab${ts.plan===i?' on':''}" data-i="${i}"><b>${p.tag}</b><i>${p.title}</i></button>`).join('');
+  const p=plans[ts.plan];
+  $('#planStage').innerHTML=`
+    <article class="plan-card">
+      <div>
+        <p class="no">${p.tag}</p>
+        <h4>${p.title}</h4>
+        <p class="dur">总耗时 ${p.time}</p>
+        <p><b>路线说明　</b>${p.route}</p>
+        <p><b>选择策略　</b>${p.strategy}</p>
+        <p><b>优点　</b>${p.pros}</p>
+        <p><b>缺点　</b>${p.cons}</p>
+        <p class="price-note">参考价 · 搜索于 2026-08-29，实时票价以 12306 / 航司为准</p>
+        <p><button class="btn sm" data-copy="${esc(p.copy)}">复制查询关键词</button></p>
+      </div>
+      <div><table class="qt"><thead><tr><th>班次 / 组合</th><th>时刻</th><th>参考价</th><th>提示</th></tr></thead>
+        <tbody>${p.rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody></table></div>
+    </article>`;
+  $$('#dirTabs .tab').forEach(b=>b.addEventListener('click',()=>{ts.dir=b.dataset.k;ts.plan=0;renderTransport();}));
+  $$('#planTabs .tab').forEach(b=>b.addEventListener('click',()=>{ts.plan=+b.dataset.i;renderTransport();}));
+}
+
+/* ============ 住宿：城市页签 × 档位页签（只显示当前组合） ============ */
+const hs={city:'洛阳',tier:'高性价比'};
+const TIERS=['高性价比','品质星级','网红特色'];
+function renderStay(){
+  $('#cityTabs').innerHTML=Object.keys(HOTELS).map(c=>
+    `<button class="tab${hs.city===c?' on':''}" data-k="${c}"><b>${c}</b><i>${HOTELS[c].nights}</i></button>`).join('');
+  $('#tierTabs').innerHTML=TIERS.map(t=>
+    `<button class="tab${hs.tier===t?' on':''}" data-k="${t}"><b>${t}</b><i>${HOTELS[hs.city].tiers[t].price}</i></button>`).join('');
+  const t=HOTELS[hs.city].tiers[hs.tier];
+  /* 与行程日期绑定的入住日历；同一城市连住段复用坐标 */
+  const segs=HOTELS[hs.city].segs||[];
+  let seg=segs[0];
+  const mtCopy=seg?`${t.copy} ${seg[1].replace(' 入住','')}入住 ${seg[3]}`:t.copy;
+  const xcCopy=seg?`${t.copy} ${seg[1]} ${seg[2]} 按价格排序`:t.copy;
+  $('#stayStage').innerHTML=`
+    <article class="stay-card">
+      <div class="ph">${t.img?`<img src="${t.img}" alt="${hs.city}${hs.tier}住宿参考" loading="lazy" onload="this.classList.add('ld')" onerror="this.outerHTML=tileHTML('${hs.city}住宿','${hs.tier}')">`:tileHTML(hs.city+'住宿',hs.tier)}</div>
+      <div class="bd">
+        <p class="lv">${hs.city} · ${hs.tier} · ${HOTELS[hs.city].nights}</p>
+        <h4>${t.area}</h4>
+        <p class="pr">${t.price}</p>
+        <p><b>选择策略　</b>${t.strategy}</p>
+        <div class="segs">${segs.map(s=>`<span class="seg"><b>${s[0]}</b>　${s[1]} → ${s[2]} · ${s[3]}</span>`).join('')}</div>
+        <ul>${t.items.map(it=>`<li><b>${it[0]}</b>　${it[1]} · ${it[2]}<br>优势：${it[3]} ｜ 口碑：${it[4]}</li>`).join('')}</ul>
+        <p>${t.tip}</p>
+        <p class="avoid"><b>住宿避雷　</b>${t.avoid}</p>
+        <p class="price-note">参考价 · 搜索于 2026-08-29。查<b>当日最低价</b>：复制下方查询词到美团 / 携程，按行程入住日期筛选并按价格从低到高排序</p>
+        <p style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-copy="${esc(mtCopy)}">复制美团查询词（含日期）</button><button class="btn sm" data-copy="${esc(xcCopy)}">复制携程查询词（含日期）</button></p>
+      </div>
+    </article>`;
+  $$('#cityTabs .tab').forEach(b=>b.addEventListener('click',()=>{hs.city=b.dataset.k;renderStay();}));
+  $$('#tierTabs .tab').forEach(b=>b.addEventListener('click',()=>{hs.tier=b.dataset.k;renderStay();}));
+}
+
+/* ============ 景点：城市筛选（只显示当前城市） ============ */
+const ss={city:'洛阳'};
+const SPOT_CITIES=['洛阳','西安'];
+function renderSpots(){
+  $('#spotTabs').innerHTML=SPOT_CITIES.map(c=>{
+    const n=SPOTS.filter(s=>s.city.startsWith(c)).length;
+    return `<button class="tab${ss.city===c?' on':''}" data-k="${c}"><b>${c}</b><i>${n} 个</i></button>`;
+  }).join('');
+  const dayKey=s=>{const m=/D(\d+)/.exec(s.day||'');return m?+m[1]:99;};
+  const list=SPOTS.filter(s=>s.city.startsWith(ss.city)).sort((a,b)=>dayKey(a)-dayKey(b));
+  $('#spotStage').innerHTML=list.map(s=>`
+    <article class="spot">
+      <div class="ph">${s.img
+        ?`<img src="${s.img}" alt="${esc(s.n)}" loading="lazy" onload="this.classList.add('ld')" onerror="this.outerHTML=tileHTML('${esc(s.n)}','${s.city}')">`
+        :tileHTML(s.n,s.city)}</div>
+      <div class="bd">
+        <p class="city">${s.city}<span class="spot-day">${s.day}</span></p>
+        <h4>${s.n}</h4>
+        <div class="spot-meta"><span><b>时长</b> ${s.dur}</span><span><b>开放</b> ${s.open}</span><span><b>预约</b> ${s.book}</span><span><b>门票</b> ${s.price}</span></div>
+        <p><b>历史人文　</b>${s.story}</p>
+        <p><b>深度体验　</b>${s.keys}</p>
+        <p><b>出片提示　</b>${s.shot}</p>
+        <p class="avoid"><b>避雷　</b>${s.avoid}</p>
+      </div>
+    </article>`).join('');
+  $$('#spotTabs .tab').forEach(b=>b.addEventListener('click',()=>{ss.city=b.dataset.k;renderSpots();}));
+}
+function tileHTML(name,city){
+  return `<div class="tile"><b>${name.slice(0,4)}</b><span>${city}</span></div>`;
+}
+</script>
+
+<script>
+/* ============ 高德 3D 地形地图（页面核心） ============ */
+const DAY_COLORS=['#476e80','#a96f45','#7a8b6f','#8c6d8f','#b0855b','#5d7f8f','#96784f','#6f7f5a','#8f6a5a','#4f7a72','#9a7a9a','#5f8a9a','#a08050','#707a8f','#96553f'];
+const TYPE_COLOR={spot:'#476e80',hotel:'#a96f45',transit:'#8c847a',food:'#b5542d'};
+const TYPE_NAME={spot:'景点',hotel:'住宿',transit:'枢纽',food:'餐厅'};
+/* 餐厅标记并入当日点位（近似定位） */
+FOOD.forEach(f=>{DAYS[f.d].points.push({n:f.n,lng:f.lng,lat:f.lat,type:'food',rec:f.rec,price:f.price,avoid:f.avoid});});
+/* 当日推荐酒店标记并入对应日期（同一连住段坐标复用，近似定位） */
+HOTEL_MARKS.forEach(h=>{DAYS[h.d].points.push({n:h.n,lng:h.lng,lat:h.lat,type:'hotel',rec:'当日推荐',area:h.area,price:h.price,seg:h.seg,stay:h.seg,desc:h.area,avoid:h.avoid,copy:h.copy});});
+const isMobile=/Android|iPhone|iPad|Mobi/i.test(navigator.userAgent);
+let map=null, dayGroups=[];
+
+function haversine(a,b){const R=6371,rad=Math.PI/180,dLat=(b[1]-a[1])*rad,dLng=(b[0]-a[0])*rad;
+  const s=Math.sin(dLat/2)**2+Math.cos(a[1]*rad)*Math.cos(b[1]*rad)*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(s));}
+
+/* 弹窗：导航走 uri.amap.com —— 手机唤起高德 App，电脑打开高德网页版 */
+function iwHTML(p,d){
+  const nav='https://uri.amap.com/marker?position='+p.lng+','+p.lat+'&name='+encodeURIComponent(p.n)+'&src=tourplan&callnative=1';
+  if(p.type==='food') return `<div class="iw">
+    <span class="iw-close" onclick="event.stopPropagation();window.closeIw&&window.closeIw()">×</span>
+    <span class="iw-day">${d.d} · ${d.date} · 推荐用餐</span>
+    <h5>${p.n}</h5>
+    <span class="iw-tag" style="background:${TYPE_COLOR.food}">餐厅</span>
+    <p><b>推荐菜</b>　${p.rec}</p>
+    <p>${p.price} ｜ 定位为近似位置，以导航为准</p>
+    <p class="iw-avoid">避雷：${p.avoid}</p>
+    <a class="iw-nav" href="${nav}" target="_blank" rel="noopener">${isMobile?'唤起高德 App 导航 →':'在高德地图中打开 →'}</a>
+  </div>`;
+  if(p.type==='hotel'&&p.rec==='当日推荐') return `<div class="iw">
+    <span class="iw-close" onclick="event.stopPropagation();window.closeIw&&window.closeIw()">×</span>
+    <span class="iw-day">${d.d} · ${d.date} · 当日推荐住宿</span>
+    <h5>${p.n}</h5>
+    <span class="iw-tag" style="background:${TYPE_COLOR.hotel}">住宿</span>
+    <p><b>片区</b>　${p.area}</p>
+    <p><b>参考</b>　${p.price} ｜ ${p.seg}</p>
+    <p class="iw-avoid">避雷：${p.avoid}</p>
+    <p><button class="btn sm" data-copy="${esc(p.copy)}">复制预订搜索词</button></p>
+    <a class="iw-nav" href="${nav}" target="_blank" rel="noopener">${isMobile?'唤起高德 App 导航 →':'在高德地图中打开 →'}</a>
+  </div>`;
+  return `<div class="iw">
+    <span class="iw-close" onclick="event.stopPropagation();window.closeIw&&window.closeIw()">×</span>
+    ${p.img?`<img class="iw-img" src="${p.img}" alt="">`:''}
+    <span class="iw-day">${d.d} · ${d.date} · ${d.theme}</span>
+    <h5>${p.n}</h5>
+    <span class="iw-tag" style="background:${TYPE_COLOR[p.type]}">${TYPE_NAME[p.type]}</span>
+    <p>海拔约 ${p.alt}m ｜ ${p.stay}</p>
+    <p>${p.desc}</p>
+    <a class="iw-nav" href="${nav}" target="_blank" rel="noopener">${isMobile?'唤起高德 App 导航 →':'在高德地图中打开 →'}</a>
+  </div>`;
+}
+
+function initMap(){
+  if(!window.AMap){$('#mapFallback').style.display='flex';return;}
+  try{
+    map=new AMap.Map('amap',{viewMode:'3D',terrain:true,zoom:7,center:[112.2,34.7],pitch:42,mapStyle:'amap://styles/whitesmoke'});
+  }catch(e){$('#mapFallback').style.display='flex';return;}
+  const info=new AMap.InfoWindow({offset:new AMap.Pixel(0,-14),closeWhenClickMap:true,isCustom:true});
+  window.closeIw=()=>info.close();
+  const textStyle={'background':'rgba(251,250,246,.9)','border':'1px solid #dcd5c6','border-radius':'99px','padding':'2px 8px','font-size':'10.5px','color':'#575046'};
+  dayGroups=DAYS.map((d,i)=>{
+    const color=DAY_COLORS[i], ovs=[];
+    ovs.push(new AMap.Polyline({path:d.route,strokeColor:color,strokeWeight:4,strokeOpacity:.85,lineJoin:'round',showDir:true,zIndex:10}));
+    /* 长距离段：每天最多一条直线距离参考标注（取最长段中点） */
+    let maxKm=0,maxMid=null;
+    for(let k=0;k<d.route.length-1;k++){
+      const km=haversine(d.route[k],d.route[k+1]);
+      if(km>maxKm){maxKm=km;maxMid=[(d.route[k][0]+d.route[k+1][0])/2,(d.route[k][1]+d.route[k+1][1])/2];}
+    }
+    if(maxKm>25&&maxMid) ovs.push(new AMap.Text({text:'约 '+Math.round(maxKm)+' km（直线）',position:maxMid,anchor:'center',style:textStyle,zIndex:15}));
+    d.points.forEach(p=>{
+      const isRecHotel=p.type==='hotel'&&p.rec==='当日推荐';
+      const m=new AMap.CircleMarker({center:[p.lng,p.lat],radius:isRecHotel?7:5.5,strokeColor:'#fff',strokeWeight:2,fillColor:TYPE_COLOR[p.type],fillOpacity:1,zIndex:isRecHotel?24:20,cursor:'pointer'});
+      m.on('click',()=>{info.setContent(iwHTML(p,d));info.open(map,[p.lng,p.lat]);});
+      ovs.push(m);
+    });
+    if(d.points.length){
+      const f=d.points[0];
+      ovs.push(new AMap.Marker({position:[f.lng,f.lat],content:'<div class="dtag" style="background:'+color+'">'+d.d+'</div>',offset:new AMap.Pixel(-16,-30),zIndex:30,anchor:'bottom-center'}));
+    }
+    map.add(ovs);
+    return {overlays:ovs};
+  });
+
+  window.setMapMode=function(mode,idx){
+    dayGroups.forEach((g,i)=>{const show=mode==='all'||i===idx;g.overlays.forEach(o=>show?o.show():o.hide());});
+    $('#viewAll').classList.toggle('on',mode==='all');
+    $('#viewDay').classList.toggle('on',mode==='day');
+    const pad=window.innerWidth>900?[60,380,60,60]:[40,40,40,40];
+    if(mode==='all'){
+      const all=[];dayGroups.forEach(g=>all.push(...g.overlays));
+      map.setFitView(all,true,pad);map.setPitch(42);
+    }else{
+      map.setFitView(dayGroups[idx].overlays,true,window.innerWidth>900?[80,400,80,80]:[50,50,50,50]);
+    }
+  };
+  setMapMode('all');
+  $('#viewAll').addEventListener('click',()=>setMapMode('all'));
+  $('#viewDay').addEventListener('click',()=>setMapMode('day',curDay));
+}
+
+/* ============ 背景音乐（单曲循环 · 图书馆风格钢琴） ============ */
+const TRACK={name:'Deliberate Thought · 古都',url:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Deliberate%20Thought.mp3'};
+const audio=new Audio(TRACK.url); audio.loop=true; audio.preload='auto'; audio.volume=0;
+let playing=false, targetVol=0.22, rampTimer=null;
+function rampTo(v,dur){
+  dur=dur||600; clearInterval(rampTimer);
+  const start=audio.volume, steps=Math.max(1,Math.round(dur/50)); let k=0;
+  rampTimer=setInterval(()=>{k++;audio.volume=Math.min(1,Math.max(0,start+(v-start)*k/steps));if(k>=steps)clearInterval(rampTimer);},50);
+}
+function startPlay(){
+  if(playing)return;
+  $('#trackName').textContent=TRACK.name;
+  audio.play().then(()=>{playing=true;rampTo(targetVol,1400);$('#playBtn').textContent='❚❚';})
+    .catch(()=>{playing=false;$('#playBtn').textContent='▶';});
+}
+function stopPlay(){rampTo(0,300);setTimeout(()=>audio.pause(),320);playing=false;$('#playBtn').textContent='▶';}
+
+/* ============ 行程模拟（时间轴自动推进，页面不跳动） ============ */
+let simDay=0, simIdx=0, simTimer=null, simSpeed=1;
+const SIM_STEP=1400;
+const POSE={'起':'wake','洗':'wash','妆':'makeup','早':'eat','午':'eat','晚':'eat','夜':'rest'};
+/* 按步骤语义细分动作：购物 / 咖啡放松 / 坐车 / 坐船游湖 / 酒店小憩 / 安检 / 坐飞机 / 坐高铁 */
+const POSE_RULES=[
+  [/安检|值机|登机口/,'security'],
+  [/起飞|航班|坐飞机|抵达.*机场/,'plane'],
+  [/(?:^|[^电])动车|高铁|火车|进站候车|列车/,'train'],
+  [/猪槽船|坐船|游湖|乘船/,'boat'],
+  [/咖啡|下午茶|歇脚/,'coffee'],
+  [/购物|伴手礼|买花|买束花|买鲜花饼|逛店|采购/,'shop'],
+  [/入住酒店|入住湖景|入住古城|入住.*民宿|酒店休息|酒店小憩|回酒店休整|稍作休整|小憩/,'hotel'],
+  [/打车|拼车|包车|公交|专线|巴士|网约车|地铁|骑行|返回|前往|出发|转场|返程/,'car'],
+  [/休息|住宿/,'rest']
+];
+function simPoseFor(step){
+  const icon=step[1], text=(step[2]||'')+' '+(step[3]||'');
+  if(POSE[icon]) return POSE[icon];
+  for(const [re,pose] of POSE_RULES){ if(re.test(text)) return pose; }
+  if(icon==='行') return 'car';
+  if(icon==='购') return 'shop';
+  if(icon==='咖') return 'coffee';
+  if(icon==='宿') return 'rest';
+  return 'travel';
+}
+function simCharUpdate(step){
+  const img=$('#simCharImg'); if(!img) return;
+  const pose=simPoseFor(step);
+  $('#simCharLabel').textContent=step[2];
+  if(img.dataset.pose===pose) return;
+  img.dataset.pose=pose;
+  img.style.opacity=0;
+  setTimeout(()=>{img.onload=()=>{img.style.opacity=1;};img.src='assets/act-'+pose+'.png';},200);
+}
+function renderSimDays(){
+  $('#simDays').innerHTML=DAYS.map((d,i)=>`<button class="${i===simDay?'on':''}" data-i="${i}">${d.d}</button>`).join('');
+  $$('#simDays button').forEach(b=>b.addEventListener('click',()=>{simStop();simSetDay(+b.dataset.i);}));
+}
+function renderSim(){
+  const d=DAYS[simDay], sim=SIM[simDay], n=sim.steps.length;
+  const cur=sim.steps[Math.min(simIdx,n-1)];
+  simCharUpdate(cur);
+  $('#simClock').textContent=cur[0];
+  $('#simDate').textContent=`${d.d} · ${d.date} 周${d.week} · ${d.city}`;
+  $('#simTheme').textContent=d.theme;
+  $('#simBar').style.width=(n>1?(simIdx/(n-1))*100:100)+'%';
+  $('#simCost').textContent=sim.cost;
+  $$('#simDays button').forEach((b,i)=>b.classList.toggle('on',i===simDay));
+  $('#simTl').innerHTML=sim.steps.map((s,i)=>
+    `<div class="tl-i${i<simIdx?' done':''}${i===simIdx?' on':''}">
+      <span class="tt">${s[0]}</span><span class="dot">${s[1]}</span>
+      <div><h6>${s[2]}</h6>${s[3]?`<p>${s[3]}</p>`:''}</div>
+    </div>`).join('');
+  const tl=$('#simTl'), item=tl.children[Math.min(simIdx,n-1)];
+  if(item) tl.scrollTop=Math.max(0,item.offsetTop-tl.clientHeight/2+item.offsetHeight/2); // 仅容器内滚动
+}
+function simSetDay(i){
+  simDay=i; simIdx=0; renderSim();
+  if(typeof selectDay==='function') selectDay(i); // 地图联动到当日
+}
+function simStep(){
+  const n=SIM[simDay].steps.length;
+  if(simIdx>=n-1){
+    if($('#simAuto').checked&&simDay<DAYS.length-1) simSetDay(simDay+1);
+    else simStop();
+    return;
+  }
+  simIdx++; renderSim();
+}
+function simPlay(){
+  if(simTimer){simStop();return;}
+  $('#simPlay').textContent='❚❚ 暂停';
+  simTimer=setInterval(simStep, SIM_STEP/simSpeed);
+}
+function simStop(){
+  clearInterval(simTimer); simTimer=null;
+  const b=$('#simPlay'); if(b) b.textContent='▶ 播放';
+}
+$('#simPlay').addEventListener('click',simPlay);
+$('#simPrev').addEventListener('click',()=>{simStop();simSetDay(Math.max(0,simDay-1));});
+$('#simNext').addEventListener('click',()=>{simStop();simSetDay(Math.min(DAYS.length-1,simDay+1));});
+$('#simSpeed').addEventListener('change',e=>{
+  simSpeed=+e.target.value;
+  if(simTimer){clearInterval(simTimer);simTimer=setInterval(simStep,SIM_STEP/simSpeed);}
+});
+
+/* ============ 初始化 ============ */
+renderDayStrip();
+renderDayFloat(DAYS[0]);
+renderTransport();
+renderStay();
+renderSpots();
+renderSimDays();
+renderSim();
+initMap();
+
+$('#playBtn').addEventListener('click',()=>playing?stopPlay():startPlay());
+$('#vol').addEventListener('input',e=>{targetVol=e.target.value/100;if(playing)rampTo(targetVol,150);});
+/* 自动播放尝试；被浏览器拦截则在首次页面点击时解锁（点击播放器本身除外） */
+startPlay();
+window.addEventListener('pointerdown',function unlock(e){
+  if(!e.target.closest('#player')&&!playing)startPlay();
+  window.removeEventListener('pointerdown',unlock);
+});
+/* 页面不可见时音量压到近乎静音，回来再恢复 */
+document.addEventListener('visibilitychange',()=>{
+  if(!playing)return;
+  if(document.hidden)rampTo(targetVol*0.1,300);else rampTo(targetVol,700);
+});
+</script>
+</body>
+</html>
