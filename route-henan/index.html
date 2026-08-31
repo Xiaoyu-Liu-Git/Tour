@@ -418,7 +418,7 @@ footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 80px;text
 </section>
 </main>
 
-<footer>洛陕七日 · 数据为 2026-08-31 参考/预估/样本值，以官方平台为准 ｜ 背景音乐为免版权素材（Kevin MacLeod · incompetech.com），仅供个人体验</footer>
+<footer>洛陕七日 · 数据为 2026-08-31 参考/预估/样本值，以官方平台为准 ｜ 背景音乐为免版权素材（Kevin MacLeod · incompetech.com），已下载至本地离线播放，仅供个人体验</footer>
 
 <!-- ============ 播放器 / Toast ============ -->
 <div class="player" id="player">
@@ -928,7 +928,7 @@ function initMap(){
 }
 
 /* ============ 背景音乐（单曲循环 · 图书馆风格钢琴） ============ */
-const TRACK={name:'Deliberate Thought · 古都',url:'https://incompetech.com/music/royalty-free/mp3-royaltyfree/Deliberate%20Thought.mp3'};
+const TRACK={name:'Deliberate Thought · 古都',url:'assets/bgm.mp3'};
 const audio=new Audio(TRACK.url); audio.loop=true; audio.preload='auto'; audio.volume=0;
 let playing=false, targetVol=0.22, rampTimer=null;
 function rampTo(v,dur){
