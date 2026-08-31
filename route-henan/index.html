@@ -217,10 +217,13 @@ footer{margin-top:80px;border-top:1px solid var(--line);padding:24px 0 80px;text
   .spot{grid-template-columns:1fr}
   .spot .ph{min-height:200px}
   .sim-box{grid-template-columns:1fr}
-  .sim-side{border-right:0;border-bottom:1px solid var(--line)}
+  .sim-side{border-right:0;border-bottom:1px solid var(--line);order:1}
   .sim-clock{font-size:40px}
-  .sim-tl{max-height:60vh}
-  .sim-char{display:none}
+  .sim-tl{max-height:56vh;order:3}
+  /* 竖屏：角色动画卡片改为横条并显示，置于时间轴上方（之前为 display:none） */
+  .sim-char{display:flex;flex-direction:row;align-items:center;justify-content:flex-start;border-left:0;border-top:1px solid var(--line);padding:14px 16px;gap:14px;order:2}
+  .sim-char .frame{width:82px;flex:0 0 82px}
+  .sim-char .act-label{text-align:left}
   .outfit-row{grid-template-columns:1fr}
 }
 </style>
